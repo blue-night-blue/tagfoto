@@ -1,24 +1,12 @@
-# README
+# 何これ
+画像保管庫
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# 機能
+## 実装済み
+- 新規登録、ログイン
+## 未実装
+- 基本はプライベートで使う
+- 複数画像をまとめて投稿
+- タグ付け
+- タグ編集
+- 閲覧できるユーザーを登録

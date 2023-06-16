@@ -5,5 +5,15 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
-  root "posts#index"
+  root "top#top"
+  get "/top" , to: redirect('../')
+  get "/signup" , to: "users#signup_form"  
+  post "/signup" , to: "users#signup"  
+  get "/login" , to: "users#login_form"  
+  post "/login" , to: "users#login"  
+  
+  
+  
+  
+
 end

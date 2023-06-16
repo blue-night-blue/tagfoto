@@ -1,0 +1,30 @@
+
+<h1>ログイン</h1>
+
+<%= form_with url:"/login" do |form|  %>
+
+  <% if @error %>
+    <div>
+      <%= @error %>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :email, style: "display: block" %>
+    <%= form.text_field :@email,value:@email %>
+  </div>
+
+  <div>
+    <%= form.label :password, style: "display: block" %>
+    <%= form.password_field :@password,value:@password %>
+  </div>
+
+  <div>
+    <%= form.submit "ログイン" %>
+  </div>
+<% end %>
+
+
+<div>
+  <%= link_to "トップページへ戻る", root_path %>
+</div>

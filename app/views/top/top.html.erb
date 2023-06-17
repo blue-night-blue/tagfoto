@@ -1,9 +1,24 @@
 <h1>tagfoto</h1>
-<ul>
-    <li>プライベートな画像保管庫です</li>
-    <li>あなたが許可したユーザーにだけ画像を公開できます</li>
-    <li>タグ付けに特化してます</li>
-</ul>
 
-<div><a href="/signup">新規登録</a></div>
-<div><a href="/login">ログイン</a></div>
+  <% if @current_user %>
+    <div><a href="">保管庫</a></div>
+    <div><%= link_to "ログアウト","/logout",data: { turbo_method: :post } %></div>
+    
+    
+    
+    
+
+  <% else %>
+    <ul>
+        <li>プライベートな画像保管庫です</li>
+        <li>あなたが許可したユーザーにだけ画像を公開できます</li>
+        <li>タグ付けに特化してます</li>
+    </ul>
+
+    <div><a href="/signup">新規登録</a></div>
+    <div><a href="/login">ログイン</a></div>
+
+    
+    
+    
+  <% end %>

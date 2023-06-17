@@ -44,6 +44,7 @@ class UsersController < ApplicationController
     @user=User.find_by(email:@email)
 
     if @user && @user.authenticate(@password)
+      session[:user_id]=@user.id
       redirect_to root_path,notice:"ok" 
     else
       @error="メールかパスワードがどっちか分かりませんが間違えとります"
@@ -52,7 +53,10 @@ class UsersController < ApplicationController
 
   end
 
-
+  def logout
+    session[:user_id] = nil
+    redirect_to root_path,notice:"ok" 
+  end
 
   # PATCH/PUT /users/1 or /users/1.json
   def update

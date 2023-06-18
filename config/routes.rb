@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   post "/login" , to: "users#login"  
   post "/logout" , to: "users#logout"  
   
-  
+  get "/:id" , to: "posts#index"  
   
   
 

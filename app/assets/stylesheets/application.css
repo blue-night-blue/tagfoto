@@ -13,3 +13,16 @@
  *= require_tree .
  *= require_self
  */
+
+.top_link a{
+    font-size: 50px;
+    font-weight: bold;
+} 
+ 
+.top_link a:link,
+.top_link a:visited{
+   color:#000;
+} 
+ 
+ 
+ 

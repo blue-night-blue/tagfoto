@@ -29,7 +29,8 @@ class UsersController < ApplicationController
     )
     
     if @user.save
-      redirect_to :login,notice: "ok"
+      session[:user_id]=@user.id
+      redirect_to root_path,notice:"ok" 
     else
       render :signup_form,status: :unprocessable_entity 
     end

@@ -52,6 +52,7 @@ gem "bootsnap", require: false
 #　ここから俺の。
 gem "bcrypt"
 gem 'rails-i18n'
+gem "aws-sdk-s3", require: false
 
 
 

@@ -1,4 +1,14 @@
 <div id="<%= dom_id post %>">
+
+  <div class="image">
+    <% if post.image.attached? %>
+      <%= link_to post.image do %>
+        <%= image_tag post.image %>
+      <% end %>
+    <% end %>
+  </div>
+
+
   <p>
     <strong>Comment:</strong>
     <%= post.comment %>

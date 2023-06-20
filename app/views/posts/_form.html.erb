@@ -12,6 +12,11 @@
   <% end %>
 
   <div>
+    <%= form.label :image, style: "display: block" %>
+    <%= form.file_field :image,direct_upload: true %>
+  </div>
+
+  <div>
     <%= form.label :comment, style: "display: block" %>
     <%= form.text_area :comment %>
   </div>

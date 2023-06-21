@@ -25,7 +25,7 @@ class PostsController < ApplicationController
 
   # POST /posts or /posts.json
   def create
-    @post = Post.new(post_params)
+    @post = Post.new(image_resize(post_params))
     @post.user_id=@current_user.id
 
       if @post.save
@@ -69,4 +69,18 @@ class PostsController < ApplicationController
     def post_params
       params.require(:post).permit(:comment, :image)
     end
+    
+    def image_resize(params)
+      if params[:image]
+        params[:image].tempfile = ImageProcessing::MiniMagick
+          .source(params[:image].tempfile)
+          .resize_to_limit(1024, 768)
+          .strip
+          .call
+      end
+      params
+    end 
+ 
+    
+    
 end

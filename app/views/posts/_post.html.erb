@@ -3,7 +3,7 @@
   <div class="image">
     <% if post.image.attached? %>
       <%= link_to post.image do %>
-        <%= image_tag post.image %>
+        <%= image_tag post.image.variant(:thumb).processed.url %>
       <% end %>
     <% end %>
   </div>

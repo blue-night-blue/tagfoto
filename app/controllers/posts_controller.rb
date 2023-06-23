@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   # GET /posts or /posts.json
   def index
     if @current_user.name==params[:id]
-      @posts = Post.all
+      @posts = Post.where(user_id:@current_user.id).order(created_at: :desc)
     else
       redirect_to root_path
     end

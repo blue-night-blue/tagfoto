@@ -11,9 +11,14 @@ module Tagfoto
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
+    
+    #ここから俺の。
+    
     # デフォルトのロケールを:en以外に変更する
     config.i18n.default_locale = :ja
-
+   
+    # 複数画像を別レコードとして保存する際に、multiple:trueで勝手に空白列を入れるのを阻止
+    config.active_storage.multiple_file_field_include_hidden = false
 
     # Configuration for the application, engines, and railties goes here.
     #

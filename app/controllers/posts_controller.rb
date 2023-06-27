@@ -23,18 +23,56 @@ class PostsController < ApplicationController
   def edit
   end
 
-  # POST /posts or /posts.json
   def create
-    @post = Post.new(image_resize(post_params))
-    @post.user_id=@current_user.id
+    params[:post][:images].each do |image|
 
-      if @post.save
-        redirect_to post_url(@post), notice: "Post was successfully created." 
-      else
-        render :new, status: :unprocessable_entity 
-      end
+      image.tempfile = ImageProcessing::MiniMagick
+      .source(image.tempfile)
+      .resize_to_limit(1024, 768)
+      .strip
+      .call
 
+      @post=Post.new(
+        images:image,
+        user_id: @current_user.id,
+        comment:params[:post][:comment]
+        )
+      @post.save
+    end
+    redirect_to "/#{@current_user.name}"
   end
+  
+  # def create
+  #   params[:post][:images].each do |image|
+  #     @post=Post.new(
+  #       images:image,
+  #       user_id: @current_user.id,
+  #       comment:params[:post][:comment]
+  #       )
+  #     @post.save
+  #   end
+  #   redirect_to "/#{@current_user.name}"
+  # end
+  
+  # def create
+  #   params[:post][:image].each do |image|
+  #     @post = Post.new(post_params)
+  #     @post.user_id=@current_user.id
+  #       unless @post.save
+  #         render :new, status: :unprocessable_entity 
+  #       end
+  #   end
+  #   redirect_to "/#{@current_user.name}"
+  # end
+
+  # def create
+  #   params[:post][:images].each do |image|
+  #     @post=Post.new(images:image, user_id: @current_user.id)
+  #     @post.save
+  #   end
+  #   redirect_to "/#{@current_user.name}"
+  # end
+  
 
   # PATCH/PUT /posts/1 or /posts/1.json
   def update
@@ -59,6 +97,10 @@ class PostsController < ApplicationController
     end
   end
 
+  
+  
+  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
@@ -67,17 +109,15 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:comment, :image)
+      params.require(:post).permit(:comment, images: [])
     end
     
     def image_resize(params)
-      if params[:image]
-        params[:image].tempfile = ImageProcessing::MiniMagick
-          .source(params[:image].tempfile)
-          .resize_to_limit(1024, 768)
-          .strip
-          .call
-      end
+      params.tempfile = ImageProcessing::MiniMagick
+        .source(params.tempfile)
+        .resize_to_limit(1024, 768)
+        .strip
+        .call
       params
     end 
  

@@ -1,6 +1,20 @@
 <h1>Editing post</h1>
 
-<%= render "form", post: @post %>
+<%= form_with(model: @post) do |form| %>
+  <div>
+    <%= form.label :images, style: "display: block" %>
+    <%= form.file_field :images %>
+  </div>
+
+  <div>
+    <%= form.label :comment, style: "display: block" %>
+    <%= form.text_area :comment %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
 
 <br>
 

@@ -1,10 +1,14 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @post %>
-
 <div>
-  <%= link_to "Edit", edit_post_path(@post) %> |
-  <%= link_to "Back","/#{@current_user.name}" %>
-
-  <%= button_to "Destroy", @post, method: :delete %>
+  <%= link_to "edit", edit_post_path(@post) %>/
+  <%= link_to "back","/#{@current_user.name}" %>/
+  <%= link_to "destroy", @post, method: :delete %>
 </div>
+
+<% if @post.images.attached? %>
+  <%= link_to @post.images[0] do %>
+    <%= image_tag @post.images[0] %>
+  <% end %>
+<% end %>
+

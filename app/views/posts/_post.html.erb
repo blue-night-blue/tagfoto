@@ -1,17 +1,9 @@
-<div id="<%= dom_id post %>">
+<div id="<%= dom_id post %>" class="image">
 
-  <div class="image">
     <% if post.images.attached? %>
-      <%= link_to post.images[0] do %>
+      <%= link_to post do %>
         <%= image_tag post.images[0].variant(:thumb).processed.url %>
       <% end %>
     <% end %>
-  </div>
-
-
-  <p>
-    <strong>Comment:</strong>
-    <%= post.comment %>
-  </p>
 
 </div>

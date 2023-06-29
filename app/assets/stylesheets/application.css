@@ -25,6 +25,8 @@
 } 
  
 .image img{
-    width: 300px;
+    width: 150px;
+    float:left;
+    border: #000 1px solid;
 } 
  

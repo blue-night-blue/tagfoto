@@ -30,3 +30,7 @@
     border: #000 1px solid;
 } 
  
+textarea#tag{
+    width: 90%;
+    height: 3em;
+}

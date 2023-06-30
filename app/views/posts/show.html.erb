@@ -1,5 +1,22 @@
 <p style="color: green"><%= notice %></p>
 
+<script>
+  function addTag1() {
+    var UserString = document.getElementById('tag1').value;
+    document.getElementById('tag').value += UserString + ",";
+  }
+  function addTag2() {
+    var UserString = document.getElementById('tag2').value;
+    document.getElementById('tag').value += UserString + ",";
+  }
+</script>
+
+<input type="button" id="tag1" value="タグ1" onclick="addTag1();">
+<input type="button" id="tag2" value="タグ2" onclick="addTag2();">
+<br>
+<textarea id="tag" name="tag">
+</textarea>
+
 <div>
   <%= link_to "edit", edit_post_path(@post) %>/
   <%= link_to "back","/#{@current_user.name}" %>/

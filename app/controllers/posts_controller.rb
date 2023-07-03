@@ -46,9 +46,11 @@ class PostsController < ApplicationController
   end
 
   def edit
+    @tags =Tag.where(user_id:@current_user.id).order(created_at: :desc)
   end
 
   def show
+    @tags =Tag.where(user_id:@current_user.id).order(created_at: :desc)
   end
   
   
@@ -61,7 +63,7 @@ class PostsController < ApplicationController
     end
 
     def post_params
-      params.require(:post).permit(:comment)
+      params.require(:post).permit(:comment, :tag)
     end
     
     def image_resize(image)

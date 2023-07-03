@@ -6,14 +6,29 @@
   <%= javascript_import_module_tag "edit_tag" %>
 <% end %> -->
 
-<input type="button" id="tag1" value="タグ1" name="タグ1" onclick="addTag('tag1');">
-<input type="button" id="tag2" value="タグ2" name="タグ2" onclick="addTag('tag2');">
+
+
+<% @tags.each do |tag| %>
+  <input type="button" id="tag<%= tag.id %>" value="<%= tag.tag %>" name="<%= tag.tag %>" onclick="addTag('tag<%= tag.id %>');">
+<% end %>
+
 <br>
-<textarea id="tag" name="tag">
-</textarea>
+
+
+<%= form_with(model: @post) do |form| %>
+
+  <div>
+    <%= form.label :tag %>
+    <%= form.text_area :tag, id:"tag", name:"tag" %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
 
 <div>
-  <%= link_to "edit", edit_post_path(@post) %>/
   <%= link_to "back","/#{@current_user.name}" %>/
   <%= link_to "destroy", @post, method: :delete %>
 </div>

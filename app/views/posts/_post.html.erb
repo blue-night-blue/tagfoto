@@ -1,7 +1,7 @@
 <div id="<%= dom_id post %>" class="image">
 
     <% if post.images.attached? %>
-      <%= link_to post do %>
+      <%= link_to "/posts/#{post.id}/edit" do %>
         <%= image_tag post.images[0].variant(:thumb).processed.url %>
       <% end %>
     <% end %>

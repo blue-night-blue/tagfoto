@@ -3,7 +3,7 @@ class TagsController < ApplicationController
 
   # GET /tags or /tags.json
   def index
-    @tags = Tag.all
+    @tags =Tag.where(user_id:@current_user.id).order(created_at: :desc)
   end
 
   # GET /tags/1 or /tags/1.json
@@ -66,6 +66,6 @@ class TagsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def tag_params
-      params.require(:tag).permit(:user_id, :name, :number, :group)
+      params.require(:tag).permit(:user_id, :tag, :number, :group)
     end
 end

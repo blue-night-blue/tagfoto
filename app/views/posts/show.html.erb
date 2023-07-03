@@ -1,18 +1,13 @@
 <p style="color: green"><%= notice %></p>
 
-<script>
-  function addTag1() {
-    var UserString = document.getElementById('tag1').value;
-    document.getElementById('tag').value += UserString + ",";
-  }
-  function addTag2() {
-    var UserString = document.getElementById('tag2').value;
-    document.getElementById('tag').value += UserString + ",";
-  }
-</script>
+<script src="/assets/edit_tag.js"></script>
 
-<input type="button" id="tag1" value="タグ1" onclick="addTag1();">
-<input type="button" id="tag2" value="タグ2" onclick="addTag2();">
+<!-- <% content_for :head do %>
+  <%= javascript_import_module_tag "edit_tag" %>
+<% end %> -->
+
+<input type="button" id="tag1" value="タグ1" name="タグ1" onclick="addTag('tag1');">
+<input type="button" id="tag2" value="タグ2" name="タグ2" onclick="addTag('tag2');">
 <br>
 <textarea id="tag" name="tag">
 </textarea>

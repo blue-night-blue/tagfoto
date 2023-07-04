@@ -1,9 +1,11 @@
 function addTag(tagNumber) {
-    const tagAdded = document.getElementById(tagNumber).value;
-    const tagInputted = document.getElementById('post_tag').value;
-    if(tagInputted.match(tagAdded) ){
-        document.getElementById('post_tag').value = tagInputted.replace(`${tagAdded}\,`,``); 
+    const tagAdded = document.getElementById(tagNumber);
+    const tagInputted = document.getElementById('post_tag');
+    if(tagInputted.value.match(tagAdded.value) ){
+        tagInputted.value = tagInputted.value.replace(`${tagAdded.value}\,`,``); 
+        tagAdded.classList.remove("tag_on");
     } else{
-        document.getElementById('post_tag').value += tagAdded + ",";
-    }
-}
+        tagInputted.value += tagAdded.value + ",";
+        tagAdded.classList.add("tag_on");
+    };
+};

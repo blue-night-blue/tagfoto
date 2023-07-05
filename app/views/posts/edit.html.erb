@@ -1,11 +1,9 @@
+<% content_for :head do %>
+  <meta name="turbo-visit-control" content="reload">
+  <%= javascript_import_module_tag "edit_tag" %>
+<% end %>
 
 <p style="color: green"><%= notice %></p>
-
-<script src="/assets/edit_tag.js"></script>
-<!-- <% content_for :head do %>
-  <%= javascript_import_module_tag "edit_tag" %>
-<% end %> -->
-
 
 <%= form_with(model: @post) do |form| %>
   <div>
@@ -21,7 +19,7 @@
   <div>
     <%= form.label :tag %>
     <% @tags.each do |tag| %>
-      <input type="button" id="tag<%= tag.id %>" value="<%= tag.tag %>" name="<%= tag.tag %>" onclick="addTag('tag<%= tag.id %>');">
+      <input type="button" value="<%= tag.tag %>" class="tag">
     <% end %>
     <%= form.text_area :tag %>
   </div>

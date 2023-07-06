@@ -1,0 +1,31 @@
+<% content_for :head do %>
+  <meta name="turbo-visit-control" content="reload">
+<% end %>
+
+<script>
+const images=document.querySelectorAll('img');
+const a=11;
+
+window.onload=function(){
+  images.forEach( (image)=>{
+      image.addEventListener('click',selectOnOff );
+  }); 
+}
+
+function selectOnOff(){
+    this.classList.toggle('selected');
+};
+</script>
+
+<div id="posts">
+  <% @posts.each do |post| %>
+
+    <div id="<%= dom_id post %>" class="image">
+        <% if post.images.attached? %>
+            <%= image_tag post.images[0].variant(:thumb).processed.url %>
+        <% end %>
+    </div>
+
+  <% end %>
+</div>
+

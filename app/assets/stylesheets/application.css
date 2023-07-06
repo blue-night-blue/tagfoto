@@ -41,3 +41,7 @@
     background-color: #0f0;
 }
 
+.selected{
+    opacity: 0.5;
+}
+

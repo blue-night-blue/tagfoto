@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>test</title>
+        <style type="text/css">
+            body{
+                background-color: #eff;
+            }
+
+            .tag_on{
+                background-color: #f8f;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <input type="button" class="tag" id="a" value="陶器">
+        <input type="button" class="tag" id="b" value="紙もの">
+
+        <div id="z">陶器,</div>
+
+        <script>
+            const tags=document.querySelectorAll('.tag');
+            const z=document.getElementById('z');
+
+            tags.forEach( (tag)=>{
+                if(z.innerText.includes(tag.value)===true){
+                    tag.classList.add('tag_on');
+                };
+                tag.addEventListener('click',tagOnOff );
+            }); 
+            
+            function tagOnOff(){
+                if(z.innerText.includes(this.value)===true){
+                    z.innerText=z.innerText.replace(`${this.value}\,`,``);
+                } else{
+                    z.innerText+=this.value+"\,";
+                };
+                this.classList.toggle('tag_on');
+            };
+
+            // const tags=document.querySelectorAll('.tag');
+            // tags.forEach( (tag)=>{
+            //     tag.innerHTML+=`
+            //         <b>gohan daisuki!</b>
+            //     `;
+            // });
+        
+        
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>test</title>
+        <style type="text/css">
+            body{
+                background-color: #eff;
+            }
+
+            .tag_on{
+                background-color: #f8f;
+            }
+
+            img{
+                width: 200px;
+            }
+
+            .selected{
+                opacity: 0.5;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <img src="1.svg">
+        <img src="2.svg">
+        <img src="3.svg">
+
+        <script>
+            const images=document.querySelectorAll('img');
+
+            images.forEach( (image)=>{
+                image.addEventListener('click',selectOnOff );
+            }); 
+            
+            function selectOnOff(){
+                this.classList.toggle('selected');
+            };
+        
+
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            const tags=document.querySelectorAll('.tag');
+            const z=document.getElementById('z');
+
+            tags.forEach( (tag)=>{
+                if(z.innerText.includes(tag.value)===true){
+                    tag.classList.add('tag_on');
+                };
+                tag.addEventListener('click',tagOnOff );
+            }); 
+            
+            function tagOnOff(){
+                if(z.innerText.includes(this.value)===true){
+                    z.innerText=z.innerText.replace(`${this.value}\,`,``);
+                } else{
+                    z.innerText+=this.value+"\,";
+                };
+                this.classList.toggle('tag_on');
+            };
+        
+        </script>
+
+    </body>
+</html>

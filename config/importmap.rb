@@ -7,4 +7,5 @@ pin "@hotwired/stimulus-loading", to: "stimulus-loading.js", preload: true
 pin_all_from "app/javascript/controllers", under: "controllers"
 
 # ここから俺。
-pin "edit_tag"
+pin "editTag"
+pin "selectImg"

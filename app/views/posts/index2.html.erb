@@ -1,21 +1,7 @@
 <% content_for :head do %>
   <meta name="turbo-visit-control" content="reload">
+  <%= javascript_import_module_tag "selectImg" %>
 <% end %>
-
-<script>
-const images=document.querySelectorAll('img');
-const a=11;
-
-window.onload=function(){
-  images.forEach( (image)=>{
-      image.addEventListener('click',selectOnOff );
-  }); 
-}
-
-function selectOnOff(){
-    this.classList.toggle('selected');
-};
-</script>
 
 <div id="posts">
   <% @posts.each do |post| %>

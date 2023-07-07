@@ -14,59 +14,79 @@
 
             img{
                 width: 200px;
+                height: 200px;
+                object-fit: cover; 
+                border: #f8f 10px solid;
             }
 
             .selected{
                 opacity: 0.5;
             }
+           
+            input{
+                display: block;
+            }
+
+            .img_zone div{
+                float: left;
+            } 
+
+            .img_zone input{
+                width: 200px;
+            }
+            
+            .clear{
+                clear: left;
+            }
+            
+            #tag{
+                margin-top: 50px;
+            } 
             
         </style>
     </head>
     <body>
-        <img src="1.svg">
-        <img src="2.svg">
-        <img src="3.svg">
+        <div class="img_zone">
+            <div>
+                <img src="1.svg" id="post1">
+                <input type="text" class="hidden_tag" id="input1"> 
+            </div>
+            <div>
+                <img src="2.svg" id="post2">
+                <input type="text" class="hidden_tag" id="input2"> 
+            </div>
+            <div>
+                <img src="3.svg" id="post3">
+                <input type="text" class="hidden_tag" id="input3"> 
+            </div>
+        </div>
+
+        <br class="clear">
+        <input type="text" id="tag"> 
+        <input type="button" id="button" value="button"> 
 
         <script>
             const images=document.querySelectorAll('img');
+            const tag=document.getElementById('tag');
+            const button=document.getElementById('button');
 
-            images.forEach( (image)=>{
-                image.addEventListener('click',selectOnOff );
-            }); 
-            
+            window.onload=function(){
+                images.forEach( (image)=>{
+                    image.addEventListener('click',selectOnOff );
+                }); 
+            }
+
+            button.addEventListener('click',()=>{
+                const selects=document.querySelectorAll('.selected');
+                selects.forEach( (select)=>{
+                    select.nextElementSibling.value=tag.value;
+                }); 
+            });
+
             function selectOnOff(){
                 this.classList.toggle('selected');
             };
-        
-
             
-            
-            
-            
-            
-            
-            
-            
-            
-            const tags=document.querySelectorAll('.tag');
-            const z=document.getElementById('z');
-
-            tags.forEach( (tag)=>{
-                if(z.innerText.includes(tag.value)===true){
-                    tag.classList.add('tag_on');
-                };
-                tag.addEventListener('click',tagOnOff );
-            }); 
-            
-            function tagOnOff(){
-                if(z.innerText.includes(this.value)===true){
-                    z.innerText=z.innerText.replace(`${this.value}\,`,``);
-                } else{
-                    z.innerText+=this.value+"\,";
-                };
-                this.classList.toggle('tag_on');
-            };
-        
         </script>
 
     </body>

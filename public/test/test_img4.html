@@ -84,12 +84,20 @@
             }
 
             function selectOnOff(){
+                const tagOnClasses=document.querySelectorAll('.tag_on');
+                const imgTag2=this.nextElementSibling;
+                     
+                // 画像を選択すると、オンになっているタグを挿入する
+                tagOnClasses.forEach( (tagOnClass)=>{
+                    if(imgTag2.value.includes(tagOnClass.value)===false){
+                        imgTag2.value+=tagOnClass.value+"\,";
+                    };
+                }); 
                 this.classList.toggle('selected');
             };
 
             function tagOnOff(){
                 const selects=document.querySelectorAll('.selected');
-                const tagOnClasses=document.querySelectorAll('.tag_on');
                 selects.forEach( (select)=>{
                     const imgTag=select.nextElementSibling;
                     

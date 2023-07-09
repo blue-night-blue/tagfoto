@@ -2,65 +2,26 @@
 <html lang="ja">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
         <title>test</title>
-        <style type="text/css">
-            body{
-                background-color: #eee;
-            }
-
-            .tag_on{
-                background-color: #8f8;
-            }
-
-            img{
-                width: 200px;
-                height: 200px;
-                object-fit: cover; 
-                border: #eee 10px solid;
-                display: block;
-            }
-
-            .selected{
-                opacity: 0.5;
-                border: #f8f 10px solid;
-            }
-           
-            .img_zone div{
-                float: left;
-                margin-right: 10px;
-            } 
-
-            .img_zone input{
-                width: 210px;
-            }
-            
-            .clear{
-                clear: left;
-            }
-            
-            .tags{
-                margin-top: 50px;
-            } 
-            
-        </style>
-    </head>
+        <link rel="stylesheet" type="text/css" href="test.css">
+   </head>
     <body>
+        <h1>フォームに入れた文字を反映させるだけ</h1>
         <div class="img_zone">
             <div>
                 <img src="1.svg" id="post1">
-                <input type="text" class="hidden_tag" id="input1"> 
+                <textarea id="input1">タグ1,</textarea> 
             </div>
             <div>
                 <img src="2.svg" id="post2">
-                <input type="text" class="hidden_tag" id="input2"> 
+                <textarea id="input2"></textarea> 
             </div>
             <div>
                 <img src="3.svg" id="post3">
-                <input type="text" class="hidden_tag" id="input3"> 
+                <textarea id="input3"></textarea> 
             </div>
         </div>
-
-        <br class="clear">
 
         <div class="tags">
             <input type="button" value="タグ1" class="tag">

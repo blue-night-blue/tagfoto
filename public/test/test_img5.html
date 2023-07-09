@@ -7,7 +7,7 @@
         <link rel="stylesheet" type="text/css" href="test.css">
     </head>
     <body>
-        <h1>ボタンをオンにした状態で画像選択するとタグを反映</h1>
+        <h1>フォームに入れた文字を追加/削除ボタンにて反映させる</h1>
         <div class="img_zone">
             <div>
                 <img src="1.svg" id="post1">
@@ -30,9 +30,16 @@
             <input type="button" value="タグ4" class="tag">
         </div>
         
+         <div class="add_and_delete">
+            <input type="button" value="追加" id="add">
+            <input type="button" value="削除" id="delete">
+        </div>
+        
         <script>
             const images=document.querySelectorAll('img');
             const tags=document.querySelectorAll('.tag');
+            const addTag=document.getElementById('add');
+            const deleteTag=document.getElementById('delete');
 
             window.onload=function(){
                 images.forEach( (image)=>{
@@ -42,43 +49,41 @@
                 tags.forEach( (tag)=>{
                     tag.addEventListener('click',tagOnOff );
                 }); 
-            }
+            };
 
             function selectOnOff(){
-                const tagOnClasses=document.querySelectorAll('.tag_on');
-                const imgTag2=this.nextElementSibling;
-                     
-                // 画像を選択すると、オンになっているタグを挿入する
-                tagOnClasses.forEach( (tagOnClass)=>{
-                    if(imgTag2.value.includes(tagOnClass.value)===false){
-                        imgTag2.value+=tagOnClass.value+"\,";
-                    };
-                }); 
                 this.classList.toggle('selected');
             };
 
             function tagOnOff(){
-                const selects=document.querySelectorAll('.selected');
-                selects.forEach( (select)=>{
-                    const imgTag=select.nextElementSibling;
-                    
-                    // タグをオンにする
-                    if(this.classList.contains('tag_on') == false ){
-                        if(imgTag.value.includes(this.value)===false){
-                            imgTag.value+=this.value+"\,";
-                        };
-                    // タグをオフにする
-                    } else{
-                        if(imgTag.value.includes(this.value)===true){
-                            imgTag.value=imgTag.value.replace(`${this.value}\,`,``);
-                        };
-                    };
-
-                }); 
                 this.classList.toggle('tag_on');
             };
 
-           
+            addTag.addEventListener('click',()=>{
+                const tagOnClasses=document.querySelectorAll('.tag_on');
+                tagOnClasses.forEach( (tagOnClass)=>{
+                    const selects=document.querySelectorAll('.selected');
+                    selects.forEach( (select)=>{
+                        const imgTag=select.nextElementSibling;
+                        if(imgTag.value.includes(tagOnClass.value)===false){
+                            imgTag.value+=tagOnClass.value+"\,";
+                        };
+                    }); 
+                }); 
+           });
+
+            deleteTag.addEventListener('click',()=>{
+                const tagOnClasses=document.querySelectorAll('.tag_on');
+                tagOnClasses.forEach( (tagOnClass)=>{
+                    const selects=document.querySelectorAll('.selected');
+                    selects.forEach( (select)=>{
+                        const imgTag=select.nextElementSibling;
+                        if(imgTag.value.includes(tagOnClass.value)===true){
+                            imgTag.value=imgTag.value.replace(`${tagOnClass.value}\,`,``);
+                        };
+                    }); 
+                }); 
+           });
         </script>
 
     </body>

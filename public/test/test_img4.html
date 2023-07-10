@@ -46,12 +46,12 @@
 
             function selectImageToggle(){
                 const selectedTags=document.querySelectorAll('.select_tag');
-                const addedTag2=this.nextElementSibling;
+                const addedTag=this.nextElementSibling;
                      
                 // 画像を選択すると、オンになっているタグを挿入する
                 selectedTags.forEach( (selectedTag)=>{
-                    if(addedTag2.value.includes(selectedTag.value)===false){
-                        addedTag2.value+=selectedTag.value+"\,";
+                    if(addedTag.value.includes(selectedTag.value)===false){
+                        addedTag.value+=selectedTag.value+"\,";
                     };
                 }); 
                 this.classList.toggle('select_image');
@@ -81,5 +81,6 @@
            
         </script>
 
+        <footer><a href="/test/">テスト一覧へ戻る</a></footer>
     </body>
 </html>

@@ -40,35 +40,35 @@
 
             window.onload=function(){
                 images.forEach( (image)=>{
-                    image.addEventListener('click',selectOnOff );
+                    image.addEventListener('click',selectImageToggle );
                 }); 
 
                 tags.forEach( (tag)=>{
-                    tag.addEventListener('click',tagOnOff );
+                    tag.addEventListener('click',selectTagToggle );
                     if(tagInputted.value.includes(tag.value)===true){
-                        tag.classList.add('tag_on');
+                        tag.classList.add('select_tag');
                     };
                 }); 
             }
 
             button.addEventListener('click',()=>{
-                const selects=document.querySelectorAll('.selected');
-                selects.forEach( (select)=>{
-                    select.nextElementSibling.value=tagInputted.value;
+                const selectedImages=document.querySelectorAll('.select_image');
+                selectedImages.forEach( (selectedImage)=>{
+                    selectedImage.nextElementSibling.value=tagInputted.value;
                 }); 
             });
 
-            function selectOnOff(){
-                this.classList.toggle('selected');
+            function selectImageToggle(){
+                this.classList.toggle('select_image');
             };
 
-            function tagOnOff(){
+            function selectTagToggle(){
                 if(tagInputted.value.includes(this.value)===true){
                     tagInputted.value=tagInputted.value.replace(`${this.value}\,`,``);
                 } else{
                     tagInputted.value+=this.value+"\,";
                 };
-                this.classList.toggle('tag_on');
+                this.classList.toggle('select_tag');
             };
 
            

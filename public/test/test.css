@@ -7,6 +7,10 @@ h1{
     font-size: 1em;
 }
 
+li{
+    margin-bottom: 1em;
+}
+
 .img_zone{
     display: flex;
 } 
@@ -29,11 +33,11 @@ h1{
     width: 100%;
 }
 
-.tag_on{
+.select_tag{
     background-color: #8f8;
 }
 
-.selected{
+.select_image{
     opacity: 0.5;
     border: #f8f 10px solid;
     box-sizing: border-box;
@@ -43,4 +47,5 @@ h1{
 #delete{
     width:200px;
     display: block;
+    margin-top: 1em;
 }

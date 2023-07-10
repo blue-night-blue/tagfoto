@@ -37,11 +37,11 @@
     height: 1.5em;
 }
 
-.tag_on{
+.select_tag{
     background-color: #0f0;
 }
 
-.selected{
+.select_image{
     opacity: 0.5;
 }
 

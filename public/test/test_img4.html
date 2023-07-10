@@ -36,46 +36,46 @@
 
             window.onload=function(){
                 images.forEach( (image)=>{
-                    image.addEventListener('click',selectOnOff );
+                    image.addEventListener('click',selectImageToggle );
                 }); 
 
                 tags.forEach( (tag)=>{
-                    tag.addEventListener('click',tagOnOff );
+                    tag.addEventListener('click',selectTagToggle );
                 }); 
             }
 
-            function selectOnOff(){
-                const tagOnClasses=document.querySelectorAll('.tag_on');
-                const imgTag2=this.nextElementSibling;
+            function selectImageToggle(){
+                const selectedTags=document.querySelectorAll('.select_tag');
+                const addedTag2=this.nextElementSibling;
                      
                 // 画像を選択すると、オンになっているタグを挿入する
-                tagOnClasses.forEach( (tagOnClass)=>{
-                    if(imgTag2.value.includes(tagOnClass.value)===false){
-                        imgTag2.value+=tagOnClass.value+"\,";
+                selectedTags.forEach( (selectedTag)=>{
+                    if(addedTag2.value.includes(selectedTag.value)===false){
+                        addedTag2.value+=selectedTag.value+"\,";
                     };
                 }); 
-                this.classList.toggle('selected');
+                this.classList.toggle('select_image');
             };
 
-            function tagOnOff(){
-                const selects=document.querySelectorAll('.selected');
-                selects.forEach( (select)=>{
-                    const imgTag=select.nextElementSibling;
+            function selectTagToggle(){
+                const selectedImages=document.querySelectorAll('.select_image');
+                selectedImages.forEach( (selectedImage)=>{
+                    const addedTag=selectedImage.nextElementSibling;
                     
                     // タグをオンにする
-                    if(this.classList.contains('tag_on') == false ){
-                        if(imgTag.value.includes(this.value)===false){
-                            imgTag.value+=this.value+"\,";
+                    if(this.classList.contains('select_tag') == false ){
+                        if(addedTag.value.includes(this.value)===false){
+                            addedTag.value+=this.value+"\,";
                         };
                     // タグをオフにする
                     } else{
-                        if(imgTag.value.includes(this.value)===true){
-                            imgTag.value=imgTag.value.replace(`${this.value}\,`,``);
+                        if(addedTag.value.includes(this.value)===true){
+                            addedTag.value=addedTag.value.replace(`${this.value}\,`,``);
                         };
                     };
 
                 }); 
-                this.classList.toggle('tag_on');
+                this.classList.toggle('select_tag');
             };
 
            

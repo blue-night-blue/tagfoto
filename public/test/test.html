@@ -8,7 +8,7 @@
                 background-color: #eff;
             }
 
-            .tag_on{
+            .select_tag{
                 background-color: #f8f;
             }
             
@@ -26,18 +26,18 @@
 
             tags.forEach( (tag)=>{
                 if(z.innerText.includes(tag.value)===true){
-                    tag.classList.add('tag_on');
+                    tag.classList.add('select_tag');
                 };
-                tag.addEventListener('click',tagOnOff );
+                tag.addEventListener('click',selectTagToggle );
             }); 
             
-            function tagOnOff(){
+            function selectTagToggle(){
                 if(z.innerText.includes(this.value)===true){
                     z.innerText=z.innerText.replace(`${this.value}\,`,``);
                 } else{
                     z.innerText+=this.value+"\,";
                 };
-                this.classList.toggle('tag_on');
+                this.classList.toggle('select_tag');
             };
 
             // const tags=document.querySelectorAll('.tag');

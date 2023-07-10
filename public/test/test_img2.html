@@ -36,30 +36,29 @@
 
             window.onload=function(){
                 images.forEach( (image)=>{
-                    image.addEventListener('click',selectOnOff );
+                    image.addEventListener('click',selectImageToggle );
                 }); 
 
                 tags.forEach( (tag)=>{
-                    tag.addEventListener('click',tagOnOff );
+                    tag.addEventListener('click',selectTagToggle );
                 }); 
             }
 
-            function selectOnOff(){
-                this.classList.toggle('selected');
+            function selectImageToggle(){
+                this.classList.toggle('select_image');
             };
 
-            function tagOnOff(){
-                const selects=document.querySelectorAll('.selected');
-                selects.forEach( (select)=>{
-                    const imgTag=select.nextElementSibling;
+            function selectTagToggle(){
+                const selectedImages=document.querySelectorAll('.select_image');
+                selectedImages.forEach( (selectedImage)=>{
+                    const addedTag=selectedImage.nextElementSibling;
 
-                    if(imgTag.value.includes(this.value)===true){
-                        imgTag.value=imgTag.value.replace(`${this.value}\,`,``);
+                    if(addedTag.value.includes(this.value)===true){
+                        addedTag.value=addedTag.value.replace(`${this.value}\,`,``);
                     } else{
-                        imgTag.value+=this.value+"\,";
+                        addedTag.value+=this.value+"\,";
                     };
                 }); 
-                this.classList.toggle('tag_on');
             };
 
            

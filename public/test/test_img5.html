@@ -43,43 +43,43 @@
 
             window.onload=function(){
                 images.forEach( (image)=>{
-                    image.addEventListener('click',selectOnOff );
+                    image.addEventListener('click',selectImageToggle );
                 }); 
 
                 tags.forEach( (tag)=>{
-                    tag.addEventListener('click',tagOnOff );
+                    tag.addEventListener('click',selectTagToggle );
                 }); 
             };
 
-            function selectOnOff(){
-                this.classList.toggle('selected');
+            function selectImageToggle(){
+                this.classList.toggle('select_image');
             };
 
-            function tagOnOff(){
-                this.classList.toggle('tag_on');
+            function selectTagToggle(){
+                this.classList.toggle('select_tag');
             };
 
             addTag.addEventListener('click',()=>{
-                const tagOnClasses=document.querySelectorAll('.tag_on');
-                tagOnClasses.forEach( (tagOnClass)=>{
-                    const selects=document.querySelectorAll('.selected');
-                    selects.forEach( (select)=>{
-                        const imgTag=select.nextElementSibling;
-                        if(imgTag.value.includes(tagOnClass.value)===false){
-                            imgTag.value+=tagOnClass.value+"\,";
+                const selectedTags=document.querySelectorAll('.select_tag');
+                selectedTags.forEach( (selectedTag)=>{
+                    const selectedImages=document.querySelectorAll('.select_image');
+                    selectedImages.forEach( (selectedImage)=>{
+                        const addedTag=selectedImage.nextElementSibling;
+                        if(addedTag.value.includes(selectedTag.value)===false){
+                            addedTag.value+=selectedTag.value+"\,";
                         };
                     }); 
                 }); 
            });
 
             deleteTag.addEventListener('click',()=>{
-                const tagOnClasses=document.querySelectorAll('.tag_on');
-                tagOnClasses.forEach( (tagOnClass)=>{
-                    const selects=document.querySelectorAll('.selected');
-                    selects.forEach( (select)=>{
-                        const imgTag=select.nextElementSibling;
-                        if(imgTag.value.includes(tagOnClass.value)===true){
-                            imgTag.value=imgTag.value.replace(`${tagOnClass.value}\,`,``);
+                const selectedTags=document.querySelectorAll('.select_tag');
+                selectedTags.forEach( (selectedTag)=>{
+                    const selectedImages=document.querySelectorAll('.select_image');
+                    selectedImages.forEach( (selectedImage)=>{
+                        const addedTag=selectedImage.nextElementSibling;
+                        if(addedTag.value.includes(selectedTag.value)===true){
+                            addedTag.value=addedTag.value.replace(`${selectedTag.value}\,`,``);
                         };
                     }); 
                 }); 

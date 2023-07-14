@@ -9,8 +9,9 @@ class PostsController < ApplicationController
     end
   end
 
-  def index2
+  def add_tag
     @posts = Post.where(user_id:@current_user.id).order(created_at: :desc)
+    @tags =Tag.where(user_id:@current_user.id).order(created_at: :desc)
   end
 
   def new

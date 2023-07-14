@@ -8,4 +8,4 @@ pin_all_from "app/javascript/controllers", under: "controllers"
 
 # ここから俺。
 pin "editTag"
-pin "selectImg"
+pin "tagToMultipleImage"

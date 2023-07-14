@@ -1,14 +1,20 @@
 <% content_for :head do %>
   <meta name="turbo-visit-control" content="reload">
-  <%= javascript_import_module_tag "selectImg" %>
+  <%= javascript_import_module_tag "tagToMultipleImage" %>
+<% end %>
+
+
+<% @tags.each do |tag| %>
+  <input type="button" value="<%= tag.tag %>" class="tag">
 <% end %>
 
 <div id="posts">
   <% @posts.each do |post| %>
 
-    <div id="<%= dom_id post %>" class="image">
+    <div id="<%= dom_id post %>" class="container_add_tag">
         <% if post.images.attached? %>
             <%= image_tag post.images[0].variant(:thumb).processed.url %>
+            <textarea></textarea>
         <% end %>
     </div>
 

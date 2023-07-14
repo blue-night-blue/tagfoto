@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>画像とボタンの選択</title>
   <style>
+    img{
+      height: 100px;
+    }
+    
     .selected {
       border: 2px solid red;
     }
@@ -13,13 +17,13 @@
 <body>
   <h1>画像の選択とボタンの操作</h1>
   <div id="images">
-    <img src="image1.jpg" onclick="selectImage(this)">
+    <img src="1.svg" onclick="selectImage(this)">
     <textarea></textarea>
     <br>
-    <img src="image2.jpg" onclick="selectImage(this)">
+    <img src="2.svg" onclick="selectImage(this)">
     <textarea></textarea>
     <br>
-    <img src="image3.jpg" onclick="selectImage(this)">
+    <img src="3.svg" onclick="selectImage(this)">
     <textarea></textarea>
   </div>
   <div id="buttons">
@@ -43,6 +47,8 @@
   </script>
 
 以下、私の追記。<br><br>
+
+これはChatGPTに書いてもらったコードです。画像ソース・画像CSSは修正しています。<br><br>
 
 ChatGPTへの質問:<br>
 HTML、CSS、JavaScriptで下記のコードを書いてほしい。

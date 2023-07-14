@@ -24,10 +24,14 @@
    color:#000;
 } 
  
-.image img{
+.container_images img{
     width: 150px;
     float:left;
     border: #000 1px solid;
+} 
+ 
+.container_add_tag img{
+    width: 150px;
 } 
  
 #post_comment,
@@ -38,10 +42,13 @@
 }
 
 .select_tag{
-    background-color: #0f0;
+    background-color: #8f8;
 }
 
 .select_image{
     opacity: 0.5;
+    border: #f8f 10px solid;
+    box-sizing: border-box;
 }
+
 

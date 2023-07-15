@@ -3,21 +3,28 @@
   <%= javascript_import_module_tag "tagToMultipleImage" %>
 <% end %>
 
-
-<% @tags.each do |tag| %>
-  <input type="button" value="<%= tag.tag %>" class="tag">
-<% end %>
-
-<div id="posts">
-  <% @posts.each do |post| %>
-
-    <div id="<%= dom_id post %>" class="container_add_tag">
-        <% if post.images.attached? %>
-            <%= image_tag post.images[0].variant(:thumb).processed.url %>
-            <textarea></textarea>
-        <% end %>
-    </div>
-
+<div class="container_input_tag">
+  <% @tags.each do |tag| %>
+    <input type="button" value="<%= tag.tag %>" class="tag">
   <% end %>
 </div>
+
+<div id="posts">
+  <%= form_with url:add_tag_update_path do |form| %>
+  <div>
+    <%= form.submit %>
+  </div>
+
+    <% @posts.each do |post| %>
+        <div id="<%= dom_id post %>" class="container_add_tag">
+          <% if post.images.attached? %>
+              <%= image_tag post.images[0].variant(:thumb).processed.url %>
+              <%= form.text_area "#{post.id}", value: post.tag %>
+          <% end %>
+        </div>
+    <% end %>
+  <% end %>
+</div>
+
+
 

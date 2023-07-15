@@ -14,6 +14,9 @@ class PostsController < ApplicationController
     @tags =Tag.where(user_id:@current_user.id).order(created_at: :desc)
   end
 
+  def add_tag_update
+  end
+
   def new
     @post = Post.new
   end
@@ -58,7 +61,7 @@ class PostsController < ApplicationController
     @tags =Tag.where(user_id:@current_user.id).order(created_at: :desc)
   end
   
-  
+ 
   
   
 

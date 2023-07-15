@@ -33,7 +33,20 @@
 .container_add_tag img{
     width: 150px;
 } 
+
+.container_add_tag #post_tag{
+    width: 150px;
+    height: 150px;
+} 
  
+.container_input_tag{
+    margin: 1em 0;
+} 
+
+#posts input[type="submit"]{
+    margin: 1em 0;
+}
+
 #post_comment,
 #post_tag
 {

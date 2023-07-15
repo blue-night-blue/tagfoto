@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   # 自分の画像保管庫
   get "/add_tag" , to: "posts#add_tag"  
   get "/:id" , to: "posts#index"  
+  post "/add_tag_update" , to: "posts#add_tag_update"  
   
   
 

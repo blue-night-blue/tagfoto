@@ -9,14 +9,6 @@ class PostsController < ApplicationController
     end
   end
 
-  def add_tag
-    @posts = Post.where(user_id:@current_user.id).order(created_at: :desc)
-    @tags =Tag.where(user_id:@current_user.id).order(created_at: :desc)
-  end
-
-  def add_tag_update
-  end
-
   def new
     @post = Post.new
   end
@@ -61,8 +53,21 @@ class PostsController < ApplicationController
     @tags =Tag.where(user_id:@current_user.id).order(created_at: :desc)
   end
   
- 
+  def add_tag
+    @posts = Post.where(user_id:@current_user.id).order(created_at: :desc)
+    @tags =Tag.where(user_id:@current_user.id).order(created_at: :desc)
+  end
+
+  def create_multiple_posts
+    params[:post].each do |post_id, tag|
+      next if tag.blank?
   
+      post = Post.find_by(id: post_id)
+      post.update(tag: tag)
+    end
+    redirect_to "/#{@current_user.name}"
+  end
+   
   
 
   private

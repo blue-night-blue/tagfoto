@@ -60,10 +60,10 @@ class PostsController < ApplicationController
 
   def create_multiple_posts
     params[:post].each do |post_id, tag|
-      next if tag.blank?
-  
       post = Post.find_by(id: post_id)
-      post.update(tag: tag)
+      if post.tag != tag 
+        post.update(tag: tag)
+      end
     end
     redirect_to "/#{@current_user.name}"
   end

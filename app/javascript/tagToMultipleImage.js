@@ -1,5 +1,7 @@
-const images=document.querySelectorAll('img');
-const tags=document.querySelectorAll('.tag');
+const posts=document.getElementById('posts');
+const container_input_tag=document.getElementById('container_input_tag');
+const images=posts.querySelectorAll('img');
+const tags=container_input_tag.querySelectorAll('.tag');
 
 window.onload=function(){
     images.forEach( (image)=>{

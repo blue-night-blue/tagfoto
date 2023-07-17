@@ -3,7 +3,7 @@
   <%= javascript_import_module_tag "tagToMultipleImage" %>
 <% end %>
 
-<div class="container_input_tag">
+<div id="container_input_tag">
   <% @tags.each do |tag| %>
     <input type="button" value="<%= tag.tag %>" class="tag">
   <% end %>
@@ -16,9 +16,10 @@
   </div>
 
     <% @posts.each do |post| %>
-        <div id="<%= dom_id post %>" class="container_add_tag">
+        <div id="<%= dom_id post %>" class="container_image_and_tag">
           <% if post.images.attached? %>
               <%= image_tag post.images[0].variant(:thumb).processed.url %>
+              <!-- <%= form.label :tag %> -->
               <%= form.text_area "post[#{post.id}]", value: post.tag %>
           <% end %>
         </div>

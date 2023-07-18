@@ -5,7 +5,7 @@ class TagsController < ApplicationController
   def index
     @search = Tag.where(user_id:@current_user.id).ransack(params[:q])
     @search.sorts = 'id desc' if @search.sorts.empty?
-    @tags = @search.result
+    @tags = @search.result.page(params[:page])
   end 
 
   # GET /tags/1 or /tags/1.json

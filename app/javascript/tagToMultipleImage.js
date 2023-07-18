@@ -14,8 +14,8 @@ window.onload=function(){
 }
 
 function selectImageToggle(){
-    const selectedTags=document.querySelectorAll('.select_tag');
-    const addedTag=this.nextElementSibling;
+    const selectedTags=container_input_tag.querySelectorAll('.select_tag');
+    const addedTag=this.parentElement.querySelector('textarea');
           
     // 画像を選択すると、オンになっているタグを挿入する
     selectedTags.forEach( (selectedTag)=>{
@@ -24,12 +24,15 @@ function selectImageToggle(){
         };
     }); 
     this.classList.toggle('select_image');
+    const getTextareaId=this.parentElement.getAttribute('id');
+    const getPostId=getTextareaId.replace('post_','');
+    addedTag.setAttribute(`name`,`post\[${getPostId}\]`);
 };
 
 function selectTagToggle(){
-    const selectedImages=document.querySelectorAll('.select_image');
+    const selectedImages=posts.querySelectorAll('.select_image');
     selectedImages.forEach( (selectedImage)=>{
-        const addedTag=selectedImage.nextElementSibling;
+        const addedTag=selectedImage.parentElement.querySelector('textarea');
         
         // タグをオンにする
         if(this.classList.contains('select_tag') == false ){

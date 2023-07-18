@@ -65,7 +65,7 @@ class PostsController < ApplicationController
         post.update(tag: tag)
       end
     end
-    redirect_to "/#{@current_user.name}"
+    redirect_to add_tag_path 
   end
    
   

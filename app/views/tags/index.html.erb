@@ -2,6 +2,17 @@
 
 <h1>Tags</h1>
 
+<%= search_form_for @search do |f| %>
+  <%= f.label :tag_cont, "タグ" %>
+  <%= f.search_field :tag_cont %>
+
+  <%= f.label :group_cont, "タググループ" %>
+  <%= f.search_field :group_cont %>
+
+  <%= f.submit %>
+  <%= link_to "クリア", tags_path %>
+<% end %>
+
 <div id="tags">
   <% @tags.each do |tag| %>
     <%= render tag %>

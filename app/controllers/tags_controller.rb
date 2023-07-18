@@ -3,8 +3,10 @@ class TagsController < ApplicationController
 
   # GET /tags or /tags.json
   def index
-    @tags =Tag.where(user_id:@current_user.id).order(created_at: :desc)
-  end
+    @search = Tag.where(user_id:@current_user.id).ransack(params[:q])
+    @search.sorts = 'id desc' if @search.sorts.empty?
+    @tags = @search.result
+  end 
 
   # GET /tags/1 or /tags/1.json
   def show

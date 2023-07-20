@@ -1,3 +1,4 @@
+/* 共通 */
 body{
     background-color: #eee;
 }
@@ -15,6 +16,15 @@ h1:nth-child(n + 2) {
 li{
     margin-bottom: 1em;
 }
+
+footer{
+    margin-top: 2em;
+}
+
+
+
+
+/* 一括タグ付け */
 
 .img_zone{
     display: flex;
@@ -55,7 +65,24 @@ li{
     margin-top: 1em;
 }
 
-footer{
-    margin-top: 2em;
+
+
+
+
+/* bootstrap実験用 */
+
+.bnb-container-all{
+    display: flex;
+    border: #f8f 5px solid;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px; 
 }
 
+.bnb-container{
+    border: #8f8 5px solid;
+    border-radius: 10px;
+    width: 33%;
+    padding: 10px;
+    margin: 20px; 
+}

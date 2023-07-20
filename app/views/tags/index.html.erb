@@ -15,10 +15,7 @@
 
 <div id="tags">
   <% @tags.each do |tag| %>
-    <%= render tag %>
-    <p>
-      <%= link_to "Show this tag", tag %>
-    </p>
+    <%= render "form", tag: tag %>
   <% end %>
 </div>
 

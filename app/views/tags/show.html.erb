@@ -1,6 +1,14 @@
-<p style="color: green"><%= notice %></p>
+<div id="<%= dom_id @tag %>">
+  <p>
+    <strong>タグ:</strong>
+    <%= @tag.tag %>
+  </p>
 
-<%= render @tag %>
+  <p>
+    <strong>タググループ:</strong>
+    <%= @tag.group %>
+  </p>
+</div>
 
 <div>
   <%= link_to "Edit this tag", edit_tag_path(@tag) %> |

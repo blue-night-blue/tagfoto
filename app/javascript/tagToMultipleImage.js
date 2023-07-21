@@ -15,7 +15,8 @@ window.onload=function(){
 
 function selectImageToggle(){
     const selectedTags=container_input_tag.querySelectorAll('.select_tag');
-    const addedTag=this.parentElement.querySelector('textarea');
+    const grandParent=this.closest('.container_image_and_tag');
+    const addedTag=grandParent.querySelector('textarea');
           
     // 画像を選択すると、オンになっているタグを挿入する
     selectedTags.forEach( (selectedTag)=>{
@@ -32,7 +33,8 @@ function selectImageToggle(){
 function selectTagToggle(){
     const selectedImages=posts.querySelectorAll('.select_image');
     selectedImages.forEach( (selectedImage)=>{
-        const addedTag=selectedImage.parentElement.querySelector('textarea');
+        const grandParent=selectedImage.closest('.container_image_and_tag');
+        const addedTag=grandParent.querySelector('textarea');
         
         // タグをオンにする
         if(this.classList.contains('select_tag') == false ){

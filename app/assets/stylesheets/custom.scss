@@ -1,2 +1,131 @@
-@import "bootstrap-sprockets";
-@import "bootstrap";
+// 共通
+
+$bg: #eee;
+$text: #000;
+$color1: #ff0;
+$color2: #f0f;
+$color3: #0ff;
+
+
+
+body{
+    background-color: $bg;
+    margin: 0;
+    font-family: "Helvetica Neue",
+        Arial,
+        "Hiragino Kaku Gothic ProN",
+        "Hiragino Sans",
+        Meiryo,
+        sans-serif;
+}
+
+.nav_bar{
+    font-size: 2rem;
+    background-color: $text;
+    
+    a{
+        display: inline-block;
+        margin: 3px;    
+        color: $bg;
+        text-decoration: none;
+        
+        &:nth-child(1){
+            color: $color1;
+        } 
+    
+        &:nth-child(2){
+            color: $color2;
+        } 
+    
+        &:nth-child(3){
+            color: $color3;
+        } 
+    }
+}
+
+input{
+    border-radius: 5px;
+    border: 1px $text solid;
+}
+
+
+// トップ
+
+
+
+
+// 画像一覧
+.container_images img{
+    width: 150px;
+    float:left;
+    border: 1px $text solid;
+} 
+
+
+
+
+// show
+#post_comment,
+#post_tag
+{
+    width: 90%;
+    height: 1.5em;
+}
+
+
+
+
+// 一括タグ付け
+#container_input_tag{
+    margin: 1em 0;
+} 
+
+#posts {
+    
+    input[type="submit"]{
+        margin: 1em 0;
+    }
+
+    .container_image_and_tag_all{
+        display: flex;
+        flex-wrap:wrap;
+
+        .container_image_and_tag {
+            width: 150px;
+            margin: 5px;
+            padding: 5px;
+            background-color: $text;
+            box-sizing: border-box;
+
+            .container_image{
+                text-align: center;
+            }
+            
+            img{
+                width: 100%;
+            } 
+
+            textarea{
+                width: 100%;
+                height: 120px;
+                background-color: $text;
+                color: $color3;
+                border: none;
+            }
+
+            &:has(.select_image){
+                 border: 5px $color2 solid;
+            } 
+        }
+    }
+}
+
+.select_tag{
+    background-color: $color3;
+}
+
+
+
+
+
+    // filter:   saturate(5620%) hue-rotate(298deg) ;

@@ -7,12 +7,28 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <script src="https://kit.fontawesome.com/df93f07d48.js" crossorigin="anonymous"></script>
     <%= yield(:head) %>
   </head>
   <body>
-    <div class="top_link">
-      <%= link_to "tagfoto", root_path %>
-    </div>
+    
+    <% if @current_user %>
+      <div class="nav_bar">
+        <%= link_to "/#{@current_user.name}" do %>
+          <i class="fa-regular fa-image"></i>
+        <% end %>
+        <%= link_to add_tag_path do %>
+          <i class="fa-solid fa-tags"></i>
+        <% end %>
+        <%= link_to tags_path do %>
+          <i class="fa-solid fa-tags"></i>
+        <% end %>
+        <%= link_to "/logout",data: { turbo_method: :post } do %>
+          <i class="fa-solid fa-right-from-bracket"></i> 
+        <% end %>
+      </div>     
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

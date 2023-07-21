@@ -13,19 +13,24 @@
 
 <div id="posts">
   <%= form_with url:create_multiple_posts_path do |form| %>
-  <div>
-    <%= form.submit %>
-  </div>
+    <div>
+      <%= form.submit %>
+    </div>
 
-    <% @posts.each do |post| %>
-        <div id="<%= dom_id post %>" class="container_image_and_tag">
-          <% if post.images.attached? %>
-              <%= image_tag post.images[0].variant(:thumb).processed.url %>
-              <%= form.label :tag %>
-              <%= form.text_area "post[#{post.id}]", value: post.tag, name: ""  %>
-          <% end %>
-        </div>
-    <% end %>
+    <div class="container_image_and_tag_all">
+      <% @posts.each do |post| %>
+          <div id="<%= dom_id post %>" class="container_image_and_tag">
+            <% if post.images.attached? %>
+                <div class="container_image">
+                  <%= image_tag post.images[0].variant(:thumb).processed.url %>
+                </div>
+                <div class="container_tag">
+                  <%= form.text_area "post[#{post.id}]", value: post.tag, name: ""  %>
+                </div>
+            <% end %>
+          </div>
+      <% end %>
+    </div>
   <% end %>
 </div>
 

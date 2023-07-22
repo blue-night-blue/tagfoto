@@ -6,11 +6,10 @@ $color1: #ff0;
 $color2: #f0f;
 $color3: #0ff;
 
-
-
 body{
     background-color: $bg;
     margin: 0;
+    padding-top: 30px;
     font-family: "Helvetica Neue",
         Arial,
         "Hiragino Kaku Gothic ProN",
@@ -20,14 +19,36 @@ body{
 }
 
 .nav_bar{
-    font-size: 2rem;
     background-color: $text;
+    color: $bg;
+    display: flex;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    padding: 2px;
     
     a{
-        display: inline-block;
-        margin: 3px;    
         color: $bg;
         text-decoration: none;
+        width: 30px;
+        margin: 0px 2px;
+        
+        i{
+            font-size: 30px;
+            display: block;
+        }
+
+        span{
+            display: block;
+            font-size: 10px; 
+            line-height: 9px;
+            text-align: center;
+        }
+        
+            // 一旦封印。
+            // transform: scale(0.6); 
+            // transform-origin: center top;
         
         &:nth-child(1){
             color: $color1;
@@ -50,7 +71,13 @@ input{
 
 
 // トップ
-
+.top{
+    width: 300px;
+    height: 600px;
+    background-color: #000;
+    color: #eee;
+    margin:0 10px 1000px 10px;
+}
 
 
 

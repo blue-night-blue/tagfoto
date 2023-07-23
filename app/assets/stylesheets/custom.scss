@@ -5,11 +5,12 @@ $text: #000;
 $color1: #ff0;
 $color2: #f0f;
 $color3: #0ff;
+$color4: #fff;
 
 body{
     background-color: $bg;
     margin: 0;
-    padding-top: 60px;
+    padding-top: 20px;
     font-family: "Helvetica Neue",
         Arial,
         "Hiragino Kaku Gothic ProN",
@@ -20,7 +21,7 @@ body{
 
 .nav_bar{
     background-color: $text;
-    color: $bg;
+    color: $color4;
     display: flex;
     width: 100%;
     position: fixed;
@@ -29,7 +30,7 @@ body{
     padding: 2px;
     
     a{
-        color: $bg;
+        color: $color4;
         text-decoration: none;
         width: 30px;
         margin: 0px 2px;
@@ -61,6 +62,15 @@ body{
         &:nth-child(3){
             color: $color3;
         } 
+    }
+}
+
+.logo{
+background-color: $text;
+margin-bottom: 2em;
+padding-top: 2em;
+    img{
+        height: 2em;
     }
 }
 
@@ -102,9 +112,11 @@ input,button{
     font-size: 14px;
     background-color: $color3;
     padding: 1px 6px;
+    margin: 5px 0;
 }
 
 #tags{
+    margin-bottom: 300px; 
     
     h1{
         font-size: 16px;
@@ -133,11 +145,11 @@ input,button{
         }
         
         .table_tag{
-            width: 150px;
+            width: 120px;
         }
 
         .table_group{
-            width: 100px;
+            width: 80px;
         }
 
         .table_number{
@@ -145,14 +157,14 @@ input,button{
         }
 
         .table_submit{
-            width: 50px;
+            width: 40px;
             background-color: $color1;
         }
 
         .table_delete{
-            width: 50px;
+            width: 40px;
             background-color: $color2;
-            color: #fff;
+            color: $color4;
         }
 
         

@@ -4,26 +4,45 @@
     <%= f.search_field :tag_cont %>
   </div>
   <div>
-  <%= f.label :group_cont, "グループ" %>
-  <%= f.search_field  :group_cont %>
+    <%= f.label :group_cont, "グループ" %>
+    <%= f.search_field  :group_cont %>
   </div>
-  <%= f.submit "検索" %>
-  <%= link_to "クリア", tags_path, class:"button_clear" %>
+  <%= f.submit "検索" ,class:"search_button" %>
+  <%= link_to "クリア", tags_path, class:"search_button" %>
 <% end %>
 
 <%= turbo_frame_tag "cats-list" do %>
-<div id="tags">
-  <div class="table_forms">
-    <div class="table_input"><%= render "form", tag: @tag %></div>
-  </div>
-  
-  
-  <% @tags.each do |tag| %>
+
+  <div id="tags">
+    <h1>追加</h1>
     <div class="table_forms">
-      <div class="table_input"><%= render "form", tag: tag %></div>
-      <div class="table_delete"><%= button_to "削除", tag, method: :delete %></div>
+      <div class="table_tag">タグ</div>
+      <div class="table_group">グループ</div>
+      <div class="table_number">並び</div>
     </div>
-  <% end %>
-</div>
+    
+    <div class="table_forms">
+      <%= render "form", tag: @tag %>
+    </div>
+
+  
+  
+    <h1>編集 (ボタンで並び替え)</h1>
+    <div class="table_forms">
+      <div class="table_tag"><%= sort_link(@search, :tag,"タグ") %></div>
+      <div class="table_group"><%= sort_link(@search, :group,"グループ") %></div>
+      <div class="table_number"><%= sort_link(@search, :number,"並び") %></div>
+    </div>
+    
+    <% @tags.each do |tag| %>
+    <div class="table_forms">
+        <%= render "form", tag: tag %>
+        <%= button_to "削除", tag, method: :delete, class:"table_delete" %>
+    </div>
+    
+    
+    
+    <% end %>
+  </div>
 <% end %>
 

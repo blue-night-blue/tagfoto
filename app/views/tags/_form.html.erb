@@ -1,20 +1,16 @@
-
-  <%= form_with(model: tag) do |form| %>
-  
-    <% if tag.errors.any? %>
-      <div style="color: red">
-        <h2><%= pluralize(tag.errors.count, "error") %> prohibited this tag from being saved:</h2>
-        <ul>
-          <% tag.errors.each do |error| %>
-            <li><%= error.full_message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-  
-    <%= form.text_field :tag %>
-    <%= form.text_field :group %>
-    <%= form.number_field :number %>
-    <%= form.submit %>
-   
+<%= form_with(model: tag) do |form| %>
+  <% if tag.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(tag.errors.count, "error") %> prohibited this tag from being saved:</h2>
+      <ul>
+        <% tag.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
   <% end %>
+  <%= form.text_field :tag, class:"table_tag" %>
+  <%= form.text_field :group, class:"table_group" %>
+  <%= form.number_field :number, class:"table_number" %>
+  <%= form.submit(class:"table_submit") %>
+<% end %>

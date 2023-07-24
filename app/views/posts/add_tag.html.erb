@@ -17,7 +17,7 @@
       <%= form.submit %>
     </div>
 
-    <div class="container_image_and_tag_all">
+    <div id="container_image_and_tag_all">
       <% @posts.each do |post| %>
           <div id="<%= dom_id post %>" class="container_image_and_tag">
             <% if post.images.attached? %>

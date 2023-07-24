@@ -195,7 +195,7 @@ input,button{
         margin: 1em 0;
     }
 
-    .container_image_and_tag_all{
+    #container_image_and_tag_all{
         display: flex;
         flex-wrap:wrap;
 
@@ -221,11 +221,10 @@ input,button{
                 color: $color3;
                 border: none;
             }
-
-            &:has(.select_image){
-                 border: 5px $color2 solid;
-            } 
         }
+        .select_image{
+            border: 5px $color2 solid;
+        } 
     }
 }
 

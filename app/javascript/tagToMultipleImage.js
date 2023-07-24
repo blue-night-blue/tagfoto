@@ -1,6 +1,6 @@
-const posts=document.getElementById('posts');
+const posts=document.getElementById('container_image_and_tag_all');
 const container_input_tag=document.getElementById('container_input_tag');
-const images=posts.querySelectorAll('img');
+const images=posts.querySelectorAll('.container_image_and_tag');
 const tags=container_input_tag.querySelectorAll('.tag');
 
 window.onload=function(){
@@ -15,8 +15,7 @@ window.onload=function(){
 
 function selectImageToggle(){
     const selectedTags=container_input_tag.querySelectorAll('.select_tag');
-    const grandParent=this.closest('.container_image_and_tag');
-    const addedTag=grandParent.querySelector('textarea');
+    const addedTag=this.querySelector('textarea');
           
     // 画像を選択すると、オンになっているタグを挿入する
     selectedTags.forEach( (selectedTag)=>{
@@ -25,16 +24,14 @@ function selectImageToggle(){
         };
     }); 
     this.classList.toggle('select_image');
-    const getTextareaId=this.parentElement.getAttribute('id');
-    const getPostId=getTextareaId.replace('post_','');
+    const getPostId=this.getAttribute('id').replace('post_','');
     addedTag.setAttribute(`name`,`post\[${getPostId}\]`);
 };
 
 function selectTagToggle(){
     const selectedImages=posts.querySelectorAll('.select_image');
     selectedImages.forEach( (selectedImage)=>{
-        const grandParent=selectedImage.closest('.container_image_and_tag');
-        const addedTag=grandParent.querySelector('textarea');
+        const addedTag=this.querySelector('textarea');
         
         // タグをオンにする
         if(this.classList.contains('select_tag') == false ){

@@ -31,7 +31,7 @@ function selectImageToggle(){
 function selectTagToggle(){
     const selectedImages=posts.querySelectorAll('.select_image');
     selectedImages.forEach( (selectedImage)=>{
-        const addedTag=this.querySelector('textarea');
+        const addedTag=selectedImage.querySelector('textarea');
         
         // タグをオンにする
         if(this.classList.contains('select_tag') == false ){

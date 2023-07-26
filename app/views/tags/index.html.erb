@@ -21,7 +21,7 @@
     <div class="table_forms">
       <div class="table_tag">タグ(必須)</div>
       <div class="table_group">グループ</div>
-      <div class="table_number">並び</div>
+      <div class="table_sort_order">並び</div>
     </div>
     
     <div class="table_forms">
@@ -36,7 +36,7 @@
     <div class="table_forms">
       <div class="table_tag"><%= sort_link(@search, :tag,"タグ") %></div>
       <div class="table_group"><%= sort_link(@search, :group,"グループ") %></div>
-      <div class="table_number"><%= sort_link(@search, :number,"並び") %></div>
+      <div class="table_sort_order"><%= sort_link(@search, :sort_order,"並び") %></div>
     </div>
     
     <% @tags.each do |tag| %>

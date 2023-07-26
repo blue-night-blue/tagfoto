@@ -78,12 +78,13 @@ h1{
 background-color: $text;
 margin-bottom: 2em;
 padding-top: 2em;
+
     img{
         height: 2em;
     }
 }
 
-input,button{
+input,button,select{
     border-radius: 5px;
     border: 1px $text solid;
 }
@@ -127,7 +128,6 @@ input,button{
 #tags{
     margin-bottom: 300px; 
     
-   
     .table_forms{
         white-space:nowrap;
         overflow:scroll;
@@ -151,11 +151,11 @@ input,button{
         }
 
         .table_group{
-            width: 80px;
+            width: 70px;
         }
 
-        .table_number{
-            width: 50px;
+        .table_sort_order{
+            width: 40px;
         }
 
         .table_submit{

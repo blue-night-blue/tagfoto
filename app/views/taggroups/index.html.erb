@@ -6,7 +6,7 @@
     <h1>追加</h1>
     <div class="table_forms">
       <div class="table_group">グループ</div>
-      <div class="table_number">並び</div>
+      <div class="table_sort_order">並び</div>
     </div>
     
     <div class="table_forms">
@@ -19,7 +19,7 @@
     <h1>編集 (ボタンで並び替え)</h1>
     <div class="table_forms">
       <div class="table_group"><%= sort_link(@search, :group,"グループ") %></div>
-      <div class="table_number"><%= sort_link(@search, :sort_order,"並び") %></div>
+      <div class="table_sort_order"><%= sort_link(@search, :sort_order,"並び") %></div>
     </div>
     
     <% @taggroups.each do |taggroup| %>

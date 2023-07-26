@@ -2,11 +2,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
 
   def index
-    if @current_user.name==params[:id]
-      @posts = Post.where(user_id:@current_user.id).order(created_at: :desc)
-    else
-      redirect_to root_path
-    end
+    @posts = Post.where(user_id:@current_user.id).order(created_at: :desc)
   end
 
   def new
@@ -53,7 +49,7 @@ class PostsController < ApplicationController
     @tags =Tag.where(user_id:@current_user.id).order(created_at: :desc)
   end
   
-  def add_tag
+  def tagto
     @posts = Post.where(user_id:@current_user.id).order(created_at: :desc)
     @tags =Tag.where(user_id:@current_user.id).order(created_at: :desc)
   end

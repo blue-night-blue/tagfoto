@@ -15,9 +15,14 @@ Rails.application.routes.draw do
   post "/login" , to: "users#login"  
   post "/logout" , to: "users#logout"  
   
-  # 自分の画像保管庫
-  get "/add_tag" , to: "posts#add_tag"  
-  get "/:id" , to: "posts#index"  
+  # メニューバー用 
+  get "/upload" , to: "posts#new"  
+  get "/photo" , to: "posts#index"  
+  get "/tagto" , to: "posts#tagto"  
+  get "/edittag" , to: "tags#index"  
+
+  
+  # その他 
   post "/create_multiple_posts" , to: "posts#create_multiple_posts"  
   
   

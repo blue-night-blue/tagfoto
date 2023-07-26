@@ -15,44 +15,20 @@
     
     <% if @current_user %>
       <div class="nav_bar">
-        <%= link_to new_post_path do %>
+        <%= link_to upload_path do %>
           <i class="fa-solid fa-square-plus"></i><span>upload</span>
         <% end %>
-        <%= link_to "/#{@current_user.name}" do %>
-          <i class="fa-regular fa-image"></i><span>index<br>img<span>
+        <%= link_to photo_path do %>
+          <i class="fa-regular fa-image"></i><span>photo<span>
         <% end %>
-        <%= link_to add_tag_path do %>
-          <i class="fa-solid fa-tags"></i><span>tag_to<br>img</span>
+        <%= link_to tagto_path do %>
+          <i class="fa-solid fa-tags"></i><span>tag_to<br>photo</span>
         <% end %>
-        <%= link_to tags_path do %>
+        <%= link_to edittag_path do %>
           <i class="fa-solid fa-tags"></i><span>edit<br>tag</span>
         <% end %>
         <%= link_to "/logout",data: { turbo_method: :post } do %>
           <i class="fa-solid fa-right-from-bracket"></i><span>log<br>out</span> 
-        <% end %>
-         <%= link_to "/#{@current_user.name}" do %>
-          <i class="fa-regular fa-image"></i><span></span>
-        <% end %>
-        <%= link_to add_tag_path do %>
-          <i class="fa-solid fa-tags"></i><span></span>
-        <% end %>
-        <%= link_to tags_path do %>
-          <i class="fa-solid fa-tags"></i><span></span>
-        <% end %>
-        <%= link_to "/logout",data: { turbo_method: :post } do %>
-          <i class="fa-solid fa-right-from-bracket"></i> 
-        <% end %>
-         <%= link_to "/#{@current_user.name}" do %>
-          <i class="fa-regular fa-image"></i><span></span>
-        <% end %>
-        <%= link_to add_tag_path do %>
-          <i class="fa-solid fa-tags"></i><span></span>
-        <% end %>
-        <%= link_to tags_path do %>
-          <i class="fa-solid fa-tags"></i><span></span>
-        <% end %>
-        <%= link_to "/logout",data: { turbo_method: :post } do %>
-          <i class="fa-solid fa-right-from-bracket"></i> 
         <% end %>
       </div>     
     <% end %>

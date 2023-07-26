@@ -1,10 +1,36 @@
-<div id="taggroups">
-  <% @taggroups.each do |taggroup| %>
-    <%= render taggroup %>
-    <p>
-      <%= link_to "Show this taggroup", taggroup %>
-    </p>
-  <% end %>
-</div>
+<%= link_to "タグ編集に戻る", edittag_path, class:"search_button" %>
 
-<%= link_to "New taggroup", new_taggroup_path %>
+<%= turbo_frame_tag "taggroups-list" do %>
+
+  <div id="tags">
+    <h1>追加</h1>
+    <div class="table_forms">
+      <div class="table_group">グループ</div>
+      <div class="table_number">並び</div>
+    </div>
+    
+    <div class="table_forms">
+      <%= render "form", taggroup: @taggroup %>
+    </div>
+
+    
+    
+  
+    <h1>編集 (ボタンで並び替え)</h1>
+    <div class="table_forms">
+      <div class="table_group"><%= sort_link(@search, :group,"グループ") %></div>
+      <div class="table_number"><%= sort_link(@search, :sort_order,"並び") %></div>
+    </div>
+    
+    <% @taggroups.each do |taggroup| %>
+    <div class="table_forms">
+        <%= render "form", taggroup: taggroup %>
+        <%= button_to "削除", taggroup, method: :delete, class:"table_delete" %>
+    </div>
+    
+    
+    
+    <% end %>
+  </div>
+<% end %>
+

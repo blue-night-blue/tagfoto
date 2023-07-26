@@ -1,4 +1,5 @@
 <%= form_with(model: tag) do |form| %>
+
   <% if tag.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(tag.errors.count, "error") %> prohibited this tag from being saved:</h2>
@@ -9,15 +10,16 @@
       </ul>
     </div>
   <% end %>
+  
+  
+  
   <%= form.text_field :tag, class:"table_tag" %>
   
-  
   <% if tag.group=="" %>
-  <%= form.select :group, options_for_select(Taggroup.order(:sort_order).map { |group| [group.group, group.id] }), include_blank: true  %>
+    <%= form.select :group, options_for_select(@taggroups), include_blank: true  %>
   <% else %>
-  <%= form.select :group, Taggroup.order(:sort_order).map { |group| [group.group, group.id] }, include_blank: true  %>
+    <%= form.select :group, @taggroups, include_blank: true  %>
   <% end %>
-
   
   <%= form.number_field :number, class:"table_number" %>
   <%= form.submit(class:"table_submit") %>

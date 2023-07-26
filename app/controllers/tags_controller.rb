@@ -7,6 +7,8 @@ class TagsController < ApplicationController
     @search = Tag.where(user_id:@current_user.id).ransack(params[:q])
     @search.sorts = 'id desc' if @search.sorts.empty?
     @tags = @search.result.page(params[:page])
+
+    @taggroups = Taggroup.where(user_id:@current_user.id).order(:sort_order).map { |group| [group.group, group.id] } 
   end 
 
   # GET /tags/1 or /tags/1.json

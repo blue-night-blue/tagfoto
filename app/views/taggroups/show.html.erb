@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @taggroup %>
+
+<div>
+  <%= link_to "Edit this taggroup", edit_taggroup_path(@taggroup) %> |
+  <%= link_to "Back to taggroups", taggroups_path %>
+
+  <%= button_to "Destroy this taggroup", @taggroup, method: :delete %>
+</div>

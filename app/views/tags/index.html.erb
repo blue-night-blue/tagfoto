@@ -1,3 +1,4 @@
+<h1>フィルター</h1>
 <%= search_form_for @search do |f| %>
   <div>
     <%= f.label :tag_cont, "タグ" %>
@@ -11,12 +12,14 @@
   <%= link_to "クリア", tags_path, class:"search_button" %>
 <% end %>
 
+
+
 <%= turbo_frame_tag "cats-list" do %>
 
   <div id="tags">
     <h1>追加</h1>
     <div class="table_forms">
-      <div class="table_tag">タグ</div>
+      <div class="table_tag">タグ(必須)</div>
       <div class="table_group">グループ</div>
       <div class="table_number">並び</div>
     </div>
@@ -25,7 +28,9 @@
       <%= render "form", tag: @tag %>
     </div>
 
-  
+    <%= link_to "グループ追加・編集", taggroups_path, data: { turbo: false }, class:"search_button" %>
+    
+    
   
     <h1>編集 (ボタンで並び替え)</h1>
     <div class="table_forms">

@@ -1,0 +1,32 @@
+<%= form_with(model: taggroup) do |form| %>
+  <% if taggroup.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(taggroup.errors.count, "error") %> prohibited this taggroup from being saved:</h2>
+
+      <ul>
+        <% taggroup.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :group, style: "display: block" %>
+    <%= form.text_field :group %>
+  </div>
+
+  <div>
+    <%= form.label :sort_order, style: "display: block" %>
+    <%= form.text_field :sort_order %>
+  </div>
+
+  <div>
+    <%= form.label :user_id, style: "display: block" %>
+    <%= form.number_field :user_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

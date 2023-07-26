@@ -19,7 +19,15 @@ body{
         sans-serif;
 }
 
-.nav_bar{
+h1{
+    font-size: 16px;
+    font-weight: 400;
+    margin: 30px 0 5px 0;
+    border-bottom: $color2 3px solid;
+    color: $color2;
+}
+
+ .nav_bar{
     background-color: $text;
     color: $color4;
     display: flex;
@@ -119,14 +127,7 @@ input,button{
 #tags{
     margin-bottom: 300px; 
     
-    h1{
-        font-size: 16px;
-        font-weight: 400;
-        margin: 30px 0 5px 0;
-        border-bottom: $color2 3px solid;
-        color: $color2;
-    }
-    
+   
     .table_forms{
         white-space:nowrap;
         overflow:scroll;

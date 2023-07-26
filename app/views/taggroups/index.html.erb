@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Taggroups</h1>
+
+<div id="taggroups">
+  <% @taggroups.each do |taggroup| %>
+    <%= render taggroup %>
+    <p>
+      <%= link_to "Show this taggroup", taggroup %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New taggroup", new_taggroup_path %>

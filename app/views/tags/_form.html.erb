@@ -10,7 +10,16 @@
     </div>
   <% end %>
   <%= form.text_field :tag, class:"table_tag" %>
-  <%= form.text_field :group, class:"table_group" %>
+  
+  
+  <% if tag.group=="" %>
+  <%= form.select :group, options_for_select(Taggroup.order(:sort_order).map { |group| [group.group, group.id] }), include_blank: true  %>
+  <% else %>
+  <%= form.select :group, Taggroup.order(:sort_order).map { |group| [group.group, group.id] }, include_blank: true  %>
+  <% end %>
+
+  
   <%= form.number_field :number, class:"table_number" %>
   <%= form.submit(class:"table_submit") %>
 <% end %>
+

@@ -27,6 +27,9 @@
         <%= link_to tagto_path do %>
           <i class="fa-solid fa-tags"></i><span>tag_to<br>photo</span>
         <% end %>
+        <%= link_to setting_path do %>
+          <i class="fa-solid fa-gear"></i><span>setting</span> 
+        <% end %>
         <%= link_to "/logout",data: { turbo_method: :post } do %>
           <i class="fa-solid fa-right-from-bracket"></i><span>log<br>out</span> 
         <% end %>
@@ -39,6 +42,10 @@
       <% end %>
     </div>
 
+    <div class="notice">
+      <%= flash[:notice] %>
+    </div>
+    
     <%= yield %>
   </body>
 </html>

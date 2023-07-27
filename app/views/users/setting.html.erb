@@ -1,0 +1,8 @@
+<h1>ユーザー設定</h1>
+
+<%= form_with(url: "/setting_update", scope: :user) do |form| %>
+  <%= form.label :approved_users, "Approved Users (Comma separated)" %>
+  <%= form.text_area :approved_users, value: @user.approved_users %>
+
+  <%= form.submit "Update User" %>
+<% end %>

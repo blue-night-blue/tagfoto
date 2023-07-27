@@ -1,6 +1,17 @@
 class TagsController < ApplicationController
+  before_action :authenticate_user
+  before_action :ensure_correct_user, only: %i[ show edit update destroy ]
   before_action :set_tag, only: %i[ show edit update destroy ]
-
+  
+  def ensure_correct_user
+    @tag = Tag.find_by(id: params[:id])
+    if @tag.user_id != @current_user.id
+      flash[:notice] = "権限がありません"
+      redirect_to photo_path
+    end
+  end 
+  
+  
   # GET /tags or /tags.json
   def index
     @tag = Tag.new

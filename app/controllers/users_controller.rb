@@ -1,6 +1,19 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user, only: %i[ index show edit update destroy ] 
+  before_action :forbid_login_user, only: %i[ signup_form signup login_form login ]
+  before_action :ensure_correct_user, only: %i[ index show edit update destroy ]
   before_action :set_user, only: %i[ show edit update destroy ]
-
+  
+  def ensure_correct_user
+    if @current_user.id != params[:id].to_i
+      flash[:notice] = "権限がありません"
+      redirect_to photo_path
+    end
+  end 
+  
+  
+  
+  
   # GET /users or /users.json
   def index
   end
@@ -82,7 +95,24 @@ class UsersController < ApplicationController
     end
   end
 
+  def setting
+    @user=User.find(@current_user.id)
+  end
 
+  def setting_update
+    @user=User.find(@current_user.id)
+    respond_to do |format|
+      if @user.update(user_params)
+        format.html { redirect_to setting_path, notice: "User was successfully updated." }
+        format.json { render :show, status: :ok, location: @user }
+      else
+        format.html { render :setting_path, status: :unprocessable_entity }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+ 
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -92,6 +122,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:name, :email, :password)
+      params.require(:user).permit(:name, :email, :password, :approved_users)
     end
 end

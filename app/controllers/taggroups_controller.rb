@@ -1,6 +1,16 @@
 class TaggroupsController < ApplicationController
+  before_action :authenticate_user
+  before_action :ensure_correct_user, only: %i[ show edit update destroy ]
   before_action :set_taggroup, only: %i[ show edit update destroy ]
-
+  
+  def ensure_correct_user
+    @taggroup = Taggroup.find_by(id: params[:id])
+    if @taggroup.user_id != @current_user.id
+      flash[:notice] = "権限がありません"
+      redirect_to photo_path
+    end
+  end 
+  
   # GET /taggroups or /taggroups.json
   def index
     @taggroup = Taggroup.new

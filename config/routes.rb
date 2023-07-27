@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  resources :taggroups
-  resources :tags
-  resources :posts
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
@@ -21,12 +18,17 @@ Rails.application.routes.draw do
   get "/photo" , to: "posts#index"  
   get "/tagto" , to: "posts#tagto"  
   get "/edittag" , to: "tags#index"  
+  get "/setting" , to: "users#setting"  
 
-  
   # その他 
   post "/create_multiple_posts" , to: "posts#create_multiple_posts"  
   get "/edittaggroup" , to: "taggroups#index"  
-  
+  post "/setting_update" , to: "users#setting_update"  
+ 
+  resources :taggroups
+  resources :tags
+  resources :posts
+  resources :users
   
 
 end

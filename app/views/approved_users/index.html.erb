@@ -1,0 +1,34 @@
+<%= link_to "ユーザー設定に戻る", setting_path, class:"search_button" %>
+
+
+  <div id="table_container">
+    <h1>追加</h1>
+    <div class="table_forms">
+      <div class="table_user_name">ユーザー名</div>
+    </div>
+    
+    <div class="table_forms">
+      <%= render "form", approved_user: @approved_user %>
+    </div>
+
+    
+    
+  
+    <h1>削除</h1>
+    <div class="table_forms">
+      <div class="table_user_name">ユーザー名</div>
+    </div>
+    
+    <% @approved_users.each do |approved_user| %>
+      <% if user=User.find(approved_user.approved_user_id) %> 
+        <div class="table_forms">
+            <div class="table_user_name"><%= user.name %></div>
+            <%= button_to "削除", approved_user, method: :delete, class:"table_delete" %>
+        </div>
+      <% end %>
+    <% end %>
+    
+    
+    
+  </div>
+

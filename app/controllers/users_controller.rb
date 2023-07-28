@@ -97,20 +97,9 @@ class UsersController < ApplicationController
 
   def setting
     @user=User.find(@current_user.id)
+    @approved_users = ApprovedUser.where(user_id: @current_user.id)
   end
 
-  def setting_update
-    @user=User.find(@current_user.id)
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to setting_path, notice: "User was successfully updated." }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :setting_path, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
-  end
 
  
 

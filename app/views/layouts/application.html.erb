@@ -15,22 +15,22 @@
     
     <% if @current_user %>
       <div class="nav_bar">
-        <%= link_to upload_path do %>
-          <i class="fa-solid fa-square-plus"></i><span>upload</span>
-        <% end %>
-        <%= link_to photo_path do %>
+        <%= link_to photo_path, class:"menu_title_photo" do %>
           <i class="fa-regular fa-image"></i><span>photo<span>
         <% end %>
-        <%= link_to edittag_path do %>
+        <%= link_to upload_path, class:"menu_title_upload" do %>
+          <i class="fa-solid fa-square-plus"></i><span>upload</span>
+        <% end %>
+        <%= link_to edittag_path, class:"menu_title_edittag" do %>
           <i class="fa-solid fa-tags"></i><span>edit<br>tag</span>
         <% end %>
-        <%= link_to tagto_path do %>
+        <%= link_to tagto_path, class:"menu_title_tagto" do %>
           <i class="fa-solid fa-tags"></i><span>tag_to<br>photo</span>
         <% end %>
-        <%= link_to setting_path do %>
+        <%= link_to setting_path, class:"menu_title_setting" do %>
           <i class="fa-solid fa-gear"></i><span>setting</span> 
         <% end %>
-        <%= link_to "/logout",data: { turbo_method: :post } do %>
+        <%= link_to "/logout", class:"menu_title_logout" ,data: { turbo_method: :post } do %>
           <i class="fa-solid fa-right-from-bracket"></i><span>log<br>out</span> 
         <% end %>
       </div>     

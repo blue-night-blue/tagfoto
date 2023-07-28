@@ -1,8 +1,15 @@
-<h1>ユーザー設定</h1>
+<h1>自分の写真を閲覧できるユーザー</h1>
+<%= link_to "追加・削除", editapproveduser_path, class:"search_button" %>
 
-<%= form_with(url: "/setting_update", scope: :user) do |form| %>
-  <%= form.label :approved_users, "Approved Users (Comma separated)" %>
-  <%= form.text_area :approved_users, value: @user.approved_users %>
-
-  <%= form.submit "Update User" %>
+<% @approved_users.each do |approved_user| %>
+    <% if user=User.find(approved_user.approved_user_id) %> 
+        <div class="table_forms">
+            <div class="table_user_name"><%= user.name %></div>
+        </div>
+    <% end %>
 <% end %>
+
+ 
+    
+    
+  

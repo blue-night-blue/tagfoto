@@ -43,9 +43,37 @@ h1{
         width: 30px;
         margin: 0px 2px;
         
+        &.menu_title_photo{
+            color:$color2 ;
+        }    
+        
+        &.menu_title_upload{
+            color: $color1;
+        }    
+        
+        &.menu_title_edittag{
+            color: $color1;
+        }    
+        
+        &.menu_title_tagto{
+            color: $color3;
+        }    
+        
+        &.menu_title_setting{
+            color: $color3;
+        }    
+        
+        &.menu_title_logout{
+            color: $color4;
+        }    
+        
         i{
             font-size: 30px;
             display: block;
+
+            
+            
+            
         }
 
         span{
@@ -54,32 +82,16 @@ h1{
             line-height: 9px;
             text-align: center;
         }
-        
-            // 一旦封印。
-            // transform: scale(0.6); 
-            // transform-origin: center top;
-        
-        &:nth-child(1){
-            color: $color1;
-        } 
-    
-        &:nth-child(2){
-            color: $color2;
-        } 
-    
-        &:nth-child(3){
-            color: $color3;
-        } 
     }
 }
 
 .logo{
 background-color: $text;
-margin-bottom: 2em;
-padding-top: 4em;
+margin-bottom: 30px;
+padding-top: 60px;
 
     img{
-        height: 2em;
+        height: 60px;
     }
 }
 
@@ -87,31 +99,9 @@ input,button,select{
     border-radius: 5px;
     border: 1px $text solid;
     background-color: $color4;
+    width: 70px;
 }
 
-
-// トップ
-.top{
-    width: 300px;
-    height: 600px;
-    background-color: $text;
-    color: $color4;
-    margin:0 10px 1000px 10px;
-}
-
-
-
-// 画像一覧
-.container_images img{
-    width: 150px;
-    float:left;
-    border: 1px $text solid;
-} 
-
-
-
-
-// タグ編集
 .search_button,
 .sort_link{
     border-radius: 5px;
@@ -125,7 +115,7 @@ input,button,select{
     margin: 5px 0;
 }
 
-#tags{
+#table_container{
     margin-bottom: 300px; 
     
     .table_forms{
@@ -158,6 +148,10 @@ input,button,select{
             width: 40px;
         }
 
+        .table_user_name{
+            width: 100px;
+        }
+
         .table_submit{
             width: 40px;
             background-color: $color1;
@@ -172,6 +166,28 @@ input,button,select{
         
     }
 }
+
+
+// トップ
+.top{
+    width: 300px;
+    height: 600px;
+    background-color: $text;
+    color: $color4;
+    margin:0 10px 1000px 10px;
+}
+
+
+
+// 画像一覧
+.container_images img{
+    width: 150px;
+    float:left;
+    border: 1px $text solid;
+} 
+
+
+
 
 
 // show
@@ -232,9 +248,15 @@ input,button,select{
 .select_tag{
     background-color: $color3;
 }
-
-
-
-
-
     // filter:   saturate(5620%) hue-rotate(298deg) ;
+
+    
+    
+
+// ユーザー設定
+
+#form_setting{
+    label,textarea,input{
+        display: block;
+    }
+}

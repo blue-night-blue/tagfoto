@@ -1,0 +1,2 @@
+class ApprovedUser < ApplicationRecord
+end

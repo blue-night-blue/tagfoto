@@ -1,9 +1,4 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
-
   # トップおよびサインイン/アウト 
   root "top#top"
   get "/top" , to: redirect('../')
@@ -23,12 +18,13 @@ Rails.application.routes.draw do
   # その他 
   post "/create_multiple_posts" , to: "posts#create_multiple_posts"  
   get "/edittaggroup" , to: "taggroups#index"  
-  post "/setting_update" , to: "users#setting_update"  
+  get "/editapproveduser" , to: "approved_users#index"  
  
   resources :taggroups
   resources :tags
   resources :posts
   resources :users
+  resources :approved_users, only: %i[index new create update destroy]
   
 
 end

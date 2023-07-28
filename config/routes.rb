@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get "/edittaggroup" , to: "taggroups#index"  
   get "/editapproveduser" , to: "approved_users#index"  
   get "/photo/:id" , to: "posts#approved_index"  
+  get "/sharedphoto" , to: "posts#sharedphoto"  
  
   resources :taggroups
   resources :tags

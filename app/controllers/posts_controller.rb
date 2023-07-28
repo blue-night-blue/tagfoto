@@ -85,6 +85,10 @@ class PostsController < ApplicationController
     end
   end
 
+  def sharedphoto
+    @approved_users=ApprovedUser.where(approved_user_id:@current_user.id)
+  end
+
   
 
   private

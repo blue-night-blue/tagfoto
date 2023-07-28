@@ -1,0 +1,15 @@
+
+
+<h1>あなたが許可されているユーザー</h1>
+
+
+
+<div>
+  <% @approved_users.each do |approved_user| %>
+    <% user=User.find(approved_user.user_id) %>
+    <div>
+      <%= link_to "photo/#{user.name}", "photo/#{user.name}" %>
+    </div>
+  <% end %>
+</div>
+

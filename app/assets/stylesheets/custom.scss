@@ -99,7 +99,6 @@ input,button,select{
     border-radius: 5px;
     border: 1px $text solid;
     background-color: $color4;
-    width: 70px;
 }
 
 .search_button,
@@ -118,6 +117,13 @@ input,button,select{
 #table_container{
     margin-bottom: 300px; 
     
+    input,button,select{
+        border-radius: 5px;
+        border: 1px $text solid;
+        background-color: $color4;
+        width: 70px;
+    }
+
     .table_forms{
         white-space:nowrap;
         overflow:scroll;
@@ -162,8 +168,6 @@ input,button,select{
             background-color: $color2;
             color: $color4;
         }
-
-        
     }
 }
 

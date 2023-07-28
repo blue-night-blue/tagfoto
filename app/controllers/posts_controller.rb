@@ -75,6 +75,16 @@ class PostsController < ApplicationController
     redirect_to add_tag_path 
   end
    
+  def approved_index
+    user=User.find_by(name:params[:id])
+    if  user && ApprovedUser.where(user_id:user.id, approved_user_id:@current_user.id).present?
+      @posts = Post.where(user_id:user.id).order(created_at: :desc)
+    else
+      flash[:notice]="当該のユーザーが存在しない、もしくは権限がありません"
+      redirect_to photo_path
+    end
+  end
+
   
 
   private

@@ -19,12 +19,13 @@ Rails.application.routes.draw do
   post "/create_multiple_posts" , to: "posts#create_multiple_posts"  
   get "/edittaggroup" , to: "taggroups#index"  
   get "/editapproveduser" , to: "approved_users#index"  
+  get "/photo/:id" , to: "posts#approved_index"  
  
   resources :taggroups
   resources :tags
   resources :posts
   resources :users
-  resources :approved_users, only: %i[index new create update destroy]
+  resources :approved_users, only: %i[index new create destroy]
   
 
 end

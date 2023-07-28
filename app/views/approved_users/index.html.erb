@@ -4,7 +4,7 @@
   <div id="table_container">
     <h1>追加</h1>
     <div class="table_forms">
-      <div class="table_user_name">ユーザー名</div>
+      <div class="table_user_name">ユーザー名(半角)</div>
     </div>
     
     <div class="table_forms">
@@ -15,9 +15,6 @@
     
   
     <h1>削除</h1>
-    <div class="table_forms">
-      <div class="table_user_name">ユーザー名</div>
-    </div>
     
     <% @approved_users.each do |approved_user| %>
       <% if user=User.find(approved_user.approved_user_id) %> 

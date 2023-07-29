@@ -6,7 +6,7 @@
   </div>
   <div>
     <%= f.label :group_cont, "グループ" %>
-    <%= f.search_field  :group_cont %>
+    <%= f.select :group_cont, options_from_collection_for_select(Taggroup.where(user_id:@current_user.id).order(:sort_order), :id, :group), include_blank: true %>
   </div>
   <%= f.submit "検索" ,class:"search_button" %>
   <%= link_to "クリア", edittag_path, class:"search_button" %>

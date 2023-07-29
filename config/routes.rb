@@ -19,8 +19,9 @@ Rails.application.routes.draw do
   post "/create_multiple_posts" , to: "posts#create_multiple_posts"  
   get "/edittaggroup" , to: "taggroups#index"  
   get "/editapproveduser" , to: "approved_users#index"  
-  get "/photo/:id" , to: "posts#approved_index"  
   get "/sharedphoto" , to: "posts#sharedphoto"  
+  get "/photo/:user_name" , to: "posts#approved_index"  
+  get "/photo/:user_name/:id" , to: "posts#approved_show"  
  
   resources :taggroups
   resources :tags

@@ -75,18 +75,28 @@ class PostsController < ApplicationController
     redirect_to add_tag_path 
   end
    
+  def sharedphoto
+    @approved_users=ApprovedUser.where(approved_user_id:@current_user.id)
+  end
+
   def approved_index
-    user=User.find_by(name:params[:id])
-    if  user && ApprovedUser.where(user_id:user.id, approved_user_id:@current_user.id).present?
-      @posts = Post.where(user_id:user.id).order(created_at: :desc)
+    @user=User.find_by(name:params[:user_name])
+    if  @user && ApprovedUser.where(user_id:@user.id, approved_user_id:@current_user.id).present?
+      @posts = Post.where(user_id:@user.id).order(created_at: :desc)
     else
       flash[:notice]="当該のユーザーが存在しない、もしくは権限がありません"
       redirect_to photo_path
     end
   end
 
-  def sharedphoto
-    @approved_users=ApprovedUser.where(approved_user_id:@current_user.id)
+  def approved_show
+    @user=User.find_by(name:params[:user_name])
+    if  @user && ApprovedUser.where(user_id:@user.id, approved_user_id:@current_user.id).present?
+      @post = Post.find(params[:id])
+    else
+      flash[:notice]="当該のユーザーが存在しない、もしくは権限がありません"
+      redirect_to photo_path
+    end
   end
 
   

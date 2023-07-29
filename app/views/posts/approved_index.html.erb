@@ -1,12 +1,19 @@
+<h1><%= @user.name %></h1>
 
-
-<h1>Posts</h1>
-
+<%= link_to "一覧に戻る", sharedphoto_path, class:"search_button" %>
 
 
 <div id="posts">
   <% @posts.each do |post| %>
-    <%= render post %>
+    <div id="<%= dom_id post %>" class="container_images">
+
+        <% if post.images.attached? %>
+          <%= link_to "#{@user.name}/#{post.id}" do %>
+            <%= image_tag post.images[0].variant(:thumb).processed.url %>
+          <% end %>
+        <% end %>
+
+    </div>
   <% end %>
 </div>
 

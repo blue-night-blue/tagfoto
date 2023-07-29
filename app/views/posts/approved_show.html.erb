@@ -1,0 +1,14 @@
+<%= link_to "back", "/photo/#{@user.name}", class:"search_button" %>
+
+<% if @post.images.attached? %>
+
+<div>
+    <%= @post.tag %>
+  </div>
+  <div>
+    <%= link_to @post.images[0] do %>
+      <%= image_tag @post.images[0] %>
+    <% end %>
+  </div>
+<% end %>
+

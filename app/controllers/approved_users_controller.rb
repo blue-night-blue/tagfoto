@@ -12,7 +12,13 @@ class ApprovedUsersController < ApplicationController
 
   def create
     user_name=params[:approved_user][:user_name]
-    if user=User.find_by(name:user_name)
+    user=User.find_by(name:user_name)
+    if user.present?
+
+      if user.id==@current_user.id
+        redirect_to editapproveduser_path, notice: "自身を登録することはできません。"
+        return 
+      end 
       
       @approved_user = ApprovedUser.new
       @approved_user.approved_user_id=user.id
@@ -23,7 +29,7 @@ class ApprovedUsersController < ApplicationController
           format.html { redirect_to editapproveduser_path, notice: "Approved user was successfully created." }
           format.json { render :show, status: :created, location: @approved_user }
         else
-          format.html { render :editapproveduser_path, status: :unprocessable_entity }
+          format.html { redirect_to editapproveduser_path, notice: "既に追加済みです。" }
           format.json { render json: @approved_user.errors, status: :unprocessable_entity }
         end
       end

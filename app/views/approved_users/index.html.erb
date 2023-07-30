@@ -2,13 +2,17 @@
 
 
   <div id="table_container">
-    <h1>追加</h1>
+    <h1>登録</h1>
     <div class="table_forms">
       <div class="table_user_name">ユーザー名(半角)</div>
     </div>
     
     <div class="table_forms">
       <%= render "form", approved_user: @approved_user %>
+    </div>
+
+    <div>
+      ※登録以降にユーザー名が変更された場合は、自動で修正されます。
     </div>
 
     

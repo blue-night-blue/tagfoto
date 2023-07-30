@@ -1,4 +1,4 @@
-<%= link_to "back", "/photo/#{@user.name}", class:"search_button" %>
+<%= link_to "#{@user.name}の写真一覧に戻る", "/photo/#{@user.name}", class:"search_button" %>
 
 <% if @post.images.attached? %>
 

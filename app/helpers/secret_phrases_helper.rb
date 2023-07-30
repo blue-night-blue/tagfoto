@@ -1,0 +1,2 @@
+module SecretPhrasesHelper
+end

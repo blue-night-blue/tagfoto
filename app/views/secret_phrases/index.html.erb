@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Secret phrases</h1>
+
+<div id="secret_phrases">
+  <% @secret_phrases.each do |secret_phrase| %>
+    <%= render secret_phrase %>
+    <p>
+      <%= link_to "Show this secret phrase", secret_phrase %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New secret phrase", new_secret_phrase_path %>

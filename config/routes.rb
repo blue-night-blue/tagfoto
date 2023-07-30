@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :secret_phrases
   # トップおよびサインイン/アウト 
   root "top#top"
   get "/top" , to: redirect('../')

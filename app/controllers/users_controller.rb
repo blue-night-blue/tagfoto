@@ -97,6 +97,7 @@ class UsersController < ApplicationController
 
   def setting
     @user=User.find(@current_user.id)
+    @approved_user= ApprovedUser.new
     @approved_users = ApprovedUser.where(user_id: @current_user.id)
   end
 

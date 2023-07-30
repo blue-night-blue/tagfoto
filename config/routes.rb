@@ -23,7 +23,9 @@ Rails.application.routes.draw do
   get "/sharedphoto" , to: "posts#sharedphoto"  
   get "/photo/:user_name" , to: "posts#approved_index"  
   get "/photo/:user_name/:id" , to: "posts#approved_show"  
- 
+  post "/authenticated" , to: "secret_phrases#authenticated"  
+  
+
   resources :taggroups
   resources :tags
   resources :posts

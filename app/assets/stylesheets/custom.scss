@@ -118,6 +118,10 @@ input,button,select{
     background-color: $color4;
 }
 
+input[type="submit"]{
+    background-color: $color1;
+}
+
 .search_button,
 .sort_link{
     border-radius: 5px;

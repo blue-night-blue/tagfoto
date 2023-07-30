@@ -1,19 +1,33 @@
-<h1><%= @user.name %></h1>
-
 <%= link_to "許可したユーザーの一覧に戻る", sharedphoto_path, class:"search_button" %>
 
+<h1><%= @user.name %></h1>
 
-<div id="posts">
-  <% @posts.each do |post| %>
-    <div id="<%= dom_id post %>" class="container_images">
+<% if @approved_user.authenticated == true %>
 
-        <% if post.images.attached? %>
-          <%= link_to "#{@user.name}/#{post.id}" do %>
-            <%= image_tag post.images[0].variant(:thumb).processed.url %>
+  <div id="posts">
+    <% @posts.each do |post| %>
+      <div id="<%= dom_id post %>" class="container_images">
+
+          <% if post.images.attached? %>
+            <%= link_to "#{@user.name}/#{post.id}" do %>
+              <%= image_tag post.images[0].variant(:thumb).processed.url %>
+            <% end %>
           <% end %>
-        <% end %>
 
-    </div>
-  <% end %>
-</div>
+      </div>
+    <% end %>
+  </div>
+
+<% else %>
+
+  <div>合言葉を入力してください。</div>
+  <div class="table_forms">
+    <%= form_with scope: :secret_phrase, url: authenticated_path do |form| %>
+      <%= form.hidden_field :user_id, value: @user.id %>
+      <%= form.text_field :password, class:"table_user_name" %>
+      <%= form.submit "送信", class:"table_submit" %>
+    <% end %>
+  </div>
+
+<% end %>
 

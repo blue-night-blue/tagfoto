@@ -81,8 +81,10 @@ class PostsController < ApplicationController
 
   def approved_index
     @user=User.find_by(name:params[:user_name])
-    if  @user && ApprovedUser.where(user_id:@user.id, approved_user_id:@current_user.id).present?
+    @approved_user = ApprovedUser.find_by(user_id:@user.id, approved_user_id:@current_user.id)
+    if  @user.present? && @approved_user.present?
       @posts = Post.where(user_id:@user.id).order(created_at: :desc)
+      @secret_phrase = SecretPhrase.find_by(user_id:@user.id) 
     else
       flash[:notice]="当該のユーザーが存在しない、もしくは権限がありません"
       redirect_to photo_path
@@ -91,7 +93,7 @@ class PostsController < ApplicationController
 
   def approved_show
     @user=User.find_by(name:params[:user_name])
-    if  @user && ApprovedUser.where(user_id:@user.id, approved_user_id:@current_user.id).present?
+    if  @user && ApprovedUser.find_by(user_id:@user.id, approved_user_id:@current_user.id).present?
       @post = Post.find(params[:id])
     else
       flash[:notice]="当該のユーザーが存在しない、もしくは権限がありません"

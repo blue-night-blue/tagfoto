@@ -17,8 +17,6 @@ class TaggroupsController < ApplicationController
     @search = Taggroup.where(user_id:@current_user.id).ransack(params[:q])
     @search.sorts = 'id desc' if @search.sorts.empty?
     @taggroups = @search.result.page(params[:page])
-
-    @taggroups_search = Taggroup.where(user_id:@current_user.id).oreder("sort_order")
   end
 
   # GET /taggroups/1 or /taggroups/1.json

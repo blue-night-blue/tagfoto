@@ -58,6 +58,24 @@ class SecretPhrasesController < ApplicationController
     end
   end
 
+  def authenticated
+    @user=User.find(params[:secret_phrase][:user_id])
+    @approved_user = ApprovedUser.find_by(user_id:@user.id, approved_user_id:@current_user.id)
+    @secret_phrase = SecretPhrase.find_by(user_id:@user.id) 
+    
+    if @secret_phrase.authenticate(params[:secret_phrase][:password])
+      @approved_user.authenticated = true
+      @approved_user.save
+      flash[:notice]="合言葉が一致しました"
+      redirect_to request.referer
+    else
+      flash[:notice]="合言葉が違います"
+      redirect_to request.referer
+    end
+  end
+  
+  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_secret_phrase

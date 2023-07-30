@@ -1,4 +1,7 @@
-<h1>あなたが許可したユーザー</h1>
-<div>ユーザーを登録し、かつ合言葉(次項参照)を入力してもらうと、そのユーザーはあなたの写真を閲覧できるようになります。</div>
+<h1>プロフィール設定</h1>
+<%= render 'form', user: @current_user %>
+
+<h1>ユーザー許可設定</h1>
+<div>ユーザーを登録し、かつ合言葉を入力してもらうと、そのユーザーはあなたの写真を閲覧できるようになります。</div>
 <%= render 'approved_users/form', approved_users: @approved_users %>
 <%= render 'secret_phrases/form', secret_phrase: @secret_phrase %>

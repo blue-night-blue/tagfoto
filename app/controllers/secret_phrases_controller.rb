@@ -42,7 +42,7 @@ class SecretPhrasesController < ApplicationController
         format.html { redirect_to setting_path, notice: "Secret phrase was successfully updated." }
         format.json { render :show, status: :ok, location: @secret_phrase }
       else
-        format.html { redirect_to setting_path, notice: "空白です2" }
+        format.html { redirect_to setting_path, notice: "空白です" }
         format.json { render json: @secret_phrase.errors, status: :unprocessable_entity }
       end
     end

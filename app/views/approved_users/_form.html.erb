@@ -1,5 +1,35 @@
-<%= form_with(model: approved_user) do |form| %>
-  <%= form.text_field :user_name, class:"table_user_name" %>
-  <%= form.submit(class:"table_submit") %>
-<% end %>
+<div id="table_container">
+  <h2>登録</h2>
+  <div class="table_forms">
+    <div class="table_user_name">ユーザー名(半角)</div>
+  </div>
+  
+  <div class="table_forms">
+    <%= form_with(model: @approved_user) do |form| %>
+      <%= form.text_field :user_name, class:"table_user_name" %>
+      <%= form.submit(class:"table_submit") %>
+    <% end %>
+  </div>
+
+  <div>
+    ※登録以降にユーザー名が変更された場合は、自動で修正されます。
+  </div>
+
+  
+  
+
+  <h2>削除</h2>
+  
+  <% @approved_users.each do |approved_user| %>
+    <% if user=User.find(approved_user.approved_user_id) %> 
+      <div class="table_forms">
+          <div class="table_user_name"><%= user.name %></div>
+          <%= button_to "削除", approved_user, method: :delete, class:"table_delete" %>
+      </div>
+    <% end %>
+  <% end %>
+  
+  
+  
+</div>
 

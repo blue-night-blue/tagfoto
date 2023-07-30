@@ -96,9 +96,17 @@ class UsersController < ApplicationController
   end
 
   def setting
-    @user=User.find(@current_user.id)
     @approved_user= ApprovedUser.new
     @approved_users = ApprovedUser.where(user_id: @current_user.id)
+    
+    @secret_phrase = SecretPhrase.find_by(user_id:@current_user.id) 
+    if @secret_phrase.present?
+      @present="登録済み"
+    else
+      @secret_phrase = SecretPhrase.new
+      @present="未登録"
+    end
+    
   end
 
 

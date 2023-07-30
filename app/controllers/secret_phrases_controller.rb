@@ -22,13 +22,14 @@ class SecretPhrasesController < ApplicationController
   # POST /secret_phrases or /secret_phrases.json
   def create
     @secret_phrase = SecretPhrase.new(secret_phrase_params)
+    @secret_phrase.user_id=@current_user.id
 
     respond_to do |format|
       if @secret_phrase.save
-        format.html { redirect_to secret_phrase_url(@secret_phrase), notice: "Secret phrase was successfully created." }
+        format.html { redirect_to setting_path, notice: "Secret phrase was successfully created." }
         format.json { render :show, status: :created, location: @secret_phrase }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { redirect_to setting_path, notice: "空白です" }
         format.json { render json: @secret_phrase.errors, status: :unprocessable_entity }
       end
     end
@@ -38,10 +39,10 @@ class SecretPhrasesController < ApplicationController
   def update
     respond_to do |format|
       if @secret_phrase.update(secret_phrase_params)
-        format.html { redirect_to secret_phrase_url(@secret_phrase), notice: "Secret phrase was successfully updated." }
+        format.html { redirect_to setting_path, notice: "Secret phrase was successfully updated." }
         format.json { render :show, status: :ok, location: @secret_phrase }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html { redirect_to setting_path, notice: "空白です2" }
         format.json { render json: @secret_phrase.errors, status: :unprocessable_entity }
       end
     end

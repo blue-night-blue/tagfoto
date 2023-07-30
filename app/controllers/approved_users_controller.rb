@@ -16,7 +16,7 @@ class ApprovedUsersController < ApplicationController
     if user.present?
 
       if user.id==@current_user.id
-        redirect_to editapproveduser_path, notice: "自身を登録することはできません。"
+        redirect_to setting_path, notice: "自身を登録することはできません。"
         return 
       end 
       
@@ -26,17 +26,17 @@ class ApprovedUsersController < ApplicationController
       
       respond_to do |format|
         if @approved_user.save
-          format.html { redirect_to editapproveduser_path, notice: "Approved user was successfully created." }
+          format.html { redirect_to setting_path, notice: "Approved user was successfully created." }
           format.json { render :show, status: :created, location: @approved_user }
         else
-          format.html { redirect_to editapproveduser_path, notice: "既に追加済みです。" }
+          format.html { redirect_to setting_path, notice: "既に追加済みです。" }
           format.json { render json: @approved_user.errors, status: :unprocessable_entity }
         end
       end
 
     else
       flash[:notice]="ユーザー名が間違っています"
-      redirect_to editapproveduser_path
+      redirect_to setting_path
     end
   end
 
@@ -44,7 +44,7 @@ class ApprovedUsersController < ApplicationController
     @approved_user.destroy
 
     respond_to do |format|
-      format.html { redirect_to editapproveduser_path, notice: "Approved user was successfully destroyed." }
+      format.html { redirect_to setting_path, notice: "Approved user was successfully destroyed." }
       format.json { head :no_content }
     end
   end

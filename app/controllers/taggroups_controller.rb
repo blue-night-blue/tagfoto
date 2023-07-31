@@ -52,7 +52,7 @@ class TaggroupsController < ApplicationController
   def update
     respond_to do |format|
       if @taggroup.update(taggroup_params)
-        format.html { redirect_to taggroups_url, notice: "Taggroup was successfully updated." }
+        format.html { redirect_to taggroups_url, flash:{success:"更新しました。"} }
         format.json { render :show, status: :ok, location: @taggroup }
       else
         format.html { render :edit, status: :unprocessable_entity }

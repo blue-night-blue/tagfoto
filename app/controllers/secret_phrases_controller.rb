@@ -26,7 +26,7 @@ class SecretPhrasesController < ApplicationController
 
     respond_to do |format|
       if @secret_phrase.save
-        format.html { redirect_to setting_path, notice: "Secret phrase was successfully created." }
+        format.html { redirect_to setting_path, flash:{success:"登録しました。"}}
         format.json { render :show, status: :created, location: @secret_phrase }
       else
         format.html { redirect_to setting_path, notice: "空白です" }
@@ -39,7 +39,7 @@ class SecretPhrasesController < ApplicationController
   def update
     respond_to do |format|
       if @secret_phrase.update(secret_phrase_params)
-        format.html { redirect_to setting_path, notice: "Secret phrase was successfully updated." }
+        format.html { redirect_to setting_path, flash:{success:"更新しました。"}}
         format.json { render :show, status: :ok, location: @secret_phrase }
       else
         format.html { redirect_to setting_path, notice: "空白です" }
@@ -66,7 +66,7 @@ class SecretPhrasesController < ApplicationController
     if @secret_phrase.authenticate(params[:secret_phrase][:password])
       @approved_user.authenticated = true
       @approved_user.save
-      flash[:notice]="合言葉が一致しました"
+      flash[:success]="合言葉が一致しました"
       redirect_to request.referer
     else
       flash[:notice]="合言葉が違います"

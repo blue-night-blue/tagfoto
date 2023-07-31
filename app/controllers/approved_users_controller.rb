@@ -26,7 +26,7 @@ class ApprovedUsersController < ApplicationController
       
       respond_to do |format|
         if @approved_user.save
-          format.html { redirect_to setting_path, notice: "Approved user was successfully created." }
+          format.html { redirect_to setting_path, flash:{success:"登録しました。"} }
           format.json { render :show, status: :created, location: @approved_user }
         else
           format.html { redirect_to setting_path, notice: "既に追加済みです。" }
@@ -44,7 +44,7 @@ class ApprovedUsersController < ApplicationController
     @approved_user.destroy
 
     respond_to do |format|
-      format.html { redirect_to setting_path, notice: "Approved user was successfully destroyed." }
+      format.html { redirect_to setting_path, flash:{success:"削除しました。"} }
       format.json { head :no_content }
     end
   end

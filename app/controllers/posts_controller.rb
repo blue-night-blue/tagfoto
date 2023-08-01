@@ -12,8 +12,18 @@ class PostsController < ApplicationController
   end 
   
   
-  def index
+  def photo
+    @posts = Post.where(user_id:@current_user.id).limit(3).order(created_at: :desc)
+    @taggroups=Taggroup.where(user_id:@current_user.id).order(:sort_order)
+    @tags=Tag.where(user_id:@current_user.id)
+  end
+
+  def photo_all
     @posts = Post.where(user_id:@current_user.id).order(created_at: :desc)
+  end
+
+  def photo_tag
+    @posts = Post.where(user_id:@current_user.id).where("tag LIKE ?","%#{params[:tag]}%").order(created_at: :desc)
   end
 
   def new
@@ -72,7 +82,7 @@ class PostsController < ApplicationController
         post.update(tag: tag)
       end
     end
-    redirect_to add_tag_path 
+    redirect_to tagto_path 
   end
    
   def sharedphoto

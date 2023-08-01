@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   
   # メニューバー用 
   get "/upload" , to: "posts#new"  
-  get "/photo" , to: "posts#index"  
+  get "/photo" , to: "posts#photo"  
   get "/tagto" , to: "posts#tagto"  
   get "/edittag" , to: "tags#index"  
   get "/setting" , to: "users#setting"  
@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   get "/photo/:user_name" , to: "posts#approved_index"  
   get "/photo/:user_name/:id" , to: "posts#approved_show"  
   post "/authenticated" , to: "secret_phrases#authenticated"  
+  get "/photo_all" , to: "posts#photo_all"  
+  get "/photo_tag/:tag" , to: "posts#photo_tag"  
   
 
   resources :taggroups

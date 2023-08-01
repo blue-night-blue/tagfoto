@@ -3,6 +3,7 @@
   <%= javascript_import_module_tag "editTag" %>
 <% end %>
 
+<%= link_to "戻る", :back, class:"search_button" %>
 
 
 <%= form_with(model: @post) do |form| %>
@@ -28,10 +29,6 @@
     <%= form.submit %>
   </div>
 <% end %>
-
-<div>
-  <%= link_to "back","/photo" %>
-</div>
 
 <% if @post.images.attached? %>
   <%= link_to @post.images[0] do %>

@@ -1,0 +1,45 @@
+<h1>タグ</h1>
+<table id="tag_index_container">
+    <tr>
+        <th class="tag_index_group">グループ</th>
+        <th class="tag_index_tag">タグ</th>
+    </tr>
+
+    <% @taggroups.each do |taggroup| %>
+        <tr>
+            <td class="tag_index_group">
+                <%= taggroup.group %>
+            </td>
+
+            <td class="tag_index_tag">
+                <% @tags.where(group:taggroup.id.to_s).each do |tag| %>
+                    <%= link_to "#{tag.tag}", "/photo_tag/#{tag.tag}", class:"tag_button" %>
+                <% end %>
+            </td>
+        </tr>
+    <% end %>
+    <tr>
+        <td class="tag_index_group">
+            (タグなし)
+        </td>
+
+        <td class="tag_index_tag">
+            <% @tags.where(group:"").each do |tag| %>
+                <%= link_to "#{tag.tag}", "/photo_tag/#{tag.tag}", class:"tag_button" %>
+            <% end %>
+        </td>
+    </tr>
+</table>
+
+  
+
+<h1>写真(最新3件)</h1>
+<div id="photo_index_container">
+    <% @posts.each do |post| %>
+        <%= render post %>
+    <% end %>
+</div>
+
+<div>
+    <%= link_to "すべて見る", photo_all_path %>
+</div>

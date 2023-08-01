@@ -2,10 +2,12 @@
 
 $bg: #eee;
 $text: #000;
+$text_lignter: #aaa;
 $color1: #ff0;
 $color2: #f0f;
 $color3: #0ff;
 $color4: #fff;
+
 
 body{
     background-color: $bg;
@@ -16,6 +18,10 @@ body{
         "Hiragino Sans",
         Meiryo,
         sans-serif;
+}
+
+a{
+    color: $text;
 }
 
 h1{
@@ -87,10 +93,6 @@ ul,ol{
         i{
             font-size: 30px;
             display: block;
-
-            
-            
-            
         }
 
         span{
@@ -126,6 +128,7 @@ input,button,select{
     border-radius: 5px;
     border: 1px $text solid;
     background-color: $color4;
+    color: $text;
 }
 
 input[type="submit"]{
@@ -133,6 +136,7 @@ input[type="submit"]{
 }
 
 .search_button,
+.tag_button,
 .sort_link{
     border-radius: 5px;
     border: $text 1px solid;
@@ -233,7 +237,24 @@ input[type="submit"]{
 }
 }
 
+#tag_index_container{
+    border-spacing: 5px;
 
+    th,td{
+        text-align: left;
+        border-right: $text_lignter 1px solid;
+        border-bottom: $text_lignter 1px solid;
+    } 
+
+    .tag_index_group{
+        
+    }
+
+    .tag_index_tag{
+        
+    }
+}    
+ 
 
 // show
 #post_comment,

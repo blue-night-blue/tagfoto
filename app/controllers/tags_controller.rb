@@ -1,13 +1,12 @@
 class TagsController < ApplicationController
   before_action :authenticate_user
-  before_action :ensure_correct_user, only: %i[ show edit update destroy ]
   before_action :set_tag, only: %i[ show edit update destroy ]
+  before_action :ensure_correct_user, only: %i[ show edit update destroy ]
   
   def ensure_correct_user
-    @tag = Tag.find_by(id: params[:id])
     if @tag.user_id != @current_user.id
       flash[:notice] = "権限がありません"
-      redirect_to photo_path
+      redirect_to edittag_path
     end
   end 
   
@@ -84,4 +83,4 @@ class TagsController < ApplicationController
     def tag_params
       params.require(:tag).permit(:user_id, :tag, :sort_order, :group)
     end
-end
+  end

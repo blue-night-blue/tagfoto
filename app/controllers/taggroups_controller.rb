@@ -11,7 +11,8 @@ class TaggroupsController < ApplicationController
     end
   end 
   
-  # GET /taggroups or /taggroups.json
+  
+  
   def index
     @taggroup = Taggroup.new
     @search = Taggroup.where(user_id:@current_user.id).ransack(params[:q])

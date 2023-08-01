@@ -211,13 +211,27 @@ input[type="submit"]{
 
 
 // 画像一覧
-.container_images img{
-    width: 150px;
-    float:left;
-    border: 1px $text solid;
-} 
+#photo_index_container{
+    display: flex;
+    flex-wrap: wrap;
 
+    .container_images{
+            width: 150px;
 
+        img{
+            border: 1px $text solid;
+            width: 100%;
+        } 
+    } 
+}    
+    
+@media screen and (max-width: 480px) {
+#photo_index_container{
+    .container_images{
+            width: 33%;
+    } 
+}
+}
 
 
 
@@ -275,6 +289,20 @@ input[type="submit"]{
         } 
     }
 }
+
+@media screen and (max-width: 480px) {
+#posts {
+
+    #container_image_and_tag_all{
+        
+
+        .container_image_and_tag {
+            width: 30%;
+        }
+    }
+}
+}
+
 
 .select_tag{
     background-color: $color3;

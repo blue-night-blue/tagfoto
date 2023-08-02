@@ -1,0 +1,10 @@
+<%= link_to "戻る", :back, class:"search_button" %>
+
+<h1>タグ:<%= params[:tag] %></h1>
+
+<div id="photo_index_container">
+  <% @posts.each do |post| %>
+    <%= render post %>
+  <% end %>
+</div>
+

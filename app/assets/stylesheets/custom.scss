@@ -137,7 +137,8 @@ input[type="submit"]{
 
 .search_button,
 .tag_button,
-.sort_link{
+.sort_link,
+.button{
     border-radius: 5px;
     border: $text 1px solid;
     display: inline-block;
@@ -147,6 +148,11 @@ input[type="submit"]{
     background-color: $color3;
     padding: 1px 6px;
     margin: 5px 0;
+}
+
+.button_clear{
+    background-color: $color2;
+    color: $color4;
 }
 
 #table_container{

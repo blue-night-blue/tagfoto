@@ -150,6 +150,11 @@ input[type="submit"]{
     margin: 5px 0;
 }
 
+.button_clear{
+    background-color: $color2;
+    color: $color4;
+}
+
 #table_container{
     
     input,button,select{

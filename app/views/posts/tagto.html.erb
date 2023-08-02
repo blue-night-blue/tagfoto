@@ -6,12 +6,45 @@
 <% end %>
 
 <div id="container_input_tag">
-  <% @tags.each do |tag| %>
-    <input type="button" value="<%= tag.tag %>" class="tag">
-  <% end %>
+
+  <table id="tag_index_container">
+      <tr>
+          <th class="tag_index_group">グループ</th>
+          <th class="tag_index_tag">タグ</th>
+      </tr>
+
+      <% @taggroups.each do |taggroup| %>
+          <tr>
+              <td class="tag_index_group">
+                  <%= taggroup.group %>
+              </td>
+
+              <td class="tag_index_tag">
+                  <% @tags.where(group:taggroup.id.to_s).each do |tag| %>
+                    <input type="button" value="<%= tag.tag %>" class="tag">
+                  <% end %>
+              </td>
+          </tr>
+      <% end %>
+      <tr>
+          <td class="tag_index_group">
+              グループなし
+          </td>
+
+          <td class="tag_index_tag">
+              <% @tags.where(group:"").each do |tag| %>
+                <input type="button" value="<%= tag.tag %>" class="tag">
+              <% end %>
+          </td>
+      </tr>
+  </table>
+
 </div>
 
-<button id="clear_input_tag" class="button">タグ選択・画像選択の解除</button>
+
+
+
+<button id="clear_input_tag" class="button button_clear">タグ選択・画像選択の解除</button>
 
 <div id="posts">
   <%= form_with url:create_multiple_posts_path do |form| %>

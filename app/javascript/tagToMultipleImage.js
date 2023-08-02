@@ -35,7 +35,7 @@ function selectImageToggle(){
           
     // 画像を選択すると、オンになっているタグを挿入する
     selectedTags.forEach( (selectedTag)=>{
-        if(addedTag.value.includes(selectedTag.value)===false){
+        if(addedTag.value.split(',').includes(selectedTag.value)===false){
             addedTag.value+=selectedTag.value+"\,";
         };
     }); 
@@ -51,12 +51,12 @@ function selectTagToggle(){
         
         // タグをオンにする
         if(this.classList.contains('select_tag') == false ){
-            if(addedTag.value.includes(this.value)===false){
+            if(addedTag.value.split(',').includes(this.value)===false){
                 addedTag.value+=this.value+"\,";
             };
         // タグをオフにする
         } else{
-            if(addedTag.value.includes(this.value)===true){
+            if(addedTag.value.split(',').includes(this.value)===true){
                 addedTag.value=addedTag.value.replace(`${this.value}\,`,``);
             };
         };

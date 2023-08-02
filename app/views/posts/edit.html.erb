@@ -5,40 +5,70 @@
 
 <%= link_to "戻る", :back, class:"search_button" %>
 
+<div class="container_all">
 
-<%= form_with(model: @post) do |form| %>
-  <div>
-    <%= form.label :images %>
-    <%= form.file_field :images %>
-  </div>
-
-  <div>
-    <%= form.label :comment %>
-    <%= form.text_area :comment %>
-  </div>
-
-  <div>
-    <%= form.label :tag %>
-    <% @tags.each do |tag| %>
-      <input type="button" value="<%= tag.tag %>" class="tag">
+  <div class="container_photo">
+    <% if @post.images.attached? %>
+      <%= link_to @post.images[0] do %>
+        <%= image_tag @post.images[0] %>
+      <% end %>
     <% end %>
-    <%= form.text_area :tag %>
   </div>
 
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+  <div class="container_form">
 
-<div class="photo_container">
-  <% if @post.images.attached? %>
-    <%= link_to @post.images[0] do %>
-      <%= image_tag @post.images[0] %>
+    <%= form_with(model: @post) do |form| %>
+      <table id="tag_index_container">
+          <tr>
+              <th class="tag_index_group">グループ</th>
+              <th class="tag_index_tag">タグ</th>
+          </tr>
+
+          <% @taggroups.each do |taggroup| %>
+              <tr>
+                  <td class="tag_index_group">
+                      <%= taggroup.group %>
+                  </td>
+
+                  <td class="tag_index_tag">
+                      <% @tags.where(group:taggroup.id.to_s).each do |tag| %>
+                        <input type="button" value="<%= tag.tag %>" class="tag">
+                      <% end %>
+                  </td>
+              </tr>
+          <% end %>
+          <tr>
+              <td class="tag_index_group">
+                  なし
+              </td>
+
+              <td class="tag_index_tag">
+                  <% @tags.where(group:"").each do |tag| %>
+                    <input type="button" value="<%= tag.tag %>" class="tag">
+                  <% end %>
+              </td>
+          </tr>
+      </table>
+
+      <div>
+        <%= form.text_area :tag %>
+      </div>
+
+      <div>
+        <%= form.label :comment,"コメント" %>
+        <%= form.text_area :comment %>
+      </div>
+
+      <div>
+        <%= form.submit class:"button_submit" %>
+      </div>
     <% end %>
-  <% end %>
+
+    <div>
+      <%= button_to "削除", @post, method: :delete, class:"button_clear" %>
+    </div>
+    
+  </div>
+
 </div>
 
-
-<div>
-  <%= button_to "destroy", @post, method: :delete %>
-</div>

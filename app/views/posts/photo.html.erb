@@ -18,9 +18,22 @@
             </td>
         </tr>
     <% end %>
+
     <tr>
         <td class="tag_index_group">
             なし
+        </td>
+
+        <td class="tag_index_tag">
+            <% @tags_included_in_model.where(group:"").each do |tag| %>
+                <%= link_to "#{tag.tag}", "/photo_tag/#{tag.tag}", class:"tag_button" %>
+            <% end %>
+        </td>
+    </tr>
+
+    <tr>
+        <td class="tag_index_group">
+            未登録 
         </td>
 
         <td class="tag_index_tag">

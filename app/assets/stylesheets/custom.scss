@@ -270,11 +270,46 @@ input[type="submit"]{
 
 // edit
 
-.photo_container img{
+.container_all{
+    display: flex;
     width: 100%;
-    max-width: 800px;
-    max-width: 400px;
+    
+    .container_photo{
+        margin: 5px;
+
+        img{
+            width: 100%;
+            max-width: 800px;
+            max-width: 400px;
+        }
+    } 
+
+    .container_form{
+        margin: 5px;
+        width: 50%;
+
+        #post_tag{
+            width: 99%;
+            height: 100px;
+        }
+
+        #post_comment{
+            width: 99%;
+            height: 30px;
+        }
+
+        .button_submit{
+            margin-top: 30px;
+            width: 99%;
+            height: 30px;
+        } 
+
+        .button_clear{
+            margin-top: 100px;
+        } 
+    }
 }
+
 
 
 // 一括タグ付け
@@ -384,6 +419,22 @@ input[type="submit"]{
             line-height: 10px;
             text-align: center;
         }
+    }
+}
+
+.container_all{
+    display: block;
+    
+    .container_photo{
+        margin: 0px;
+
+        img{
+        }
+    } 
+
+    .container_form{
+        margin: 0px;
+        width: 99%;
     }
 }
 

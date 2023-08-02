@@ -70,7 +70,8 @@ class PostsController < ApplicationController
 
   def edit
     session[:previous_url] = request.referer
-    @tags =Tag.where(user_id:@current_user.id).order(created_at: :desc)
+    @taggroups=Taggroup.where(user_id:@current_user.id).order(:sort_order)
+    @tags =Tag.where(user_id:@current_user.id).order(:sort_order)
   end
 
   def show

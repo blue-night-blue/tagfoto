@@ -40,7 +40,7 @@ class TaggroupsController < ApplicationController
 
     respond_to do |format|
       if @taggroup.save
-        format.html { redirect_to taggroups_url, notice: "Taggroup was successfully created." }
+        format.html { redirect_to taggroups_url}
         format.json { render :show, status: :created, location: @taggroup }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -53,7 +53,7 @@ class TaggroupsController < ApplicationController
   def update
     respond_to do |format|
       if @taggroup.update(taggroup_params)
-        format.html { redirect_to taggroups_url, flash:{success:"更新しました。"} }
+        format.html { redirect_to taggroups_url}
         format.json { render :show, status: :ok, location: @taggroup }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -67,7 +67,7 @@ class TaggroupsController < ApplicationController
     @taggroup.destroy
 
     respond_to do |format|
-      format.html { redirect_to taggroups_url, notice: "Taggroup was successfully destroyed." }
+      format.html { redirect_to taggroups_url}
       format.json { head :no_content }
     end
   end

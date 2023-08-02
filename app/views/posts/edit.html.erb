@@ -30,14 +30,15 @@
   </div>
 <% end %>
 
-<% if @post.images.attached? %>
-  <%= link_to @post.images[0] do %>
-    <%= image_tag @post.images[0] %>
+<div class="photo_container">
+  <% if @post.images.attached? %>
+    <%= link_to @post.images[0] do %>
+      <%= image_tag @post.images[0] %>
+    <% end %>
   <% end %>
-<% end %>
-
+</div>
 
 
 <div>
-  <%= link_to "destroy", @post, method: :delete %>
+  <%= button_to "destroy", @post, method: :delete %>
 </div>

@@ -59,8 +59,8 @@ ul,ol{
     a{
         color: $color4;
         text-decoration: none;
-        width: 30px;
         margin: 0px 2px;
+        width: 100px;
         
         &.menu_title_photo{
             color:$color2 ;
@@ -93,13 +93,16 @@ ul,ol{
         i{
             font-size: 30px;
             display: block;
+            text-align: left;
+            float: left;
+            padding-right: 5px;
         }
 
         span{
             display: block;
-            font-size: 10px; 
-            line-height: 9px;
-            text-align: center;
+            font-size: 15px; 
+            line-height: 15px;
+            text-align: left;
         }
     }
 }
@@ -221,27 +224,6 @@ input[type="submit"]{
 
 
 // 画像一覧
-#photo_index_container{
-    display: flex;
-    flex-wrap: wrap;
-
-    .container_images{
-            width: 150px;
-
-        img{
-            border: 1px $text solid;
-            width: 100%;
-        } 
-    } 
-}    
-    
-@media screen and (max-width: 480px) {
-#photo_index_container{
-    .container_images{
-            width: 33%;
-    } 
-}
-}
 
 #tag_index_container{
 
@@ -261,6 +243,23 @@ input[type="submit"]{
 }    
  
 
+#photo_index_container{
+    display: flex;
+    flex-wrap: wrap;
+
+    .container_images{
+            width: 150px;
+
+        img{
+            border: 1px $text solid;
+            width: 100%;
+        } 
+    } 
+}    
+    
+
+
+
 // show
 #post_comment,
 #post_tag
@@ -269,7 +268,13 @@ input[type="submit"]{
     height: 1.5em;
 }
 
+// edit
 
+.photo_container img{
+    width: 100%;
+    max-width: 800px;
+    max-width: 400px;
+}
 
 
 // 一括タグ付け
@@ -316,19 +321,6 @@ input[type="submit"]{
     }
 }
 
-@media screen and (max-width: 480px) {
-#posts {
-
-    #container_image_and_tag_all{
-        
-
-        .container_image_and_tag {
-            width: 30%;
-        }
-    }
-}
-}
-
 
 .select_tag{
     background-color: $color3;
@@ -345,3 +337,57 @@ input[type="submit"]{
         display: block;
     }
 }
+
+
+
+
+
+
+// スマホ用
+
+@media screen and (max-width: 480px) {
+
+#photo_index_container{
+    .container_images{
+            width: 33%;
+    } 
+}
+
+#posts {
+
+    #container_image_and_tag_all{
+
+        .container_image_and_tag {
+            width: 30%;
+        }
+    }
+}
+
+ .nav_bar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    
+    a{
+        margin: 0px 2px;
+        width: 40px;
+        
+        i{
+            font-size: 30px;
+            text-align: center;
+            float: none;
+            padding-right: 0px;
+        }
+
+        span{
+            font-size: 10px; 
+            line-height: 10px;
+            text-align: center;
+        }
+    }
+}
+
+
+
+}
+

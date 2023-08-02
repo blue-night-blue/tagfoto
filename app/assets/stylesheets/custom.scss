@@ -211,6 +211,11 @@ input[type="submit"]{
     }
 }
 
+.button_mini{
+    width: 40px !important;
+}
+
+
 
 // トップ
 .top{
@@ -268,6 +273,11 @@ input[type="submit"]{
     height: 1.5em;
 }
 
+
+
+
+
+
 // edit
 
 .container_all{
@@ -312,7 +322,18 @@ input[type="submit"]{
 
 
 
+// タグ編集
+
+.container_filter{
+    letter-spacing: -2px;
+    margin-bottom: 2em;
+}
+
+
+
+
 // 一括タグ付け
+
 #container_input_tag{
     margin: 1em 0;
 } 

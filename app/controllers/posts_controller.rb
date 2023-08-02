@@ -32,6 +32,10 @@ class PostsController < ApplicationController
     @posts = Post.where(user_id:@current_user.id).where("tag LIKE ?","%#{params[:tag]}%").order(created_at: :desc)
   end
 
+  def nothing_tag
+    @posts = Post.where(user_id:@current_user.id).where(tag:"").order(created_at: :desc)
+  end
+
   def new
     @post = Post.new
   end

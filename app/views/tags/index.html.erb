@@ -1,17 +1,3 @@
-<h1>フィルター</h1>
-<%= search_form_for @search do |f| %>
-  <div>
-    <%= f.label :tag_cont, "タグ" %>
-    <%= f.search_field :tag_cont %>
-  </div>
-  <div>
-    <%= f.label :group_cont, "グループ" %>
-    <%= f.select :group_cont, options_from_collection_for_select(Taggroup.where(user_id:@current_user.id).order(:sort_order), :id, :group), include_blank: true %>
-  </div>
-  <%= f.submit "検索" ,class:"search_button" %>
-  <%= link_to "クリア", edittag_path, class:"search_button" %>
-<% end %>
-
 
 
 <%= turbo_frame_tag "cats-list" do %>
@@ -30,9 +16,23 @@
 
     <%= link_to "グループ追加・編集", edittaggroup_path, data: { turbo: false }, class:"search_button" %>
     
-    
+ 
   
     <h1>編集 (ボタンで並び替え)</h1>
+
+    <div class="container_filter">
+      <%= search_form_for @search do |f| %>
+        <%= f.label :tag_cont, "タグ" %>
+        <%= f.search_field :tag_cont, class:"table_tag" %>
+        <%= f.label :group_cont, "グループ" %> 
+        <%= f.select :group_cont, options_from_collection_for_select(Taggroup.where(user_id:@current_user.id).order(:sort_order), :id, :group), include_blank: true %>
+        <%= f.submit "検索" ,class:"button_mini" %>
+        <%= link_to "クリア", edittag_path, class:"button button_clear" %>
+      <% end %>
+    </div>
+
+
+    
     <div class="table_forms">
       <div class="table_tag"><%= sort_link(@search, :tag,"タグ") %></div>
       <div class="table_group"><%= sort_link(@search, :group,"グループ") %></div>

@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   post "/authenticated" , to: "secret_phrases#authenticated"  
   get "/photo_all" , to: "posts#photo_all"  
   get "/photo_tag/:tag" , to: "posts#photo_tag"  
+  get "/nothing_tag" , to: "posts#nothing_tag"  
   
 
   resources :taggroups

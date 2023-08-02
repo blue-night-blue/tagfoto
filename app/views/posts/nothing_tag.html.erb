@@ -1,6 +1,6 @@
 <%= link_to "戻る", photo_path, class:"search_button" %>
 
-<h1>すべての写真</h1>
+<h1>タグなし<%= params[:tag] %></h1>
 
 <div id="photo_index_container">
   <% @posts.each do |post| %>

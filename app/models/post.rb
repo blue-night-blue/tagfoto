@@ -5,8 +5,6 @@ class Post < ApplicationRecord
     end
 
     validates :images, attached: true, content_type: ['image/png', 'image/jpg', 'image/jpeg']
- 
-    
     
     
     

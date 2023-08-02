@@ -13,9 +13,15 @@ class PostsController < ApplicationController
   
   
   def photo
+    tags_in_posts_array = Post.where(user_id:@current_user.id).pluck(:tag).join(",").split(",").map(&:strip).reject(&:empty?).uniq
+    tags_in_tags_hash = Tag.where(user_id:@current_user.id).pluck(:tag).map { |tag| [tag, true] }.to_h
+    @tags_included_in_model=Tag.where(user_id:@current_user.id).where(tag: tags_in_posts_array)
+    @tags_not_included_in_model = tags_in_posts_array.reject { |tag| tags_in_tags_hash[tag] }
+
+    groups_in_tags_in_posts_array = @tags_included_in_model.pluck(:group).reject(&:empty?)
+    @taggroups=Taggroup.where(user_id:@current_user.id).where(id:groups_in_tags_in_posts_array).order(:sort_order)
+
     @posts = Post.where(user_id:@current_user.id).limit(3).order(created_at: :desc)
-    @taggroups=Taggroup.where(user_id:@current_user.id).order(:sort_order)
-    @tags=Tag.where(user_id:@current_user.id)
   end
 
   def photo_all

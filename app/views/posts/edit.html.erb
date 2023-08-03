@@ -16,59 +16,13 @@
   </div>
 
   <div class="container_form">
-
-    <%= form_with(model: @post) do |form| %>
-      <table id="tag_index_container">
-          <tr>
-              <th class="tag_index_group">グループ</th>
-              <th class="tag_index_tag">タグ</th>
-          </tr>
-
-          <% @taggroups.each do |taggroup| %>
-              <tr>
-                  <td class="tag_index_group">
-                      <%= taggroup.group %>
-                  </td>
-
-                  <td class="tag_index_tag">
-                      <% @tags.where(group:taggroup.id.to_s).each do |tag| %>
-                        <input type="button" value="<%= tag.tag %>" class="tag">
-                      <% end %>
-                  </td>
-              </tr>
-          <% end %>
-          <tr>
-              <td class="tag_index_group">
-                  なし
-              </td>
-
-              <td class="tag_index_tag">
-                  <% @tags.where(group:"").each do |tag| %>
-                    <input type="button" value="<%= tag.tag %>" class="tag">
-                  <% end %>
-              </td>
-          </tr>
-      </table>
-
-      <div>
-        <%= form.text_area :tag %>
-      </div>
-
-      <div>
-        <%= form.label :comment,"コメント" %>
-        <%= form.text_area :comment %>
-      </div>
-
-      <div>
-        <%= form.submit class:"button_submit" %>
-      </div>
-    <% end %>
-
-    <div>
-      <%= button_to "削除", @post, method: :delete, class:"button_clear" %>
-    </div>
-    
+    <%= render "form", post: @post, multiple_images: @multiple_images %>
   </div>
 
 </div>
 
+
+<div class="container_delete">
+  <%= button_to "削除", @post, method: :delete, class:"button_clear" %>
+</div>
+    

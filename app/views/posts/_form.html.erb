@@ -1,27 +1,55 @@
-<%= form_with(model: post) do |form| %>
-  <% if post.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+    <%= form_with(model: @post) do |form| %>
+    
+      <div>
+        <%= form.label :images,"写真" %>
+        <%= form.file_field :images, { multiple: @multiple_images } %>
+      </div>
+    
+      <table id="tag_index_container">
+          <tr>
+              <th class="tag_index_group">グループ</th>
+              <th class="tag_index_tag">タグ</th>
+          </tr>
 
-      <ul>
-        <% post.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+          <% @taggroups.each do |taggroup| %>
+              <tr>
+                  <td class="tag_index_group">
+                      <%= taggroup.group %>
+                  </td>
 
-  <div>
-    <%= form.label :images, style: "display: block" %>
-    <%= form.file_field :images, multiple: true %>
-  </div>
+                  <td class="tag_index_tag">
+                      <% @tags.where(group:taggroup.id.to_s).each do |tag| %>
+                        <input type="button" value="<%= tag.tag %>" class="tag">
+                      <% end %>
+                  </td>
+              </tr>
+          <% end %>
+          <tr>
+              <td class="tag_index_group">
+                  なし
+              </td>
 
-  <div>
-    <%= form.label :comment, style: "display: block" %>
-    <%= form.text_area :comment %>
-  </div>
+              <td class="tag_index_tag">
+                  <% @tags.where(group:"").each do |tag| %>
+                    <input type="button" value="<%= tag.tag %>" class="tag">
+                  <% end %>
+              </td>
+          </tr>
+      </table>
 
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+      <div>
+        <%= form.text_area :tag %>
+      </div>
+
+      <div>
+        <%= form.label :comment,"コメント" %>
+        <%= form.text_area :comment %>
+      </div>
+
+      <div>
+        <%= form.submit class:"button_submit" %>
+      </div>
+    <% end %>
+
+
+

@@ -119,6 +119,9 @@ class PostsController < ApplicationController
   
   def new
     @post = Post.new
+    @taggroups=Taggroup.where(user_id:@current_user.id).order(:sort_order)
+    @tags =Tag.where(user_id:@current_user.id).order(:sort_order)
+    @multiple_images=true
   end
 
   def create

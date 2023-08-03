@@ -228,9 +228,10 @@ input[type="submit"]{
 
 
 
-// 画像一覧
+// アップロード 兼 画像一覧 兼 画像編集
 
 #tag_index_container{
+    width: 100%;
 
     th,td{
         text-align: left;
@@ -239,14 +240,16 @@ input[type="submit"]{
     } 
 
     .tag_index_group{
-        
+        width: 20%;
     }
 
     .tag_index_tag{
-        
+        width: 80%;
     }
 }    
  
+
+// 画像一覧
 
 #photo_index_container{
     display: flex;
@@ -265,20 +268,10 @@ input[type="submit"]{
 
 
 
-// show
-#post_comment,
-#post_tag
-{
-    width: 90%;
-    height: 1.5em;
-}
 
 
 
-
-
-
-// edit
+// アップロード 兼 画像編集
 
 .container_all{
     display: flex;
@@ -286,17 +279,24 @@ input[type="submit"]{
     
     .container_photo{
         margin: 5px;
+        flex: 1;
 
         img{
             width: 100%;
-            max-width: 800px;
-            max-width: 400px;
         }
     } 
 
     .container_form{
         margin: 5px;
-        width: 50%;
+        flex: 1;
+
+        label{
+            display: block;
+        } 
+
+        table{
+            margin-top: 1em;
+        }
 
         #post_tag{
             width: 99%;
@@ -305,7 +305,7 @@ input[type="submit"]{
 
         #post_comment{
             width: 99%;
-            height: 30px;
+            height: 3em;
         }
 
         .button_submit{
@@ -313,12 +313,17 @@ input[type="submit"]{
             width: 99%;
             height: 30px;
         } 
-
-        .button_clear{
-            margin-top: 100px;
-        } 
     }
 }
+
+.container_delete{
+    margin-top: 100px;
+}
+
+
+
+
+
 
 
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_01_071544) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_03_013120) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -45,6 +45,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_01_071544) do
     t.boolean "authenticated"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "seacret_message_access"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -87,6 +88,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_01_071544) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "approved_users"
+    t.text "seacret_message"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

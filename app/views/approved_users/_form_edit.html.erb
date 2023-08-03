@@ -1,0 +1,15 @@
+<div id="table_container">
+
+  <h2>ユーザー削除</h2>
+  
+  <% @approved_users.each do |approved_user| %>
+    <% if user=User.find(approved_user.approved_user_id) %> 
+      <div class="table_forms">
+          <div class="table_user_name"><%= user.name %></div>
+          <%= button_to "削除", approved_user, method: :delete, class:"table_delete",data: { turbo_confirm: "本当に削除しますか？" } %>
+      </div>
+    <% end %>
+  <% end %>
+  
+</div>
+

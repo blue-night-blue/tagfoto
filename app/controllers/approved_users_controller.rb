@@ -49,6 +49,25 @@ class ApprovedUsersController < ApplicationController
     end
   end
 
+  
+  
+  def secret_message_access_toggle
+    @approved_user = ApprovedUser.find_by(user_id: @current_user.id,approved_user_id:params[:user_id].to_i)
+    @secret_phrase = SecretPhrase.find_by(user_id:@current_user.id) 
+    if @secret_phrase.present?
+      if @approved_user.secret_message_access==nil
+        @approved_user.secret_message_access=true
+        @approved_user.save
+      else  
+        @approved_user.secret_message_access=nil
+        @approved_user.save
+      end
+    end
+    redirect_to setting_path
+  end
+  
+  
+
   private
     def set_approved_user
       @approved_user = ApprovedUser.find(params[:id])

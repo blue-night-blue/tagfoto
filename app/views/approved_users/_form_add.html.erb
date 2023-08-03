@@ -1,0 +1,19 @@
+<div id="table_container">
+  <h2>ユーザー登録</h2>
+  <div class="table_forms">
+    <div class="table_user_name">ユーザー名(半角)</div>
+  </div>
+  
+  <div class="table_forms">
+    <%= form_with(model: @approved_user) do |form| %>
+      <%= form.text_field :user_name, class:"table_user_name" %>
+      <%= form.submit(class:"table_submit") %>
+    <% end %>
+  </div>
+  
+  <ul>
+    <li>登録以降にユーザー名が変更された場合は、自動で修正されます。</li>
+  </ul>
+  
+</div>
+

@@ -208,6 +208,21 @@ input[type="submit"]{
             background-color: $color2;
             color: $color4;
         }
+
+        .table_toggle{
+            
+            button{
+                width: auto;
+            }
+
+            .button_active{
+                background-color: $color1;
+            }
+
+            .button_unpushed{
+                background-color: $bg;
+            }
+        }
     }
 }
 

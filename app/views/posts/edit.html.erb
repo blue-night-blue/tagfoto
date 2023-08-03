@@ -23,6 +23,6 @@
 
 
 <div class="container_delete">
-  <%= button_to "削除", @post, method: :delete, class:"button_clear" %>
+  <%= button_to "削除", @post, method: :delete, class:"button_clear",data: { turbo_confirm: "本当に削除しますか？" } %>
 </div>
     

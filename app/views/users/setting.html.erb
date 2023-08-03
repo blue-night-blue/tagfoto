@@ -1,7 +1,7 @@
-<h1>プロフィール設定</h1>
+<h1>プロフィール</h1>
 <%= render 'form', user: @current_user %>
 
-<h1>ユーザー許可設定</h1>
+<h1>ユーザー許可</h1>
 <ol>
     <li>まず合言葉を登録してください。登録後、ユーザー登録ができます。</li>
     <li>次に許可したいユーザーを登録してください。</li>
@@ -10,6 +10,38 @@
 </ol>
 <%= render 'secret_phrases/form', secret_phrase: @secret_phrase %>
 
-<% if SecretPhrase.find_by(user_id:@current_user.id) %>
-    <%= render 'approved_users/form', approved_users: @approved_users %>
+<% if @secret_phrase %>
+    <%= render 'approved_users/form_add', approved_users: @approved_users %>
 <% end %>
+
+<%= turbo_frame_tag "approve_edit_list" do %>
+
+    <% if @secret_phrase %>
+        <%= render 'approved_users/form_edit', approved_users: @approved_users %>
+    <% end %>
+
+    <h1>秘密メモ</h1>
+    <div>
+        基本は、自分が死んだ後のコレクションの売却・処分方法を記録することを想定しています。
+        下記は一例です。
+    </div>
+    <ul>
+        <li>まず知人AとBを「同時に」(←ここがミソ)家に呼んで引き取り依頼</li>
+        <li>次に店Cへ売却、次が店D</li>
+        <li>残ったものは以下の順番で処分。まず家族・遺族で興味のある人がいれば無償譲渡</li>
+        <li>蚤の市E(例年11月)と、大規模蚤の市Fに出店(毎年3回開催。詳細はWebサイト参照)</li>
+        <li>なんでも買い取る事に定評のあるリサイクルショップGへ</li>
+        <li>遺品は場所を取って邪魔なので適当なタイミングで埋立ごみへ出すのがいいと思う。判断は任せる。</li>
+        <li>
+        ヤフオクとメルカリに出してもいいけど手間が大変だと思うので、よほど金に困ってない限りはおすすめしない。
+        ざっくりの計算だけど(残りは個数だけなら数十個と思う)総額で3万円くらいかと(平均1000円×30個で計算)
+        </li>
+    </ul>
+    <%= render 'form_secret_message', user: @current_user %>
+        
+    <% if @secret_phrase %>
+        <%= render 'approved_users/form_secret_message_access', approved_users: @approved_users %>
+    <% end %>
+
+<% end %>
+

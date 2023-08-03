@@ -19,7 +19,6 @@ Rails.application.routes.draw do
   # その他 
   post "/create_multiple_posts" , to: "posts#create_multiple_posts"  
   get "/edittaggroup" , to: "taggroups#index"  
-  get "/editapproveduser" , to: "approved_users#index"  
   get "/sharedphoto" , to: "posts#sharedphoto"  
   get "/photo/:user_name" , to: "posts#approved_index"  
   get "/photo/:user_name/all/" , to: "posts#approved_photo_all"  
@@ -30,7 +29,7 @@ Rails.application.routes.draw do
   get "/photo_all" , to: "posts#photo_all"  
   get "/photo_tag/:tag" , to: "posts#photo_tag"  
   get "/nothing_tag" , to: "posts#nothing_tag"  
-  
+  post "/secret_message_access_toggle/:user_id" , to: "approved_users#secret_message_access_toggle"  
 
   resources :taggroups
   resources :tags

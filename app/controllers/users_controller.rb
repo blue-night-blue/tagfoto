@@ -76,10 +76,10 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to user_url(@user), flash:{success:"更新しました。"} }
+        format.html { redirect_to setting_path, flash:{success:"更新しました。"} }
         format.json { render :show, status: :ok, location: @user }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html { render :setting, status: :unprocessable_entity }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -120,6 +120,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:name, :email, :password, :approved_users)
+      params.require(:user).permit(:name, :email, :password, :approved_users, :secret_message)
     end
 end

@@ -92,15 +92,22 @@ class PostsController < ApplicationController
       flash[:notice]="当該のユーザーが存在しない、もしくは権限がありません"
       redirect_to photo_path
     end
-    
-    
-    
   end
 
   def approved_show
     @user=User.find_by(name:params[:user_name])
+
     if  @user && ApprovedUser.find_by(user_id:@user.id, approved_user_id:@current_user.id).present?
       @post = Post.find(params[:id])
+      
+      tags_in_posts_array = @post.tag.split(",").map(&:strip).reject(&:empty?) 
+      tags_in_tags_hash = Tag.tags_in_tags(@user)
+      @tags_included_in_model=Tag.where(user_id:@user.id).where(tag: tags_in_posts_array).order(:sort_order)
+      @tags_not_included_in_model = tags_in_posts_array.reject { |tag| tags_in_tags_hash[tag] }
+
+      groups_in_tags_in_posts_array = @tags_included_in_model.pluck(:group).reject(&:empty?)
+      @taggroups=Taggroup.where(user_id:@user.id).where(id:groups_in_tags_in_posts_array).order(:sort_order)
+      
     else
       flash[:notice]="当該のユーザーが存在しない、もしくは権限がありません"
       redirect_to photo_path

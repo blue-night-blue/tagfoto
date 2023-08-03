@@ -59,7 +59,7 @@
   <h1><%= @user.name %>の写真(最新3件)</h1>
   <div id="photo_index_container">
       <% @posts.each do |post| %>
-          <%= render post %>
+          <%= render "post_approved",post:post %>
       <% end %>
   </div>
 

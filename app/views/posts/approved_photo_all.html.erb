@@ -4,7 +4,7 @@
 
 <div id="photo_index_container">
   <% @posts.each do |post| %>
-    <%= render post %>
+    <%= render "post_approved",post:post %>
   <% end %>
 </div>
 

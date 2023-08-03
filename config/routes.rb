@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   get "/photo/:user_name/all/" , to: "posts#approved_photo_all"  
   get "/photo/:user_name/nothing_tag/" , to: "posts#approved_nothing_tag"  
   get "/photo/:user_name/tag/:tag" , to: "posts#approved_photo_tag"  
-  get "/photo/:user_name/:id" , to: "posts#approved_show"  
+  get "/photo/:user_name/show/:id" , to: "posts#approved_show"  
   post "/authenticated" , to: "secret_phrases#authenticated"  
   get "/photo_all" , to: "posts#photo_all"  
   get "/photo_tag/:tag" , to: "posts#photo_tag"  

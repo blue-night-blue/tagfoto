@@ -45,6 +45,7 @@
 
 
 <button id="clear_input_tag" class="button button_clear">タグ選択・画像選択の解除</button>
+<div><%= link_to "リセット", tagto_path, class:"tag_button" %></div>
 
 <div id="posts">
   <%= form_with url:create_multiple_posts_path do |form| %>

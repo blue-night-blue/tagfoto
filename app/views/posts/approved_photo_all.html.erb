@@ -1,6 +1,6 @@
 <%= link_to "戻る", :back, class:"search_button" %>
 
-<h1>すべての写真</h1>
+<h1><%= @user.name %>のすべての写真</h1>
 
 <div id="photo_index_container">
   <% @posts.each do |post| %>

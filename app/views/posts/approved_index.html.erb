@@ -67,6 +67,15 @@
       <%= link_to "すべて見る", "/photo/#{@user.name}/all/" %>
   </div>
 
+  
+  
+    <% if @approved_user.secret_message_access == true %>
+        <h1><%= @user.name %>の秘密メモ</h1>
+        <div class="container_secret_message_in_setting">
+            <%= simple_format(@user.secret_message) %>
+        </div>  
+    <% end %>
+
 <% else %>
 
   <h1><%= @user.name %></h1>

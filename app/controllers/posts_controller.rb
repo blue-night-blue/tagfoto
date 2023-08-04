@@ -132,7 +132,7 @@ class PostsController < ApplicationController
         @post.images=image_resize(image)
         @post.save
       end
-      redirect_to "/#{@current_user.name}"
+      redirect_to photo_path
     else
       redirect_to :new_post
     end
@@ -144,14 +144,14 @@ class PostsController < ApplicationController
     end
     @post.update(post_params)
     @post.save
-    redirect_to "/#{@current_user.name}"
+    redirect_to photo_path
   end
 
   def destroy
     @post.destroy
     
     respond_to do |format|
-      format.html { redirect_to session[:previous_url], notice: "Post was successfully destroyed." }
+      format.html { redirect_to photo_path, notice: "削除しました。" }
       format.json { head :no_content }
     end
   end

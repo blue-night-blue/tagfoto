@@ -6,6 +6,13 @@
 <div class="container_all">
 
   <div class="container_form">
+    <div class="message">
+      <ul>
+        <li>複数画像をまとめてアップロードできます。</li>
+        <li>その場合、画像1枚につき1投稿扱いになります。</li>
+        <li>登録していないタグを使う場合、半角のカンマ「,」で区切ってください。</li>
+      </ul>
+    </div>
     <%= render "form", post: @post, multiple_images: @multiple_images %>
   </div>
 

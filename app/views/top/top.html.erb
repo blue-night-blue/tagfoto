@@ -1,9 +1,9 @@
   <% unless @current_user %>
     <h1>概要</h1>
     <ul class="overview">
+        <li>タグ付けに特化してます</li>
         <li>プライベートな画像保管庫です</li>
         <li>あなたが許可したユーザーにだけ画像を公開できます</li>
-        <li>タグ付けに特化してます</li>
     </ul>
     <div>
       <%= link_to "登録",signup_path,class:"button" %> 
@@ -35,20 +35,77 @@
     
   <% else %>
 
-    <div class="top">
-      てすと
+
+  
+  
+  
+  
+  
+    <% @menu_items = [
+      {
+        title: "your photo",
+        path: photo_path,
+        fa_class: "fa-regular fa-image",
+        text: "あなたがアップロードした写真を閲覧できます。冒頭に、写真に付けられたタグの一覧が表示されます。",
+      },
+      {
+        title: "shared photo",
+        path: sharedphoto_path,
+        fa_class: "fa-solid fa-image",
+        text: "あなたを許可したユーザーの写真を閲覧できます。こちらも冒頭にタグ一覧が表示されます。",
+      },
+      {
+        title: "upload",
+        path: upload_path,
+        fa_class: "fa-solid fa-square-plus",
+        text: "写真をアップロードできます。同時にタグやコメントも付けられます。なお、複数の写真をまとめてアップできます。",
+      },
+      {
+        title: "edit tag",
+        path: edittag_path,
+        fa_class: "fa-solid fa-tags",
+        text: "タグの追加、修正、削除ができます。タグはグループ別に分類可能です。グループもタグ同様、自由に作れます。",
+      },
+      {
+        title: "tag to photo",
+        path: tagto_path,
+        fa_class: "fa-solid fa-tags",
+        text: "アップロードした写真に対して、一括で、直感的な操作にてタグの修正ができます。",
+      },
+      {
+        title: "setting",
+        path: setting_path,
+        fa_class: "fa-solid fa-gear",
+        text: "ユーザー名等の変更や、あなたの写真を閲覧できるユーザーの設定ができます。また、秘密メモ(遺言的なメモ)の設定や、その閲覧ユーザー設定もできます。",
+      },
+    ] %>
+ 
+    <div class="container_description_all">
+
+      <% @menu_items.each_with_index do |item,i| %>
+        <div class="container_description menu<%= i+1 %>">
+
+          <div class="container_link_and_text">
+            <div class="link">
+              <%= link_to item[:path] do %>
+                <i class="<%= item[:fa_class] %>"></i><span><%= item[:title] %><span>
+              <% end %>
+            </div>
+            <div class="text"><%= item[:text] %></div>
+          </div>
+          
+          <div class="image">
+            <%= image_tag "description#{i+1}.png" %>
+          </div>
+          
+        </div>
+      <% end %>
+      
     </div>
 
-    <div class="top">
-      てすと
-    </div>
-
-    <div class="top">
-      てすと
-    </div>
-
-    <div class="top">
-      てすと
-    </div>
+    
+        
+        
+        
 
   <% end %>

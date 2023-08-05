@@ -252,6 +252,7 @@ input[type="submit"]{
         background-color: $text;
         padding: 2em;
         margin: 1em 0 3em 1em;
+        border-radius: 20px;
 
         div{
             color: $color1;
@@ -262,20 +263,68 @@ input[type="submit"]{
             height: 400px;
         }
     }
-
 }
 
-
-.top{
-    width: 300px;
-    height: 300px;
-    background-color: $color1;
-    border-radius: 50%;
-    color: $text;
-    margin:30px;
+.container_description_all{
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 100px;
+    
+    .menu1,.menu2{
+        color: $color2;
+        a{
+            color: $color2;
+            border-bottom: $color2 solid 1px;
+        }
+    }
+    .menu3,.menu4{
+        color: $color1;
+        a{
+            color: $color1;
+            border-bottom: $color1 solid 1px;
+        }
+    }
+    .menu5,.menu6{
+        color: $color3;
+        a{
+            color: $color3;
+            border-bottom: $color3 solid 1px;
+        }
+    }
+
+    .container_description{
+        display: flex;
+        justify-content: space-between;
+        margin:20px;
+        padding: 20px;
+        background-color: $text;
+        width: 400px;
+        border-radius: 20px;
+
+        .container_link_and_text{
+            
+            .link{
+                font-size: 25px;
+                a{
+                    span{
+                        display: inline-block;
+                        margin-left: 5px;
+                    }
+                }
+            }
+
+            .text{
+                margin: 20px 20px 0 0;
+            }
+
+       }
+        .image{
+            img{
+                width: 100px;
+                border: $text solid 1px;
+            }
+        }
+     }
 }
 
 
@@ -328,6 +377,10 @@ input[type="submit"]{
 .container_all{
     display: flex;
     width: 100%;
+
+    .message{
+        margin-bottom: 1em;
+    }
     
     .container_photo{
         margin: 5px;
@@ -477,7 +530,7 @@ input[type="submit"]{
     .container_demo{
         display: block;
         padding: 1em;
-        margin: 1em 0 3em 1em;
+        margin: 1em 1em 3em 1em;
 
         div{
             font-size: 20px;

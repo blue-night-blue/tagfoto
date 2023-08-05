@@ -233,6 +233,39 @@ input[type="submit"]{
 
 
 // トップ
+.overview{
+    font-size: 20px; 
+
+    li{
+        margin-bottom: 20px;
+    }
+}
+
+.container_demo_all{
+    width: 100%;
+    max-width: 800px;
+
+    .container_demo{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background-color: $text;
+        padding: 2em;
+        margin: 1em 0 3em 1em;
+
+        div{
+            color: $color1;
+            font-size: 60px;
+        }
+
+        img{
+            height: 400px;
+        }
+    }
+
+}
+
+
 .top{
     width: 300px;
     height: 300px;
@@ -438,6 +471,32 @@ input[type="submit"]{
 // スマホ用
 
 @media screen and (max-width: 480px) {
+
+ .container_demo_all{
+
+    .container_demo{
+        display: block;
+        padding: 1em;
+        margin: 1em 0 3em 1em;
+
+        div{
+            font-size: 20px;
+            margin-bottom: 1em;
+
+            br{
+                display: none;
+            }
+        }
+
+        img{
+            width: 100%;
+            height:auto;
+        }
+    }
+
+}
+
+   
 
 #photo_index_container{
     .container_images{

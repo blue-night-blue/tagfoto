@@ -32,36 +32,31 @@ class UsersController < ApplicationController
   end
 
   def signup
-    @name=params[:@name]
-    @email=params[:@email]
-    @password=params[:@password]
-    @user = User.new(
-      name:@name,
-      email:@email,
-      password:@password
-    )
+    @user=User.new(user_params)
     
     if @user.save
       session[:user_id]=@user.id
-      redirect_to root_path,notice:"ok" 
+      flash[:success]="ユーザー登録しました。" 
+      redirect_to root_path
     else
       render :signup_form,status: :unprocessable_entity 
     end
   end
   
   def login_form
+    @user=User.new
   end
   
  def login
-    @email=params[:@email]
-    @password=params[:@password]
-    @user=User.find_by(email:@email)
+    @login_user=User.new(user_params)
+    @user=User.find_by(email:@login_user.email)
 
-    if @user && @user.authenticate(@password)
+    if @user && @user.authenticate(@login_user.password)
       session[:user_id]=@user.id
-      redirect_to root_path,notice:"ok" 
+      flash[:success]="ログインしました。" 
+      redirect_to root_path
     else
-      @error="メールかパスワードがどっちか分かりませんが間違えとります"
+      flash[:notice]="メール・パスワードのいずれか、もしくは両方が間違っています。" 
       render :login_form,status: :unprocessable_entity
     end
 
@@ -69,7 +64,8 @@ class UsersController < ApplicationController
 
   def logout
     session[:user_id] = nil
-    redirect_to root_path,notice:"ok" 
+    redirect_to root_path
+    flash[:success]="ログアウトしました。" 
   end
 
   # PATCH/PUT /users/1 or /users/1.json
@@ -107,6 +103,8 @@ class UsersController < ApplicationController
       @secret_phrase = SecretPhrase.new
       @present="未登録"
     end
+    
+    @find_secret_phrase = SecretPhrase.find_by(user_id:@current_user.id) 
     
   end
 

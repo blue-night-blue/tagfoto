@@ -38,8 +38,17 @@
           <i class="fa-solid fa-right-from-bracket"></i><span>log<br>out</span> 
         <% end %>
       </div>     
+    <% else %>
+      <div class="nav_bar">
+        <%= link_to "/signup", class:"menu_title_signup" do %>
+          <i class="fa-solid fa-pen-to-square"></i><span>sign<br>up</span> 
+        <% end %>
+        <%= link_to "/login", class:"menu_title_login" do %>
+          <i class="fa-solid fa-right-from-bracket"></i><span>log<br>in</span> 
+        <% end %>
+      </div>     
     <% end %>
-
+ 
     <div class="logo">
       <%= link_to root_path do %>
         <%= image_tag "logo.svg" %>

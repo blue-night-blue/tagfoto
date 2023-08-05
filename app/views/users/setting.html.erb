@@ -23,32 +23,34 @@
 </ol>
 <%= render 'secret_phrases/form', secret_phrase: @secret_phrase %>
 
-<% if @secret_phrase %>
+<% if @find_secret_phrase %>
     <%= render 'approved_users/form_add', approved_users: @approved_users %>
 <% end %>
 
 <%= turbo_frame_tag "approve_edit_list" do %>
 
-    <% if @secret_phrase %>
+    <% if @find_secret_phrase %>
         <%= render 'approved_users/form_edit', approved_users: @approved_users %>
     <% end %>
 
-    <% if @secret_phrase %>
+    <% if @find_secret_phrase %>
         <%= render 'approved_users/form_secret_message_access', approved_users: @approved_users %>
     <% end %>
 
 <% end %>
 
 <h1>秘密メモ</h1>
-<div>
-    基本は、自分が死んだ後のコレクションの売却・処分方法を記録することを想定しています。
-</div>
+<ul>
+    <li>基本は、自分が死んだ後のコレクションの売却・処分方法を記録することを想定しています。</li>
+    <li>合言葉と許可ユーザーを登録すると、秘密メモを見せるユーザーを設定できます。</li>
+</ul>
+    
 <details>
-    <summary>サンプル</summary>
+    <summary>秘密メモのサンプル</summary>
     <ul>
         <li>まず知人AとBを「同時に」(←ここがミソ)家に呼んで引き取り依頼</li>
         <li>次に店Cへ売却、次が店D</li>
-        <li>残ったものは以下の順番で処分。まず家族・遺族で興味のある人がいれば無償譲渡</li>
+        <li>残ったものは以下の順番で処分。まず家族・親族で興味のある人がいれば無償譲渡</li>
         <li>蚤の市E(例年11月)と、大規模蚤の市Fに出店(毎年3回開催。詳細はWebサイト参照)</li>
         <li>なんでも買い取る事に定評のあるリサイクルショップGへ</li>
         <li>遺品は場所を取って邪魔なので適当なタイミングで埋立ごみへ出すのがいいと思う。判断は任せる。</li>

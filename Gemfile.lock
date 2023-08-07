@@ -283,6 +283,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   kaminari
+  nokogiri
   pg
   puma (~> 5.0)
   rails (~> 7.0.5)

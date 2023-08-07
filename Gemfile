@@ -57,7 +57,7 @@ gem 'active_storage_validations'
 gem 'ransack'
 gem 'kaminari'
 gem "bootstrap-sass"
-
+gem 'nokogiri'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

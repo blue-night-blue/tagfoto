@@ -1,7 +1,0 @@
-services:
-  app:
-    build: .
-    volumes:
-      - .:/tagfoto
-    ports:
-     - 3000:3000

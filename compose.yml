@@ -7,8 +7,6 @@ services:
       - 3000:3000
     depends_on:
       - db
-    links:
-      - db
     tty: true
     stdin_open: true
     environment:
@@ -22,6 +20,7 @@ services:
     platform: linux/amd64
     environment:
       MYSQL_ROOT_PASSWORD: password
+      MYSQL_ROOT_HOST: '%'
       TZ: "Asia/Tokyo"
     ports:
       - 3306:3306

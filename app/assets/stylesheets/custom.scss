@@ -339,6 +339,25 @@ input[type="submit"]{
 
 
 
+
+// サインアップ、ログイン画面
+
+.container_simple_form{
+    
+    div{
+        margin-top: 1em;
+
+        label{
+            display: block;
+        }
+    }
+}
+
+
+
+
+
+
 // アップロード 兼 画像一覧 兼 画像編集
 
 #tag_index_container{

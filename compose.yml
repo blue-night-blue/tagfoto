@@ -1,32 +1,44 @@
+#Docker関係の設定は全て https://qiita.com/three_mouth_ago/items/b7c54ae1b0f831060a70 を参考
+
 services:
   web:
     build: .
-    volumes:
-      - .:/tagfoto
-    ports:
-      - 3000:3000
-    depends_on:
-      - db
     tty: true
     stdin_open: true
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/tagfoto
+    depends_on:
+      - db
+    links:
+      - db
     environment:
       RAILS_ENV: development
-      DB_HOST: db
       DB_USERNAME: root
-      DB_PASSWORD: password
+      DB_PASSWORD: root
+      DB_HOST: db
 
   db:
-    image: mysql:8.0
-    platform: linux/amd64
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_ROOT_HOST: '%'
-      TZ: "Asia/Tokyo"
+    platform: linux/x86_64
+    restart: always
+    image: mysql:8
     ports:
       - 3306:3306
-    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
     volumes:
-      - db-volume:/var/lib/mysql
+      - mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      TZ: Asia/Tokyo
+
+  nginx:
+    build:
+      context: ./nginx
+    ports:
+      - 80:80
+    restart: always
+    depends_on:
+      - web 
 
 volumes:
-  db-volume:
+  mysql-data:

@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
-rm -f /tagfoto/tmp/pids/server.pid
+
+rm -f tmp/pids/server.pid
+mkdir -p tmp/sockets
+mkdir -p tmp/pids
 
 bundle exec rails db:create
 bundle exec rails db:migrate

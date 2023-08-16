@@ -1,7 +1,7 @@
 #Docker関係の設定は全て https://qiita.com/three_mouth_ago/items/b7c54ae1b0f831060a70 を参考
 
 services:
-  web:
+  rails:
     build: .
     tty: true
     stdin_open: true
@@ -38,7 +38,7 @@ services:
       - 80:80
     restart: always
     depends_on:
-      - web 
+      - rails
 
 volumes:
   mysql-data:

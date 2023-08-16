@@ -10,7 +10,7 @@ workflows:
       - aws-ecr/build-and-push-image:
           account-url: AWS_ECR_ACCOUNT_URL
           region: AWS_REGION
-          dockerfile: ./nginx/Dockerfile
+          dockerfile: nginx/Dockerfile
           repo: ${MY_APP_PREFIX}-nginx
           tag: "${CIRCLE_SHA1}"
           filters:
@@ -29,7 +29,7 @@ workflows:
       - aws-ecr/build-and-push-image:
           account-url: AWS_ECR_ACCOUNT_URL
           region: AWS_REGION
-          dockerfile: ./Dockerfile
+          dockerfile: Dockerfile
           repo: ${MY_APP_PREFIX}-rails
           tag: "${CIRCLE_SHA1}"
           filters:

@@ -15,7 +15,7 @@
   <%= form_with(model: @user, url: signup_path) do |form|  %>
 
     <div>
-      <%= form.label :name,"ユーザー名(半角英数とハイフンとアンダーバーのみ使用可能です。20字以内)" %>
+      <%= form.label :name,"ユーザー名(半角英数とハイフンとアンダーバーのみ使用可能です。20文字以内)" %>
       <%= form.text_field :name %>
     </div>
 
@@ -25,7 +25,7 @@
     </div>
 
     <div>
-      <%= form.label :password,"パスワード(半角であれば英数記号なんでもOK。255文字以内)" %>
+      <%= form.label :password,"パスワード(半角であれば英数・記号なんでも使用可能です。6文字以上255文字以内)" %>
       <%= form.password_field :password %>
     </div>
 

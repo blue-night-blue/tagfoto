@@ -8,12 +8,8 @@ workflows:
   nginx-deploy:
     jobs:
       - aws-ecr/build-and-push-image:
-          resource_class: large
           account-url: AWS_ECR_ACCOUNT_URL
           region: AWS_REGION
-          aws-access-key-id: AWS_ACCESS_KEY_ID
-          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-          create-repo: true
           dockerfile: ./nginx/Dockerfile
           repo: ${MY_APP_PREFIX}-nginx
           tag: "${CIRCLE_SHA1}"
@@ -31,12 +27,8 @@ workflows:
   rails-deploy:
     jobs:
       - aws-ecr/build-and-push-image:
-          resource_class: large
           account-url: AWS_ECR_ACCOUNT_URL
           region: AWS_REGION
-          aws-access-key-id: AWS_ACCESS_KEY_ID
-          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-          create-repo: true
           dockerfile: ./Dockerfile
           repo: ${MY_APP_PREFIX}-rails
           tag: "${CIRCLE_SHA1}"

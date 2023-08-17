@@ -9,19 +9,19 @@ workflows:
 
   setting:
     jobs:
-      executor-setting:
-        executor: aws-ecs/default
+      - executor-setting:
+          executor: aws-ecs/default
 
-      image-build-setting:
-        steps:
-          - checkout
+      - image-build-setting:
+          steps:
+            - checkout
 
-          - setup_remote_docker:
-              version: 20.10.8
+            - setup_remote_docker:
+                version: 20.10.8
 
-          - run:
-              name: Build Docker images
-              command: docker-compose build
+            - run:
+                name: Build Docker images
+                command: docker-compose build
 
   nginx-deploy:
     jobs:

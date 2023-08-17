@@ -1,51 +1,32 @@
 version: 2.1
 
 orbs:
-  aws-ecr: circleci/aws-ecr@6.15
-  aws-ecs: circleci/aws-ecs@2.3.0
-
-executors:
-  aws-ecs/default:
-    docker:
-      - image: cimg/base:2020.01
-
-jobs:
-  build-and-deploy:
-    executor: aws-ecs/default
-    steps:
-      - checkout
-
-      - setup_remote_docker:
-          version: 20.10.8
-
-      - run:
-          name: Build Docker images
-          command: docker-compose build
-
-      - aws-ecr/build-and-push-image:
-          repo: ${MY_APP_PREFIX}-rails
-          tag: ${CIRCLE_SHA1}
-          path: ./Dockerfile
-
-      - aws-ecr/build-and-push-image:
-          repo: ${MY_APP_PREFIX}-nginx
-          tag: ${CIRCLE_SHA1}
-          path: ./nginx/Dockerfile
-
-      - aws-ecs/deploy-service-update:
-          family: '${MY_APP_PREFIX}2'
-          cluster-name: '${MY_APP_PREFIX}-clst'
-          service-name: '${MY_APP_PREFIX}-svc'
-          container-image-name-updates: "container=rails,tag=${CIRCLE_SHA1}"
-
-      - aws-ecs/deploy-service-update:
-          family: '${MY_APP_PREFIX}2'
-          cluster-name: '${MY_APP_PREFIX}-clst'
-          service-name: '${MY_APP_PREFIX}-svc'
-          container-image-name-updates: "container=nginx,tag=${CIRCLE_SHA1}"
+  aws-ecr: circleci/aws-ecr@8.1.2
+  aws-ecs: circleci/aws-ecs@3.2.0
+  aws-cli: circleci/aws-cli@3.1.1
 
 workflows:
-  version: 2
-  build-and-deploy:
+
+  rails:
     jobs:
-      - build-and-deploy
+      - aws-ecr/build-and-push-image:
+          repo: '${MY_APP_PREFIX}-rails'
+          tag: '${CIRCLE_SHA1}'
+      - aws-ecs/deploy-service-update:
+          requires:
+            - aws-ecr/build-and-push-image
+          family: '${MY_APP_PREFIX}-svc'
+          cluster: '${MY_APP_PREFIX}-clst'
+          container-image-name-updates: 'container=rails,tag=${CIRCLE_SHA1}'
+
+  nginx:
+    jobs:
+      - aws-ecr/build-and-push-image:
+          repo: '${MY_APP_PREFIX}-nginx'
+          tag: '${CIRCLE_SHA1}'
+      - aws-ecs/deploy-service-update:
+          requires:
+            - aws-ecr/build-and-push-image
+          family: '${MY_APP_PREFIX}-svc'
+          cluster: '${MY_APP_PREFIX}-clst'
+          container-image-name-updates: 'container=nginx,tag=${CIRCLE_SHA1}'

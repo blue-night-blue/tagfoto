@@ -33,10 +33,10 @@ a{
         
 h1{
     position: relative;
-    margin: 60px 0 20px 0;
+    margin: 60px 10px 20px -10px;
     padding-left: 30px;
     background-image:
-        radial-gradient(circle, $color4 6px, transparent 0px),
+        radial-gradient(circle, $color4 4px, transparent 0px),
         linear-gradient(135deg, transparent 16px, $color2 1px),
         linear-gradient(45deg, transparent 16px, $color2 1px);
     background-repeat: no-repeat;
@@ -53,7 +53,7 @@ h2{
     margin: 30px 0 10px 0;
     padding-left: 25px;
     background-image:
-        radial-gradient(circle, $color4 4px, transparent 0px),
+        radial-gradient(circle, $color4 3px, transparent 0px),
         linear-gradient(135deg, transparent 10px, $color3 1px),
         linear-gradient(45deg, transparent 10px, $color3 1px);
     background-repeat: no-repeat;

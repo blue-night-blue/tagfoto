@@ -6,11 +6,13 @@ orbs:
 
 workflows:
   version: 2
-  
-  image-build-setting:
+
+  setting:
     jobs:
-      image-build:
+      executor-setting:
         executor: aws-ecs/default
+
+      image-build-setting:
         steps:
           - checkout
 

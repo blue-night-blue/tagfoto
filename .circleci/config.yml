@@ -5,18 +5,21 @@ orbs:
   aws-ecs: circleci/aws-ecs@2.0.0
 
 workflows:
-  image-build:
+  version: 2
+  
+  image-build-setting:
     jobs:
-      executor: aws-ecs/default
-      steps:
-        - checkout
+      image-build:
+        executor: aws-ecs/default
+        steps:
+          - checkout
 
-        - setup_remote_docker:
-            version: 20.10.8
+          - setup_remote_docker:
+              version: 20.10.8
 
-        - run:
-            name: Build Docker images
-            command: docker-compose build
+          - run:
+              name: Build Docker images
+              command: docker-compose build
 
   nginx-deploy:
     jobs:

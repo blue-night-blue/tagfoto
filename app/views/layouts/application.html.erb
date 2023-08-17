@@ -50,7 +50,9 @@
     <% end %>
  
     <div class="logo">
-      <%= link_to embedded_svg("logo2.svg",class: "application-logo",alt: "ApplicationName logo"), root_path %>
+      <%= link_to root_path do %>
+        <%= image_tag "logo.svg" %>
+      <% end %>
     </div>
 
     <% if flash[:success] %>

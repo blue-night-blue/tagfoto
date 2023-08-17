@@ -20,24 +20,49 @@ body{
         sans-serif;
 }
 
+.container_main{
+    margin-left: 5px;
+}
+
 a{
     color: $text;
 }
 
+
+
+        
 h1{
-    font-size: 20px;
-    margin: 30px 0 5px 0;
-    border-bottom: $color2 3px solid;
-    color: $color2;
+    position: relative;
+    margin: 60px 0 20px 0;
+    padding-left: 30px;
+    background-image:
+        radial-gradient(circle, $color4 6px, transparent 0px),
+        linear-gradient(135deg, transparent 16px, $color2 1px),
+        linear-gradient(45deg, transparent 16px, $color2 1px);
+    background-repeat: no-repeat;
+    background-size: 40px, 100% 50%, 100% 50%;
+    background-position: left, top, bottom;
+    font-size: 24px;
+    overflow: hidden;
+    border-radius: 10px;
+    color: $color4;
 }
 
 h2{
+    position: relative;
+    margin: 30px 0 10px 0;
+    padding-left: 25px;
+    background-image:
+        radial-gradient(circle, $color4 4px, transparent 0px),
+        linear-gradient(135deg, transparent 10px, $color3 1px),
+        linear-gradient(45deg, transparent 10px, $color3 1px);
+    background-repeat: no-repeat;
+    background-size: 30px, 100% 50%, 100% 50%;
+    background-position: left, top, bottom;
     font-size: 16px;
-    font-weight: 400;
-    margin: 2em 0 0 0;
-    padding-left: 5px;
-    border-left: $color2 1em solid;
-    color: $color2;
+    overflow: hidden;
+    border-radius: 10px;
+    color: $text;
 }
 
 ul,ol{
@@ -231,7 +256,9 @@ input[type="submit"]{
     width: 40px !important;
 }
 
-
+.container_indent{
+    margin-left: 30px;
+}
 
 // トップ
 .overview{
@@ -394,7 +421,7 @@ input[type="submit"]{
 
 // アップロード 兼 画像編集
 
-.container_all{
+.container_flex{
     display: flex;
     width: 100%;
 
@@ -611,7 +638,7 @@ input[type="submit"]{
     }
 }
 
-.container_all{
+.container_flex{
     display: block;
     
     .container_photo{

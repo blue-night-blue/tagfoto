@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :authenticate_user
-  before_action :ensure_correct_user, only: %i[ show edit update destroy ]
-  before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :ensure_correct_user, only: %i[ edit update destroy ]
+  before_action :set_post, only: %i[ edit update destroy ]
 
   def ensure_correct_user
     @post = Post.find_by(id: params[:id])
@@ -11,6 +11,67 @@ class PostsController < ApplicationController
     end
   end 
   
+
+  
+  
+  
+  
+  
+  def new
+    @post = Post.new
+    @taggroups=Taggroup.where(user_id:@current_user.id).order(:sort_order)
+    @tags =Tag.where(user_id:@current_user.id).order(:sort_order)
+    @multiple_images=true
+  end
+
+  def create
+    if params[:post][:images] 
+      params[:post][:images].each do |image|
+        @post = Post.new(post_params)
+        @post.user_id=@current_user.id
+        @post.images=image_resize(image)
+        @post.save
+      end
+      redirect_to photo_path
+    else
+      redirect_to :new_post
+    end
+  end
+
+  def update
+    if image=params[:post][:images]
+      @post.images=image_resize(image)
+    end
+    @post.update(post_params)
+    @post.save
+    redirect_to photo_path
+  end
+
+  def destroy
+    @post.destroy
+    
+    respond_to do |format|
+      format.html { redirect_to photo_path, notice: "削除しました。" }
+    end
+  end
+
+  def edit
+    session[:previous_url] = request.referer
+    @taggroups=Taggroup.where(user_id:@current_user.id).order(:sort_order)
+    @tags =Tag.where(user_id:@current_user.id).order(:sort_order)
+  end
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  # 自分の写真
   
   def photo
     tags_in_posts_array = Post.tags_in_posts(@current_user)
@@ -36,7 +97,14 @@ class PostsController < ApplicationController
     @posts = Post.where(user_id:@current_user.id).where(tag:"").order(created_at: :desc)
   end
 
+  
+  
+  
+  
+  
+  
 
+  # 閲覧を許可された写真
   
   def sharedphoto
     @approved_users=ApprovedUser.where(approved_user_id:@current_user.id)
@@ -116,55 +184,11 @@ class PostsController < ApplicationController
 
  
   
+
   
-  def new
-    @post = Post.new
-    @taggroups=Taggroup.where(user_id:@current_user.id).order(:sort_order)
-    @tags =Tag.where(user_id:@current_user.id).order(:sort_order)
-    @multiple_images=true
-  end
-
-  def create
-    if params[:post][:images] 
-      params[:post][:images].each do |image|
-        @post = Post.new(post_params)
-        @post.user_id=@current_user.id
-        @post.images=image_resize(image)
-        @post.save
-      end
-      redirect_to photo_path
-    else
-      redirect_to :new_post
-    end
-  end
-
-  def update
-    if image=params[:post][:images]
-      @post.images=image_resize(image)
-    end
-    @post.update(post_params)
-    @post.save
-    redirect_to photo_path
-  end
-
-  def destroy
-    @post.destroy
-    
-    respond_to do |format|
-      format.html { redirect_to photo_path, notice: "削除しました。" }
-      format.json { head :no_content }
-    end
-  end
-
-  def edit
-    session[:previous_url] = request.referer
-    @taggroups=Taggroup.where(user_id:@current_user.id).order(:sort_order)
-    @tags =Tag.where(user_id:@current_user.id).order(:sort_order)
-  end
-
-  def show
-    @tags =Tag.where(user_id:@current_user.id).order(created_at: :desc)
-  end
+  
+  
+  # 一括タグ付け 
   
   def tagto
     @posts = Post.where(user_id:@current_user.id).order(created_at: :desc)
@@ -184,6 +208,12 @@ class PostsController < ApplicationController
    
   
 
+  
+  
+  
+  
+  
+
   private
     def set_post
       @post = Post.find(params[:id])
@@ -201,7 +231,5 @@ class PostsController < ApplicationController
         .call
       image
     end 
- 
-    
     
 end

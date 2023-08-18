@@ -1,14 +1,10 @@
 class ApprovedUsersController < ApplicationController
   before_action :set_approved_user, only: %i[ destroy ]
 
-  def index
-    @approved_user= ApprovedUser.new
-    @approved_users = ApprovedUser.where(user_id: @current_user.id)
-  end
-
-  def new
-    @approved_user = ApprovedUser.new
-  end
+  
+  
+  
+  
 
   def create
     user_name=params[:approved_user][:user_name]
@@ -27,10 +23,8 @@ class ApprovedUsersController < ApplicationController
       respond_to do |format|
         if @approved_user.save
           format.html { redirect_to setting_path, flash:{success:"登録しました。"} }
-          format.json { render :show, status: :created, location: @approved_user }
         else
           format.html { redirect_to setting_path, notice: "既に追加済みです。" }
-          format.json { render json: @approved_user.errors, status: :unprocessable_entity }
         end
       end
 
@@ -45,10 +39,12 @@ class ApprovedUsersController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to setting_path, flash:{success:"削除しました。"} }
-      format.json { head :no_content }
     end
   end
 
+  
+  
+  
   
   
   def secret_message_access_toggle
@@ -65,6 +61,11 @@ class ApprovedUsersController < ApplicationController
     end
     redirect_to setting_path
   end
+  
+  
+  
+  
+  
   
   
 

@@ -1,3 +1,5 @@
+<% provide(:title, "#{@user.name}(タグ:#{params[:tag]})") %>
+
 <%= link_to "戻る", "../", class:"search_button" %>
 
 <h1><%= @user.name %>のタグ:<%= params[:tag] %></h1>

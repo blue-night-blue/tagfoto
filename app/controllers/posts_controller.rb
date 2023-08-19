@@ -51,7 +51,7 @@ class PostsController < ApplicationController
     @post.destroy
     
     respond_to do |format|
-      format.html { redirect_to photo_path, notice: "削除しました。" }
+      format.html { redirect_to photo_path, flash:{success:"削除しました。"} }
     end
   end
 

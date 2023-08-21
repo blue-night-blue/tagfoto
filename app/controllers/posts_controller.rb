@@ -7,7 +7,7 @@ class PostsController < ApplicationController
     @post = Post.find_by(id: params[:id])
     if @post.user_id != @current_user.id
       flash[:notice] = "権限がありません"
-      redirect_to photo_path
+      redirect_to yourphoto_path
     end
   end 
   
@@ -32,7 +32,8 @@ class PostsController < ApplicationController
         @post.images=image_resize(image)
         @post.save
       end
-      redirect_to photo_path
+      flash[:success]="アップロードしました。"
+      redirect_to yourphoto_path
     else
       redirect_to :new_post
     end
@@ -44,21 +45,38 @@ class PostsController < ApplicationController
     end
     @post.update(post_params)
     @post.save
-    redirect_to photo_path
+    redirect_to yourphoto_path
   end
 
   def destroy
     @post.destroy
     
     respond_to do |format|
-      format.html { redirect_to photo_path, flash:{success:"削除しました。"} }
+      format.html { redirect_to yourphoto_path, flash:{success:"削除しました。"} }
     end
   end
 
   def edit
+    if params[:tag]
+      @posts = Post.where(user_id:@current_user.id).where("tag LIKE ?","%#{params[:tag]}%").order(created_at: :desc)
+    elsif params[:view]=="all"
+      @posts = Post.where(user_id:@current_user.id).order(created_at: :desc)
+    elsif params[:view]=="nothing_tag"
+      @posts = Post.where(user_id:@current_user.id).where(tag:"").order(created_at: :desc)
+    else
+      flash[:notice]="無効なURLです。"
+      redirect_to yourphoto_path  
+    end
+
+    current_index = @posts.index(@post)
+    # 降順に並んでいる関係で、数字が小さくなるほど後のポストになることに注意
+    @prev_post = @posts[current_index + 1] if current_index < @posts.length - 1
+    @next_post = @posts[current_index - 1] if current_index > 0
+    
     session[:previous_url] = request.referer
     @taggroups=Taggroup.where(user_id:@current_user.id).order(:sort_order)
     @tags =Tag.where(user_id:@current_user.id).order(:sort_order)
+    
   end
 
 
@@ -73,7 +91,7 @@ class PostsController < ApplicationController
   
   # 自分の写真
   
-  def photo
+  def yourphoto
     tags_in_posts_array = Post.tags_in_posts(@current_user)
     tags_in_tags_hash = Tag.tags_in_tags(@current_user)
     @tags_included_in_model=Tag.where(user_id:@current_user.id).where(tag: tags_in_posts_array).order(:sort_order)
@@ -85,15 +103,16 @@ class PostsController < ApplicationController
     @posts = Post.where(user_id:@current_user.id).limit(3).order(created_at: :desc)
   end
 
-  def photo_all
+
+  def yourphoto_all
     @posts = Post.where(user_id:@current_user.id).order(created_at: :desc)
   end
 
-  def photo_tag
+  def yourphoto_tag
     @posts = Post.where(user_id:@current_user.id).where("tag LIKE ?","%#{params[:tag]}%").order(created_at: :desc)
   end
 
-  def nothing_tag
+  def yourphoto_nothing_tag
     @posts = Post.where(user_id:@current_user.id).where(tag:"").order(created_at: :desc)
   end
 
@@ -128,7 +147,7 @@ class PostsController < ApplicationController
       @secret_phrase = SecretPhrase.find_by(user_id:@user.id) 
     else
       flash[:notice]="当該のユーザーが存在しない、もしくは権限がありません"
-      redirect_to photo_path
+      redirect_to yourphoto_path
     end
   end
 
@@ -138,7 +157,7 @@ class PostsController < ApplicationController
       @posts = Post.where(user_id:@user.id).order(created_at: :desc)
     else
       flash[:notice]="当該のユーザーが存在しない、もしくは権限がありません"
-      redirect_to photo_path
+      redirect_to yourphoto_path
     end
   end
 
@@ -148,7 +167,7 @@ class PostsController < ApplicationController
       @posts = Post.where(user_id:@user.id).where("tag LIKE ?","%#{params[:tag]}%").order(created_at: :desc)
     else
       flash[:notice]="当該のユーザーが存在しない、もしくは権限がありません"
-      redirect_to photo_path
+      redirect_to yourphoto_path
     end
   end
 
@@ -158,7 +177,7 @@ class PostsController < ApplicationController
       @posts = Post.where(user_id:@user.id).where(tag:"").order(created_at: :desc)
     else
       flash[:notice]="当該のユーザーが存在しない、もしくは権限がありません"
-      redirect_to photo_path
+      redirect_to yourphoto_path
     end
   end
 
@@ -178,7 +197,7 @@ class PostsController < ApplicationController
       
     else
       flash[:notice]="当該のユーザーが存在しない、もしくは権限がありません"
-      redirect_to photo_path
+      redirect_to yourphoto_path
     end
   end
 

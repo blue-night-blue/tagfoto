@@ -7,7 +7,7 @@ class TaggroupsController < ApplicationController
     @taggroup = Taggroup.find_by(id: params[:id])
     if @taggroup.user_id != @current_user.id
       flash[:notice] = "権限がありません"
-      redirect_to photo_path
+      redirect_to yourphoto_path
     end
   end 
   

@@ -3,16 +3,35 @@
 <% content_for :head do %>
   <meta name="turbo-visit-control" content="reload">
   <%= javascript_import_module_tag "editTag" %>
+  <%= javascript_import_module_tag "swipe" %>
 <% end %>
 
-<%= link_to "戻る", :back, class:"search_button" %>
+<div>
+  <%= link_to "一覧に戻る", "../" , class:"search_button" %>
+
+  <% if @prev_post %>
+    <%= link_to "./#{@prev_post.id}", class:"prev" do %>
+      <i class="fa-solid fa-right-long fa-flip-horizontal"></i>
+    <% end %>
+  <% end %>
+
+  <% if @next_post %>
+    <%= link_to "./#{@next_post.id}", class:"next" do %>
+      <i class="fa-solid fa-right-long"></i>
+    <% end %>
+  <% end %>
+</div>
+
+<div>
+  画像の左右スワイプにて前後移動が可能
+</div>
 
 <div class="container_flex">
 
   <div class="container_photo">
     <% if @post.images.attached? %>
       <%= link_to @post.images[0] do %>
-        <%= image_tag @post.images[0] %>
+        <%= image_tag @post.images[0] , class: "image_touch" %>
       <% end %>
     <% end %>
   </div>

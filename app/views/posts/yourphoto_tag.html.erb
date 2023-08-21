@@ -1,0 +1,18 @@
+<% provide(:title, "タグ:#{params[:tag]}") %>
+
+<%= link_to "戻る", yourphoto_path, class:"search_button" %>
+
+<h1>タグ:<%= params[:tag] %></h1>
+
+<div id="photo_index_container">
+  <% @posts.each do |post| %>
+    <div id="<%= dom_id post %>" class="container_images">
+        <% if post.images.attached? %>
+        <%= link_to "./#{post.id}" do %>
+            <%= image_tag post.images[0].variant(:thumb).processed.url %>
+        <% end %>
+        <% end %>
+    </div>
+  <% end %>
+</div>
+

@@ -15,7 +15,7 @@
 
             <td class="tag_index_tag">
                 <% @tags_included_in_model.where(group:taggroup.id.to_s).each do |tag| %>
-                    <%= link_to "#{tag.tag}", "/photo_tag/#{tag.tag}", class:"tag_button" %>
+                    <%= link_to "#{tag.tag}", "./tag/#{tag.tag}/", class:"tag_button" %>
                 <% end %>
             </td>
         </tr>
@@ -28,7 +28,7 @@
 
         <td class="tag_index_tag">
             <% @tags_included_in_model.where(group:"").each do |tag| %>
-                <%= link_to "#{tag.tag}", "/photo_tag/#{tag.tag}", class:"tag_button" %>
+                <%= link_to "#{tag.tag}", "./tag/#{tag.tag}/", class:"tag_button" %>
             <% end %>
         </td>
     </tr>
@@ -40,7 +40,7 @@
 
         <td class="tag_index_tag">
             <% @tags_not_included_in_model.each do |tag| %>
-                <%= link_to "#{tag}", "/photo_tag/#{tag}", class:"tag_button" %>
+                <%= link_to "#{tag}", "./tag/#{tag}/", class:"tag_button" %>
             <% end %>
         </td>
     </tr>
@@ -48,16 +48,22 @@
 </table>
 
 <div>
-    <%= link_to "タグなし", "/nothing_tag", class:"tag_button" %>
+    <%= link_to "タグなし", yourphoto_nothing_tag_path , class:"tag_button" %>
 </div>
 
 <h1>写真(最新3件)</h1>
 <div id="photo_index_container">
     <% @posts.each do |post| %>
-        <%= render post %>
+        <div id="<%= dom_id post %>" class="container_images">
+            <% if post.images.attached? %>
+            <%= link_to "./all/#{post.id}" do %>
+                <%= image_tag post.images[0].variant(:thumb).processed.url %>
+            <% end %>
+            <% end %>
+        </div>
     <% end %>
 </div>
 
 <div>
-    <%= link_to "すべて見る", photo_all_path %>
+    <%= link_to "すべて見る", yourphoto_all_path %>
 </div>

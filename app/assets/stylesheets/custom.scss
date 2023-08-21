@@ -259,6 +259,14 @@ input[type="submit"]{
     margin-left: 30px;
 }
 
+
+
+
+
+
+
+
+
 // トップ
 .overview{
     font-size: 20px; 
@@ -357,6 +365,10 @@ input[type="submit"]{
 
 
 
+
+
+
+
 // サインアップ、ログイン画面
 
 .container_simple_form{
@@ -396,6 +408,11 @@ input[type="submit"]{
 }    
  
 
+
+
+
+
+
 // 画像一覧
 
 #photo_index_container{
@@ -418,7 +435,7 @@ input[type="submit"]{
 
 
 
-// アップロード 兼 画像編集
+// アップロード 兼 編集
 
 .container_flex{
     display: flex;
@@ -471,7 +488,17 @@ input[type="submit"]{
     margin-top: 100px;
 }
 
+.prev,
+.next{
+   text-decoration: none;
+   color: $color2;
+   font-size: 30px;
+}
 
+.prev{
+   margin-left: 1em;
+   margin-right: 10px;
+}
 
 
 

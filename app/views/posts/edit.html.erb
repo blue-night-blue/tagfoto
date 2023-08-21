@@ -7,19 +7,21 @@
 <% end %>
 
 <div>
-  <%= link_to "一覧に戻る", "../" , class:"search_button" %>
-
-  <% if @prev_post %>
-    <%= link_to "./#{@prev_post.id}", class:"prev" do %>
-      <i class="fa-solid fa-right-long fa-flip-horizontal"></i>
+  <%= link_to "一覧に戻る", "./" , class:"search_button" %>
+  <div class="container_prev">
+    <% if @prev_post %>
+      <%= link_to "./#{@prev_post.id}", class:"prev" do %>
+        <i class="fa-solid fa-right-long fa-flip-horizontal"></i>
+      <% end %>
     <% end %>
-  <% end %>
-
-  <% if @next_post %>
-    <%= link_to "./#{@next_post.id}", class:"next" do %>
-      <i class="fa-solid fa-right-long"></i>
+  </div>
+  <div class="container_next">
+    <% if @next_post %>
+      <%= link_to "./#{@next_post.id}", class:"next" do %>
+        <i class="fa-solid fa-right-long"></i>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>
 
 <div>

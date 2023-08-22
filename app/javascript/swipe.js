@@ -1,6 +1,6 @@
 const imageTouch=document.querySelector('.image_touch');
-const linkPrev=document.querySelector('.prev');
-const linkNext=document.querySelector('.next');
+const recentPhoto=document.querySelector('.recent_photo');
+const oldPhoto=document.querySelector('.old_photo');
 let startX = 0;
 let endX = 0;
 
@@ -14,12 +14,12 @@ imageTouch.addEventListener('touchmove', (e) =>  {
 
 imageTouch.addEventListener('touchend', (e) =>  {
   if(startX - endX <= -30){
-    if(linkPrev){
-        window.location.href = linkPrev.getAttribute("href");
+    if(recentPhoto){
+        window.location.href = recentPhoto.getAttribute("href");
     };
   }else if(startX - endX >= 30){
-    if(linkNext){
-        window.location.href = linkNext.getAttribute("href");
+    if(oldPhoto){
+        window.location.href = oldPhoto.getAttribute("href");
     };
   };
 

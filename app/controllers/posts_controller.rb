@@ -58,22 +58,20 @@ class PostsController < ApplicationController
 
   def edit
     if params[:tag]
-      @posts = Post.where(user_id:@current_user.id).where("tag LIKE ?","%#{params[:tag]}%").order(created_at: :desc)
+      @posts = Post.where(user_id:@current_user.id).where("tag LIKE ?","%#{params[:tag]}%")
     elsif params[:view]=="all"
-      @posts = Post.where(user_id:@current_user.id).order(created_at: :desc)
+      @posts = Post.where(user_id:@current_user.id)
     elsif params[:view]=="nothing_tag"
-      @posts = Post.where(user_id:@current_user.id).where(tag:"").order(created_at: :desc)
+      @posts = Post.where(user_id:@current_user.id).where(tag:"")
     else
       flash[:notice]="無効なURLです。"
       redirect_to yourphoto_path  
     end
 
     current_index = @posts.index(@post)
-    # 降順に並んでいる関係で、数字が小さくなるほど後のポストになることに注意
-    @prev_post = @posts[current_index + 1] if current_index < @posts.length - 1
-    @next_post = @posts[current_index - 1] if current_index > 0
+    @recent_photo_post = @posts[current_index + 1] if current_index < @posts.length - 1
+    @old_photo_post = @posts[current_index - 1] if current_index > 0
     
-    session[:previous_url] = request.referer
     @taggroups=Taggroup.where(user_id:@current_user.id).order(:sort_order)
     @tags =Tag.where(user_id:@current_user.id).order(:sort_order)
     

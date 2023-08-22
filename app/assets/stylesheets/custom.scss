@@ -488,22 +488,24 @@ input[type="submit"]{
     margin-top: 100px;
 }
 
-.container_prev,
-.container_next{
+.container_recent_photo,
+.container_old_photo{
     display: inline-block;
-    width:50px;
+    width: 100px;
 }
 
-.container_prev{
+.container_recent_photo{
     margin-left: 30px;
 }
 
+.recent_photo,
+.old_photo{
+    text-decoration: none;
+    color: $color2;
 
-.prev,
-.next{
-   text-decoration: none;
-   color: $color2;
-   font-size: 30px;
+    i{
+        font-size: 30px;
+    }
 }
 
 

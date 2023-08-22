@@ -8,16 +8,18 @@
 
 <div>
   <%= link_to "一覧に戻る", "./" , class:"search_button" %>
-  <div class="container_prev">
-    <% if @prev_post %>
-      <%= link_to "./#{@prev_post.id}", class:"prev" do %>
+  <div class="container_recent_photo">
+    <% if @recent_photo_post %>
+      <%= link_to "./#{@recent_photo_post.id}", class:"recent_photo" do %>
         <i class="fa-solid fa-right-long fa-flip-horizontal"></i>
+        <span>new</span>
       <% end %>
     <% end %>
   </div>
-  <div class="container_next">
-    <% if @next_post %>
-      <%= link_to "./#{@next_post.id}", class:"next" do %>
+  <div class="container_old_photo">
+    <% if @old_photo_post %>
+      <%= link_to "./#{@old_photo_post.id}", class:"old_photo" do %>
+        <span>old</span>
         <i class="fa-solid fa-right-long"></i>
       <% end %>
     <% end %>

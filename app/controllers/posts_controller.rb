@@ -66,6 +66,7 @@ class PostsController < ApplicationController
     else
       flash[:notice]="無効なURLです。"
       redirect_to yourphoto_path  
+      return
     end
 
     current_index = @posts.index(@post)
@@ -183,8 +184,28 @@ class PostsController < ApplicationController
     @user=User.find_by(name:params[:user_name])
 
     if  @user && ApprovedUser.find_by(user_id:@user.id, approved_user_id:@current_user.id).present?
+
       @post = Post.find(params[:id])
       
+      # 前後ポストへのナビゲーション用
+      if params[:tag]
+        @posts = Post.where(user_id:@user.id).where("tag LIKE ?","%#{params[:tag]}%")
+      elsif params[:view]=="all"
+        @posts = Post.where(user_id:@user.id)
+      elsif params[:view]=="nothing_tag"
+        @posts = Post.where(user_id:@user.id).where(tag:"")
+      else
+        flash[:notice]="無効なURLです。"
+        redirect_to approved_index_path 
+        return
+      end
+
+      current_index = @posts.index(@post)
+      @recent_photo_post = @posts[current_index + 1] if current_index < @posts.length - 1
+      @old_photo_post = @posts[current_index - 1] if current_index > 0
+        
+
+      # タグ表示用 
       tags_in_posts_array = @post.tag.split(",").map(&:strip).reject(&:empty?) 
       tags_in_tags_hash = Tag.tags_in_tags(@user)
       @tags_included_in_model=Tag.where(user_id:@user.id).where(tag: tags_in_posts_array).order(:sort_order)
@@ -197,6 +218,27 @@ class PostsController < ApplicationController
       flash[:notice]="当該のユーザーが存在しない、もしくは権限がありません"
       redirect_to yourphoto_path
     end
+  end
+
+def edit2
+    if params[:tag]
+      @posts = Post.where(user_id:@current_user.id).where("tag LIKE ?","%#{params[:tag]}%")
+    elsif params[:view]=="all"
+      @posts = Post.where(user_id:@current_user.id)
+    elsif params[:view]=="nothing_tag"
+      @posts = Post.where(user_id:@current_user.id).where(tag:"")
+    else
+      flash[:notice]="無効なURLです。"
+      redirect_to yourphoto_path  
+    end
+
+    current_index = @posts.index(@post)
+    @recent_photo_post = @posts[current_index + 1] if current_index < @posts.length - 1
+    @old_photo_post = @posts[current_index - 1] if current_index > 0
+    
+    @taggroups=Taggroup.where(user_id:@current_user.id).order(:sort_order)
+    @tags =Tag.where(user_id:@current_user.id).order(:sort_order)
+    
   end
 
  

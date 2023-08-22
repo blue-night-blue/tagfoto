@@ -11,7 +11,8 @@ Rails.application.routes.draw do
   
   # メニューバー用 
   get "/upload" , to: "posts#new"  
-  get "/yourphoto" , to: "posts#yourphoto" , trailing_slash: true 
+  get "/yourphoto/" , to: "posts#yourphoto" , trailing_slash: true 
+  get "/sharedphoto" , to: "posts#sharedphoto"
   get "/tagto" , to: "posts#tagto"  
   get "/edittag" , to: "tags#index"  
   get "/setting" , to: "users#setting"  
@@ -24,14 +25,15 @@ Rails.application.routes.draw do
   get "yourphoto/nothing_tag/" , to: "posts#yourphoto_nothing_tag"  , trailing_slash: true
   get "yourphoto/:view/:id" , to: "posts#edit"  
 
-
   # 閲覧を許可された写真
-  get "/sharedphoto" , to: "posts#sharedphoto"  
-  get "/photo/:user_name" , to: "posts#approved_index"  
+  get "/photo/:user_name/tag/:tag/" , to: "posts#approved_photo_tag" , trailing_slash: true  
+  get "/photo/:user_name/tag/:tag/:id" , to: "posts#approved_show"
+
+  get "/photo/:user_name/" , to: "posts#approved_index" , as: :approved_index , trailing_slash: true  
   get "/photo/:user_name/all/" , to: "posts#approved_photo_all" , as: :approved_photo_all , trailing_slash: true 
-  get "/photo/:user_name/tag/:tag" , to: "posts#approved_photo_tag"  
-  get "/photo/:user_name/nothing_tag/" , to: "posts#approved_nothing_tag"  
-  get "/photo/:user_name/show/:id" , to: "posts#approved_show"  
+  get "/photo/:user_name/nothing_tag/" , to: "posts#approved_nothing_tag" , as: :approved_nothing_tag , trailing_slash: true 
+  get "/photo/:user_name/:view/:id" , to: "posts#approved_show"  
+  
   post "/authenticated" , to: "secret_phrases#authenticated"  
  
   # その他 

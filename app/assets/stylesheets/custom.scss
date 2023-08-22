@@ -133,10 +133,10 @@ ul,ol{
 }
 
 .logo{
-background-color: $text;
-margin-bottom: 30px;
-padding-top: 60px;
-text-align: left;
+    background-color: $text;
+    margin-bottom: 30px;
+    padding-top: 60px;
+    text-align: left;
 
     img{
         height: 60px;
@@ -435,7 +435,7 @@ input[type="submit"]{
 
 
 
-// アップロード 兼 編集
+// アップロード 兼 ポスト閲覧
 
 .container_flex{
     display: flex;
@@ -484,27 +484,43 @@ input[type="submit"]{
     }
 }
 
+
+
+
+
+
+
+
+
+// ポスト閲覧
+
 .container_delete{
     margin-top: 100px;
 }
 
-.container_recent_photo,
-.container_old_photo{
-    display: inline-block;
-    width: 100px;
-}
+.container_post_navi{
+    display: flex;
+    align-items: center;
+    
+    .search_button{
+        margin-right: 30px;
+    }
 
-.container_recent_photo{
-    margin-left: 30px;
-}
+    div{
+        display: inline-block;
+        width: 90px;
 
-.recent_photo,
-.old_photo{
-    text-decoration: none;
-    color: $color2;
+        a{
+            text-decoration: none;
+            color: $color2;
+            display: flex;
+            align-items: center;
 
-    i{
-        font-size: 30px;
+            i{
+                font-size: 30px;
+                margin: 3px;
+            }
+        }
     }
 }
 
@@ -569,11 +585,9 @@ input[type="submit"]{
     }
 }
 
-
 .select_tag{
     background-color: $color3;
 }
-    // filter:   saturate(5620%) hue-rotate(298deg) ;
 
     
     
@@ -584,6 +598,10 @@ input[type="submit"]{
     label,textarea,input{
         display: block;
     }
+}
+
+details{
+    margin-left: 30px;
 }
 
 .container_secret_message_in_setting{

@@ -34,7 +34,7 @@ class TagsController < ApplicationController
       if @tag.save
         format.html { redirect_to tags_url}
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { redirect_to edittag_path}
       end
     end
   end
@@ -44,7 +44,7 @@ class TagsController < ApplicationController
       if @tag.update(tag_params)
         format.html { redirect_to tags_url}
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html { redirect_to edittag_path}
       end
     end
   end

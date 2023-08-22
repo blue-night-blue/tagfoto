@@ -259,6 +259,17 @@ input[type="submit"]{
     margin-left: 30px;
 }
 
+details{
+    margin: 1em 0 1em 15px;
+
+    .container_symbol{
+        letter-spacing: 10px;
+        font-size: 30px;
+        font-weight: 900;
+        color: $color2;
+    } 
+}
+
 
 
 
@@ -598,10 +609,6 @@ input[type="submit"]{
     label,textarea,input{
         display: block;
     }
-}
-
-details{
-    margin-left: 30px;
 }
 
 .container_secret_message_in_setting{

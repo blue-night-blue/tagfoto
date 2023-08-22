@@ -12,8 +12,18 @@
       <ul>
         <li>複数画像をまとめてアップロードできます。</li>
         <li>その場合、画像1枚につき1投稿扱いになります。</li>
-        <li>登録していないタグを使う場合、半角のカンマ「,」で区切ってください。</li>
+        <li>タグは半角のカンマ「,」で区切ってください。</li>
       </ul>
+
+      <details>
+          <summary>タグで使用できる文字の種類</summary>
+          <ul>
+              <li>全角なんでも</li>
+              <li>半角英数なんでも</li>
+              <li>半角記号は<span class="container_symbol">#()-_@</span>のみ</li>
+          </ul>            
+      </details>
+
     </div>
     <%= render "form", post: @post, multiple_images: @multiple_images %>
   </div>

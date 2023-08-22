@@ -30,9 +30,9 @@ class TaggroupsController < ApplicationController
 
     respond_to do |format|
       if @taggroup.save
-        format.html { redirect_to taggroups_url}
+        format.html { redirect_to taggroups_url }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { redirect_to taggroups_url }
       end
     end
   end
@@ -42,7 +42,7 @@ class TaggroupsController < ApplicationController
       if @taggroup.update(taggroup_params)
         format.html { redirect_to taggroups_url}
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html { redirect_to taggroups_url }
       end
     end
   end

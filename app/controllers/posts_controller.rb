@@ -26,11 +26,16 @@ class PostsController < ApplicationController
 
   def create
     if params[:post][:images] 
+
+      # 複数画像を個別ポストで保存
       params[:post][:images].each do |image|
         @post = Post.new(post_params)
         @post.user_id=@current_user.id
         @post.images=image_resize(image)
-        @post.save
+        unless @post.save 
+          redirect_to upload_path
+          return
+        end
       end
 
       # 未登録のタグを登録
@@ -41,20 +46,24 @@ class PostsController < ApplicationController
           Tag.create(user_id: @current_user.id , tag: "#{tag}" , group: "")
         end
       end
-
       flash[:success]="アップロードしました。"
       redirect_to yourphoto_path
     else
-      redirect_to :new_post
+      redirect_to upload_path
     end
   end
 
   def update
+    
     if image=params[:post][:images]
       @post.images=image_resize(image)
     end
+
     @post.update(post_params)
-    @post.save
+    unless @post.save 
+      redirect_to request.referer
+      return
+    end
 
     # 未登録のタグを登録
     if @post.tag != ""
@@ -65,7 +74,8 @@ class PostsController < ApplicationController
       end
     end
 
-   redirect_to yourphoto_path
+    flash[:success]="更新しました。"
+    redirect_to yourphoto_path
   end
 
   def destroy

@@ -9,5 +9,8 @@ class Post < ApplicationRecord
     def self.tags_in_posts(user)
         self.where(user_id:user.id).pluck(:tag).join(",").split(",").map(&:strip).reject(&:empty?).uniq
     end
+
+    VALID_TAG_REGEX = /\A[^\!\"\$\%\&\'\=\~\|\`\{\*\}\<\>\?\^\[\;\:\]\\\.\/]*\z/i
+    validates :tag,  format: { with: VALID_TAG_REGEX }
     
 end

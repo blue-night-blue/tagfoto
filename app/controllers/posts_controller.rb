@@ -35,7 +35,7 @@ class PostsController < ApplicationController
         
         # 読点をカンマに変換し、末尾がカンマでない場合にカンマを追加
         converted_tag_string = @post.tag.gsub("、", ",")
-        if converted_tag_string[-1] != ","
+        if converted_tag_string[-1] != "," && @post.tag != ""
           converted_tag_string += ","
         end
         @post.tag = converted_tag_string
@@ -71,7 +71,7 @@ class PostsController < ApplicationController
 
     # 読点をカンマに変換し、末尾がカンマでない場合にカンマを追加
     converted_tag_string = @post.tag.gsub("、", ",")
-    if converted_tag_string[-1] != ","
+    if converted_tag_string[-1] != "," && @post.tag != ""
       converted_tag_string += ","
     end
     @post.tag = converted_tag_string

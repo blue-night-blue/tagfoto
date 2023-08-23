@@ -70,6 +70,12 @@
     <div class="container_main">
       <%= yield %>
     </div>
+
+    <footer>
+      <%= link_to "運営者" , about_path %>
+      <%= link_to "更新履歴" , updates_path %>
+      <%= link_to "問い合わせ" , contact_path %>
+    </footer>
     
   </body>
 </html>

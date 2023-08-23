@@ -17,6 +17,11 @@ Rails.application.routes.draw do
   get "/edittag" , to: "tags#index"  
   get "/setting" , to: "users#setting"  
 
+  # フッター用 
+  get "/about" , to: "top#about"
+  get "/updates" , to: "top#updates"
+  get "/contact" , to: "top#contact"
+
   # 自分の写真
   get "yourphoto/tag/:tag/" , to: "posts#yourphoto_tag"  , trailing_slash: true
   get "yourphoto/tag/:tag/:id" , to: "posts#edit"  

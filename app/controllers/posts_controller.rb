@@ -32,6 +32,14 @@ class PostsController < ApplicationController
         @post = Post.new(post_params)
         @post.user_id=@current_user.id
         @post.images=image_resize(image)
+        
+        # 読点をカンマに変換し、末尾がカンマでない場合にカンマを追加
+        converted_tag_string = @post.tag.gsub("、", ",")
+        if converted_tag_string[-1] != ","
+          converted_tag_string += ","
+        end
+        @post.tag = converted_tag_string
+        
         unless @post.save 
           redirect_to upload_path
           return
@@ -60,6 +68,14 @@ class PostsController < ApplicationController
     end
 
     @post.update(post_params)
+
+    # 読点をカンマに変換し、末尾がカンマでない場合にカンマを追加
+    converted_tag_string = @post.tag.gsub("、", ",")
+    if converted_tag_string[-1] != ","
+      converted_tag_string += ","
+    end
+    @post.tag = converted_tag_string
+    
     unless @post.save 
       redirect_to request.referer
       return

@@ -262,6 +262,10 @@ input[type="submit"]{
 details{
     margin: 1em 0 1em 15px;
 
+    summary{
+        text-decoration: underline;
+    }
+    
     .container_symbol{
         letter-spacing: 10px;
         font-size: 30px;

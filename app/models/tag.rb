@@ -8,8 +8,9 @@ class Tag < ApplicationRecord
         self.where(user_id:user.id).pluck(:tag).map { |tag| [tag, true] }.to_h
     end
 
-    VALID_TAG_REGEX = /\A[^\!\"\$\%\&\'\=\~\|\`\{\*\}\<\>\?\^\[\;\:\]\\\.\/]*\z/i
-    validates :tag, length: { maximum: 30 },
+    VALID_TAG_REGEX = /\A[^\[\]\/\\"$%&'=~|`{*}<>?!^;:.,]*\z/i
+    validates :tag, presence:true,
+                    length: { maximum: 30 },
                     format: { with: VALID_TAG_REGEX },
                     uniqueness: { scope: :user_id }
     

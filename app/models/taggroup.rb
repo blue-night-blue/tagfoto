@@ -3,8 +3,9 @@ class Taggroup < ApplicationRecord
         ["created_at", "group", "id", "sort_order", "updated_at", "user_id"]
     end    
 
-    VALID_TAG_REGEX = /\A[^\!\"\$\%\&\'\=\~\|\`\{\*\}\<\>\?\^\[\;\:\]\\\.\/]*\z/i
-    validates :group, length: { maximum: 30 },
+    VALID_TAG_REGEX = /\A[^\[\]\/\\"$%&'=~|`{*}<>?!^;:.,]*\z/i
+    validates :group, presence:true,
+                        length: { maximum: 30 },
                         format: { with: VALID_TAG_REGEX },
                         uniqueness: { scope: :user_id }
   

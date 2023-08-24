@@ -31,7 +31,8 @@ class PostsController < ApplicationController
       params[:post][:images].each do |image|
         @post = Post.new(post_params)
         @post.user_id=@current_user.id
-        @post.images=image_resize(image)
+        use_fill = true if params[:post][:use_fill] == "1"
+        @post.images=image_resize(image,use_fill)
         
         # 読点をカンマに変換し、末尾がカンマでない場合にカンマを追加
         converted_tag_string = @post.tag.gsub("、", ",")
@@ -64,7 +65,8 @@ class PostsController < ApplicationController
   def update
     
     if image=params[:post][:images]
-      @post.images=image_resize(image)
+      use_fill = true if params[:post][:use_fill] == "1"
+      @post.images=image_resize(image,use_fill)
     end
 
     @post.update(post_params)
@@ -306,13 +308,19 @@ class PostsController < ApplicationController
       params.require(:post).permit(:comment, :tag)
     end
     
-    def image_resize(image)
-      image.tempfile = ImageProcessing::MiniMagick
-        .source(image.tempfile)
-        .resize_to_limit(1024, 768)
-        .strip
-        .call
-      image
-    end 
+    def image_resize(image,use_fill)
+      chain = ImageProcessing::MiniMagick.source(image.tempfile)
     
+      if use_fill
+        chain = chain.resize_to_fill(1024, 1024)
+      else
+        chain = chain.resize_to_limit(1024, 768)
+      end
+    
+      image.tempfile = chain.strip.call
+      image
+    end
+    
+    
+   
 end

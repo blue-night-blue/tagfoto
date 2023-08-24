@@ -3,6 +3,8 @@
       <div>
         <%= form.label :images,"写真" %>
         <%= form.file_field :images, { multiple: @multiple_images } %>
+        <%= form.label :use_fill,"自動で正方形にトリミング" %>
+        <%= form.check_box :use_fill %>
       </div>
     
       <table id="tag_index_container">

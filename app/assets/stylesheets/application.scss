@@ -217,6 +217,10 @@ dl{
 
     dd{
         margin-left: 1em;
+
+        p:first-child{
+            margin-top: 0;
+        } 
     }
 }
 

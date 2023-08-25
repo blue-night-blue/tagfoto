@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  # トップおよびサインイン/アウト 
+  # トップおよびサインイン/アウト/退会 
   root "top#top"
   get "/top" , to: redirect('../')
   get "/signup" , to: "users#signup_form"  
@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get "/login" , to: "users#login_form"  
   post "/login" , to: "users#login"  
   post "/logout" , to: "users#logout"  
+  get "/leave_service" , to: "users#leave_service_form"  
+  post "/leave_service" , to: "users#leave_service"  
   
   # メニューバー用 
   get "/upload" , to: "posts#new"  

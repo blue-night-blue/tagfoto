@@ -1,0 +1,20 @@
+<% provide(:title, "退会") %>
+
+
+<h1>退会</h1>
+
+<div class="container_simple_form">
+
+  <%= form_with(model: @user, url: leave_service_path) do |form|  %>
+
+    <div>
+      <%= form.label :password,"パスワード" %>
+      <%= form.password_field :password %>
+    </div>
+
+    <div>
+      <%= form.submit "退会する" ,data: { turbo_confirm: "本当に退会しますか？" } %>
+    </div>
+  <% end %>
+
+</div>

@@ -101,6 +101,20 @@ class UsersController < ApplicationController
     
   end
 
+  def leave_service
+  end
+  
+ def leave_service
+    if @current_user.authenticate(params[:password])
+      session[:user_id]=nil
+      flash[:success]="退会しました。" 
+      redirect_to root_path
+    else
+      flash[:notice]="パスワードが間違っています。" 
+      redirect_to leave_service_path
+    end
+  end
+
  
 
   

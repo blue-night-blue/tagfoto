@@ -98,6 +98,7 @@ class UsersController < ApplicationController
   
  def leave_service
     if @current_user.authenticate(params[:password])
+      @current_user.destroy
       session[:user_id]=nil
       flash[:success]="退会しました。" 
       redirect_to root_path

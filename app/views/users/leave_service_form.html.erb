@@ -3,6 +3,16 @@
 
 <h1>退会</h1>
 
+<p>退会すると、下記が削除されます。</p>
+
+<ol>
+  <li>アップロードした写真(付けたタグ、コメント含む)</li>
+  <li>登録したタグとタググループ</li>
+  <li>ユーザー登録情報(ユーザー名、Eメール、パスワード)</li>
+  <li>許可ユーザー設定(合言葉含む)</li>
+  <li>秘密メモ</li>
+</ol>
+
 <div class="container_simple_form">
 
   <%= form_with(model: @user, url: leave_service_path) do |form|  %>

@@ -1,4 +1,5 @@
 class Post < ApplicationRecord
+    belongs_to :user
 
     has_many_attached :images do |attachable|
         attachable.variant :thumb, resize_to_fill: [150, 150]

@@ -21,7 +21,7 @@ user_count.times do |i|
     ApprovedUser.find_or_create_by(user_id: users[i].id, approved_user_id: users[i-1-j].id)
   end
 
-  if Post.exists?(user_id: users[i].id)
+  unless Post.exists?(user_id: users[i].id)
     post = Post.new(user_id: users[i].id) 
     post.images.attach(io: File.open(Rails.root.join('app/assets/images/sample.jpg')),filename: 'sample.jpg')
     post.save

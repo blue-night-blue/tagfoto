@@ -86,6 +86,7 @@ input,button,select{
     border: 1px $text solid;
     background-color: $color4;
     color: $text;
+    white-space: nowrap;
 }
 
 input[type="submit"]{
@@ -117,18 +118,20 @@ input[type="submit"]{
         width: 70px;
     }
 
+    .table_forms_title{
+        letter-spacing: -3px;
+        white-space: nowrap;
+    }
+
     .table_forms{
         white-space:nowrap;
-
+        display: flex;
+        flex-wrap: wrap;
+        
         div{
-            display: inline-block;
             margin:0 3px;
         }
         
-        form{
-            display: inline;
-        }
-
         .table_title{
             border: none;
             background-color: transparent;
@@ -596,6 +599,21 @@ footer{
     margin-bottom: 2em;
 }
 
+#flash{
+    width: 100%;
+    background-color: $color1;
+    position:fixed;
+    top:33px;
+    left:0;
+    z-index:1500;
+    opacity: 0.9;
+}
+
+
+
+
+
+
 
 
 
@@ -771,6 +789,9 @@ iframe{
     height: 1500px;
 }
 
+#flash{
+    top:54px;
+}
 
 }
 

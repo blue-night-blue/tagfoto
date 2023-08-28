@@ -1,65 +1,60 @@
 <% provide(:title, "タグ編集") %>
 
+<% content_for :head do %>
+  <meta name="turbo-visit-control" content="reload">
+  <%= javascript_import_module_tag "turboCustomize" %>
+<% end %>
 
+<%= render "flash" %>
 
-<%= turbo_frame_tag "cats-list" do %>
-
-  <div id="table_container">
-    <h1>追加</h1>
-    
-    <details>
-        <summary>使用できる文字の種類</summary>
-        <ul>
-            <li>全角なんでも</li>
-            <li>半角英数なんでも</li>
-            <li>半角記号は<span class="container_symbol">#()-_@</span>のみ</li>
-        </ul>            
-    </details>
-
-    <div class="table_forms">
-      <div class="table_tag">タグ(必須)</div>
-      <div class="table_group">グループ</div>
-      <div class="table_sort_order">並び</div>
-    </div>
-    
-    <div class="table_forms">
-      <%= render "form", tag: @tag %>
-    </div>
-
-    <%= link_to "グループ追加・編集", edittaggroup_path, data: { turbo: false }, class:"search_button" %>
-    
- 
+<div id="table_container">
+  <h1>追加</h1>
   
-    <h1>編集 (ボタンで並び替え)</h1>
+  <details>
+    <summary>使用できる文字の種類</summary>
+    <ul>
+        <li>全角なんでも</li>
+        <li>半角英数なんでも</li>
+        <li>半角記号は<span class="container_symbol">#()-_@</span>のみ</li>
+    </ul>            
+  </details>
 
-    <div class="container_filter">
-      <%= search_form_for @search do |f| %>
-        <%= f.label :tag_cont, "タグ" %>
-        <%= f.search_field :tag_cont, class:"table_tag" %>
-        <%= f.label :group_cont, "グループ" %> 
-        <%= f.select :group_cont, options_from_collection_for_select(Taggroup.where(user_id:@current_user.id).order(:sort_order), :id, :group), include_blank: true %>
-        <%= f.submit "検索" ,class:"button_mini" %>
-        <%= link_to "クリア", edittag_path, class:"button button_clear" %>
-      <% end %>
-    </div>
-
-
-    
-    <div class="table_forms">
-      <div class="table_tag"><%= sort_link(@search, :tag,"タグ") %></div>
-      <div class="table_group"><%= sort_link(@search, :group,"グループ") %></div>
-      <div class="table_sort_order"><%= sort_link(@search, :sort_order,"並び") %></div>
-    </div>
-    
-    <% @tags.each do |tag| %>
-    <div class="table_forms">
-        <%= render "form", tag: tag %>
-        <%= button_to "削除", tag, method: :delete, class:"table_delete" %>
-    </div>
-    
-    
-    
+  <div class="table_forms table_forms_title">
+    <div class="table_tag">タグ ( 必須 )</div>
+    <div class="table_group">グループ</div>
+    <div class="table_sort_order">並び</div>
+  </div>
+  
+  <div class="table_forms">
+    <%= turbo_frame_tag "new_tag" do %>
+      <%= render "form" , tag: @tag, form_type: @form_type="new_form" %>
     <% end %>
   </div>
-<% end %>
+
+  <%= link_to "グループ追加・編集", edittaggroup_path, data: { turbo: false }, class:"search_button" %>
+
+  <h1>編集 (ボタンで並び替え)</h1>
+
+  <div class="container_filter">
+    <%= search_form_for @search do |f| %>
+      <%= f.label :tag_cont, "タグ" %>
+      <%= f.search_field :tag_cont, class:"table_tag" %>
+      <%= f.label :group_cont, "グループ" %> 
+      <%= f.select :group_cont, options_from_collection_for_select(Taggroup.where(user_id:@current_user.id).order(:sort_order), :id, :group), include_blank: true %>
+      <%= f.submit "検索" ,class:"button_mini" %>
+      <%= link_to "クリア", edittag_path, class:"button button_clear" %>
+    <% end %>
+  </div>
+  
+  <div class="table_forms table_forms_title">
+    <div class="table_tag"><%= sort_link(@search, :tag,"タグ") %></div>
+    <div class="table_group"><%= sort_link(@search, :group,"グループ") %></div>
+    <div class="table_sort_order"><%= sort_link(@search, :sort_order,"並び") %></div>
+  </div>
+  
+  <%= turbo_frame_tag "tags" do %>
+    <%= render @tags %>
+  <% end %>
+  
+</div>
 

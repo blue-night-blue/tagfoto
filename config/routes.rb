@@ -57,8 +57,8 @@ Rails.application.routes.draw do
   
   resources :posts, only: %i[ new create update destroy ]
 
-  resources :tags, only: %i[ create update destroy index ]
-  resources :taggroups, only: %i[ create update destroy index ]
+  resources :tags, only: %i[ new create update destroy index edit ]
+  resources :taggroups, only: %i[ new create update destroy index edit ]
   
 
 

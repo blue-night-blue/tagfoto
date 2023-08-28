@@ -1,0 +1,10 @@
+<%= turbo_frame_tag tag do %>
+  <div class="table_forms">
+    <div>
+      <%= render "form", tag: tag, form_type: @form_type="posted_form" %>
+    </div>
+    <div>
+      <%= button_to "削除",tag_path(tag), method: :delete, class:"table_delete" %>
+    </div>
+  </div>
+<% end %>

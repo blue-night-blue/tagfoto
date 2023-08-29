@@ -5,9 +5,7 @@ FROM --platform=linux/x86_64 ruby:3.2.2
 ENV APP="/tagfoto"  \
     CONTAINER_ROOT="./" 
 
-RUN apt-get clean && \
-    rm -rf /var/cache/apt/archives/*.deb /var/cache/apt/archives/partial/*.deb /var/cache/apt/*.bin && \
-    apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y \
         libvips \
         imagemagick
 

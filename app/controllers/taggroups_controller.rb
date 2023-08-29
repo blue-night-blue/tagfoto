@@ -24,43 +24,63 @@ class TaggroupsController < ApplicationController
     @taggroups = @search.result.page(params[:page])
   end
 
+  def new
+    @taggroup = Taggroup.new
+  end
+
   def create
     @taggroup = Taggroup.new(taggroup_params)
+    taggroup_name = @taggroup.group
     @taggroup.user_id=@current_user.id
 
-    respond_to do |format|
-      if @taggroup.save
-        format.html { redirect_to taggroups_url }
-      else
-        format.html { redirect_to taggroups_url }
+    if @taggroup.save
+      respond_to do |format|
+          format.html { redirect_to tags_path, notice: "#{taggroup_name}を投稿しました" }
+          format.turbo_stream { flash.now.notice = "#{taggroup_name}を投稿しました" }
       end
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
   def update
-    respond_to do |format|
-      if @taggroup.update(taggroup_params)
-        format.html { redirect_to taggroups_url}
-      else
-        format.html { redirect_to taggroups_url }
+    taggroup_name = @taggroup.group
+    if @taggroup.update(taggroup_params) && @taggroup.saved_change_to_attribute?(:group) || @taggroup.saved_change_to_attribute?(:sort_order)
+      respond_to do |format|
+        if @taggroup.update(taggroup_params)
+          format.html { redirect_to taggroups_path, notice: "#{taggroup_name}を修正しました" }
+          format.turbo_stream { flash.now[:notice] = "#{taggroup_name}を修正しました" }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+        end
       end
     end
   end
 
   def destroy
+    taggroup_name = @taggroup.group
     @taggroup.destroy
-
+  
     respond_to do |format|
-      format.html { redirect_to taggroups_url}
+      format.html { redirect_to taggroups_path, notice: "#{taggroup_name}を削除しました" }
+      format.turbo_stream { flash.now[:notice] = "#{taggroup_name}を削除しました" }
     end
   end
-  
-  
-  
-  
-  
 
-  private
+
+
+
+
+
+
+
+
+
+
+
+
+
+ private
     def set_taggroup
       @taggroup = Taggroup.find(params[:id])
     end

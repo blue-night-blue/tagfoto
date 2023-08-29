@@ -1,48 +1,47 @@
 <% provide(:title, "タググループ編集") %>
 
+<% content_for :head do %>
+  <meta name="turbo-visit-control" content="reload">
+  <%= javascript_import_module_tag "turboCustomize" %>
+<% end %>
+
+<%= render "flash" %>
+
 <%= link_to "タグ編集に戻る", edittag_path, class:"search_button" %>
 
-<%= turbo_frame_tag "taggroups-list" do %>
-
-  <div id="table_container">
-    <h1>追加</h1>
-        
-    <details>
-        <summary>使用できる文字の種類</summary>
-        <ul>
-            <li>全角なんでも</li>
-            <li>半角英数なんでも</li>
-            <li>半角記号は<span class="container_symbol">#()-_@</span>のみ</li>
-        </ul>            
-    </details>
-
-    <div class="table_forms">
-      <div class="table_group">グループ</div>
-      <div class="table_sort_order">並び</div>
-    </div>
-    
-    <div class="table_forms">
-      <%= render "form", taggroup: @taggroup %>
-    </div>
-
-    
-    
+<div id="table_container">
+  <h1>追加</h1>
   
-    <h1>編集 (ボタンで並び替え)</h1>
-    <div class="table_forms">
-      <div class="table_group"><%= sort_link(@search, :group,"グループ") %></div>
-      <div class="table_sort_order"><%= sort_link(@search, :sort_order,"並び") %></div>
-    </div>
-    
-    <% @taggroups.each do |taggroup| %>
-    <div class="table_forms">
-        <%= render "form", taggroup: taggroup %>
-        <%= button_to "削除", taggroup, method: :delete, class:"table_delete" %>
-    </div>
-    
-    
-    
+  <details>
+    <summary>使用できる文字の種類</summary>
+    <ul>
+        <li>全角なんでも</li>
+        <li>半角英数なんでも</li>
+        <li>半角記号は<span class="container_symbol">#()-_@</span>のみ</li>
+    </ul>            
+  </details>
+
+  <div class="table_forms table_forms_title">
+    <div class="table_tag">グループ ( 必須 )</div>
+    <div class="table_sort_order">並び</div>
+  </div>
+  
+  <div class="table_forms">
+    <%= turbo_frame_tag "new_taggroup" do %>
+      <%= render "form" , taggroup: @taggroup, form_type: @form_type="new_form" %>
     <% end %>
   </div>
-<% end %>
+
+  <h1>編集 (ボタンで並び替え)</h1>
+
+  <div class="table_forms table_forms_title">
+    <div class="table_tag"><%= sort_link(@search, :group,"グループ") %></div>
+    <div class="table_sort_order"><%= sort_link(@search, :sort_order,"並び") %></div>
+  </div>
+  
+  <%= turbo_frame_tag "taggroups" do %>
+    <%= render @taggroups %>
+  <% end %>
+  
+</div>
 

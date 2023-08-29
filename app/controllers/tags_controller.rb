@@ -1,6 +1,6 @@
 class TagsController < ApplicationController
   before_action :authenticate_user
-  before_action :set_taggroup
+  before_action :set_my_taggroup
   before_action :set_tag, only: %i[ edit update destroy ]
   before_action :ensure_correct_user, only: %i[ edit update destroy ]
   
@@ -11,7 +11,7 @@ class TagsController < ApplicationController
     end
   end 
   
-  def set_taggroup
+  def set_my_taggroup
     @taggroups = Taggroup.where(user_id:@current_user.id).order(:sort_order).map { |group| [group.group, group.id] } 
   end 
 

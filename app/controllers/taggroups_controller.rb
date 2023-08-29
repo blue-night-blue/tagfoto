@@ -59,6 +59,11 @@ class TaggroupsController < ApplicationController
 
   def destroy
     taggroup_name = @taggroup.group
+    tags = Tag.where(user_id:@current_user.id, group:@taggroup.id.to_s)
+    tags.each do |tag|
+      tag.group = ""
+      tag.save
+    end
     @taggroup.destroy
   
     respond_to do |format|

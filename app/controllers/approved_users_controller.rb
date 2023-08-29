@@ -38,7 +38,7 @@ class ApprovedUsersController < ApplicationController
     @approved_user.destroy
 
     respond_to do |format|
-      format.html { redirect_to setting_path, flash:{success:"削除しました。"} }
+      format.html { redirect_to setting_path }
     end
   end
 

@@ -93,24 +93,33 @@ input[type="submit"]{
     background-color: $color1;
 }
 
-.search_button,
-.tag_button,
-.sort_link,
 .button{
     border-radius: 5px;
     border: $text 1px solid;
     display: inline-block;
     color: $text;
     font-size: 14px;
-    background-color: $color3;
     padding: 1px 6px;
     margin: 5px 0;
+}
+
+.button_link{
+    background-color: $color3;
+}
+
+.button_tag{
+    background-color: $color3;
+}
+
+.button_search{
+    background-color: $color1;
 }
 
 .button_clear{
     background-color: $color2;
     color: $color4;
 }
+
 
 #table_container{
     
@@ -492,14 +501,23 @@ footer{
         } 
     } 
 }    
-    
+
+.container_search_link{
+    margin-bottom: 2em;
+
+    a{
+        font-size: 20px;
+    }
+}
+
+.container_reset{
+    margin-top: 50px;
+}
 
 
 
 
-
-
-// アップロード 兼 ポスト閲覧
+// アップロード 兼 個別ポスト
 
 .container_flex{
     display: flex;
@@ -556,7 +574,7 @@ footer{
 
 
 
-// ポスト閲覧
+// 個別ポスト
 
 .container_delete{
     margin-top: 100px;
@@ -566,7 +584,7 @@ footer{
     display: flex;
     align-items: center;
     
-    .search_button{
+    .button_link{
         margin-right: 30px;
     }
 
@@ -797,4 +815,3 @@ iframe{
 }
 
 }
-

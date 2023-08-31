@@ -1,6 +1,6 @@
 <% provide(:title, "#{@user.name}") %>
 
-<%= link_to "許可したユーザーの一覧に戻る", sharedphoto_path, class:"search_button" %>
+<%= link_to "許可したユーザーの一覧に戻る", sharedphoto_path, class:"button button_link" %>
 
 
 <% if @approved_user.authenticated == true %>
@@ -22,7 +22,7 @@
 
               <td class="tag_index_tag">
                   <% @tags_included_in_model.where(group:taggroup.id.to_s).each do |tag| %>
-                      <%= link_to "#{tag.tag}", "./tag/#{tag.tag}/", class:"tag_button" %>
+                      <%= link_to "#{tag.tag}", "./tag/#{tag.tag}/", class:"button button_tag" %>
                   <% end %>
               </td>
           </tr>
@@ -35,19 +35,7 @@
 
           <td class="tag_index_tag">
               <% @tags_included_in_model.where(group:"").each do |tag| %>
-                  <%= link_to "#{tag.tag}", "./tag/#{tag.tag}/", class:"tag_button" %>
-              <% end %>
-          </td>
-      </tr>
-
-      <tr>
-          <td class="tag_index_group">
-              未登録 
-          </td>
-
-          <td class="tag_index_tag">
-              <% @tags_not_included_in_model.each do |tag| %>
-                  <%= link_to "#{tag}", "./tag/#{tag}/", class:"tag_button" %>
+                  <%= link_to "#{tag.tag}", "./tag/#{tag.tag}/", class:"button button_tag" %>
               <% end %>
           </td>
       </tr>
@@ -55,7 +43,7 @@
   </table>
 
   <div>
-      <%= link_to "タグなし", approved_nothing_tag_path , class:"tag_button" %>
+      <%= link_to "タグなし", approved_nothing_tag_path , class:"button button_tag" %>
   </div>
 
   <h1><%= @user.name %>の写真(最新3件)</h1>

@@ -105,7 +105,10 @@ class PostsController < ApplicationController
   end
 
   def edit
-    if params[:tag]
+    if params[:tags]
+      tags = params[:tags].split("&")
+      @posts = Post.where(user_id:@current_user.id).where(tags.map { |tag| "FIND_IN_SET('#{tag}', tag)" }.join(" AND ") )
+    elsif params[:tag]
       @posts = Post.where(user_id:@current_user.id).where("tag LIKE ?","%#{params[:tag]}%")
     elsif params[:view]=="all"
       @posts = Post.where(user_id:@current_user.id)
@@ -140,9 +143,7 @@ class PostsController < ApplicationController
   
   def yourphoto
     tags_in_posts_array = Post.tags_in_posts(@current_user)
-    tags_in_tags_hash = Tag.tags_in_tags(@current_user)
     @tags_included_in_model=Tag.where(user_id:@current_user.id).where(tag: tags_in_posts_array).order(:sort_order)
-    @tags_not_included_in_model = tags_in_posts_array.reject { |tag| tags_in_tags_hash[tag] }
 
     groups_in_tags_in_posts_array = @tags_included_in_model.pluck(:group).reject(&:empty?)
     @taggroups=Taggroup.where(user_id:@current_user.id).where(id:groups_in_tags_in_posts_array).order(:sort_order)
@@ -162,7 +163,26 @@ class PostsController < ApplicationController
     @posts = Post.where(user_id:@current_user.id).where(tag:"").order(created_at: :desc)
   end
 
+  def yourphoto_tagsearch
+    tags_in_posts_array = Post.tags_in_posts(@current_user)
+    @tags_included_in_model=Tag.where(user_id:@current_user.id).where(tag: tags_in_posts_array).order(:sort_order)
+
+    groups_in_tags_in_posts_array = @tags_included_in_model.pluck(:group).reject(&:empty?)
+    @taggroups=Taggroup.where(user_id:@current_user.id).where(id:groups_in_tags_in_posts_array).order(:sort_order)
+
+    posts = Post.where(user_id:@current_user.id)
+    @json_string = posts.map { |post| { id: post.id, tag: post.tag } }.to_json
+
+  end
+
+  def yourphoto_tagsearch_result
+    tags = params[:tags].split("&")
+    @posts = Post.where(user_id:@current_user.id).where(tags.map { |tag| "FIND_IN_SET('#{tag}', tag)" }.join(" AND ") ).order(created_at: :desc)
+  end
+   
   
+
+ 
   
   
   
@@ -181,9 +201,7 @@ class PostsController < ApplicationController
     if  @user.present? && @approved_user.present?
 
       tags_in_posts_array = Post.tags_in_posts(@user)
-      tags_in_tags_hash = Tag.tags_in_tags(@user)
       @tags_included_in_model=Tag.where(user_id:@user.id).where(tag: tags_in_posts_array).order(:sort_order)
-      @tags_not_included_in_model = tags_in_posts_array.reject { |tag| tags_in_tags_hash[tag] }
 
       groups_in_tags_in_posts_array = @tags_included_in_model.pluck(:group).reject(&:empty?)
       @taggroups=Taggroup.where(user_id:@user.id).where(id:groups_in_tags_in_posts_array).order(:sort_order)
@@ -254,9 +272,7 @@ class PostsController < ApplicationController
 
       # タグ表示用 
       tags_in_posts_array = @post.tag.split(",").map(&:strip).reject(&:empty?) 
-      tags_in_tags_hash = Tag.tags_in_tags(@user)
       @tags_included_in_model=Tag.where(user_id:@user.id).where(tag: tags_in_posts_array).order(:sort_order)
-      @tags_not_included_in_model = tags_in_posts_array.reject { |tag| tags_in_tags_hash[tag] }
 
       groups_in_tags_in_posts_array = @tags_included_in_model.pluck(:group).reject(&:empty?)
       @taggroups=Taggroup.where(user_id:@user.id).where(id:groups_in_tags_in_posts_array).order(:sort_order)

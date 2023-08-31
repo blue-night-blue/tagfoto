@@ -6,7 +6,7 @@
 <% end %>
 
 <div class="container_post_navi">
-  <%= link_to "一覧に戻る", "./" , class:"search_button" %>
+  <%= link_to "一覧に戻る", "./" , class:"button button_link" %>
   <div>
     <% if @recent_photo_post %>
       <%= link_to "./#{@recent_photo_post.id}", class:"recent_photo" do %>
@@ -56,7 +56,7 @@
 
               <td class="tag_index_tag">
                   <% @tags_included_in_model.where(group:taggroup.id.to_s).each do |tag| %>
-                      <%= link_to "#{tag.tag}", "/photo/#{@user.name}/tag/#{tag.tag}", class:"tag_button" %>
+                      <%= link_to "#{tag.tag}", "/photo/#{@user.name}/tag/#{tag.tag}", class:"button button_tag" %>
                   <% end %>
               </td>
           </tr>
@@ -69,19 +69,7 @@
 
           <td class="tag_index_tag">
               <% @tags_included_in_model.where(group:"").each do |tag| %>
-                  <%= link_to "#{tag.tag}", "/photo/#{@user.name}/tag/#{tag.tag}", class:"tag_button" %>
-              <% end %>
-          </td>
-      </tr>
-
-      <tr>
-          <td class="tag_index_group">
-              未登録 
-          </td>
-
-          <td class="tag_index_tag">
-              <% @tags_not_included_in_model.each do |tag| %>
-                  <%= link_to "#{tag}", "/photo/#{@user.name}/tag/#{tag}", class:"tag_button" %>
+                  <%= link_to "#{tag.tag}", "/photo/#{@user.name}/tag/#{tag.tag}", class:"button button_tag" %>
               <% end %>
           </td>
       </tr>

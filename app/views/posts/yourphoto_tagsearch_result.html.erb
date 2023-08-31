@@ -1,8 +1,8 @@
-<% provide(:title, "タグ:#{params[:tag]}") %>
+<% provide(:title, "タグ:#{params[:tags]}") %>
 
-<%= link_to "戻る", yourphoto_path, class:"button button_link" %>
+<%= link_to "戻る", "../" , class:"button button_link" %>
 
-<h1>タグ:<%= params[:tag] %></h1>
+<h1>タグ:<%= params[:tags] %></h1>
 
 <div id="photo_index_container">
   <% @posts.each do |post| %>

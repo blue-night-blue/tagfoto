@@ -1,6 +1,11 @@
 <% provide(:title, "photo") %>
 
 <h1>タグ</h1>
+
+<div class="container_search_link">
+    <%= link_to "詳細検索(現在AND検索のみ)",yourphoto_tagsearch_path,class:"button button_search" %>
+</div>
+
 <table id="tag_index_container">
     <tr>
         <th class="tag_index_group">グループ</th>
@@ -15,7 +20,7 @@
 
             <td class="tag_index_tag">
                 <% @tags_included_in_model.where(group:taggroup.id.to_s).each do |tag| %>
-                    <%= link_to "#{tag.tag}", "./tag/#{tag.tag}/", class:"tag_button" %>
+                    <%= link_to "#{tag.tag}", "./tag/#{tag.tag}/", class:"button button_tag" %>
                 <% end %>
             </td>
         </tr>
@@ -28,19 +33,7 @@
 
         <td class="tag_index_tag">
             <% @tags_included_in_model.where(group:"").each do |tag| %>
-                <%= link_to "#{tag.tag}", "./tag/#{tag.tag}/", class:"tag_button" %>
-            <% end %>
-        </td>
-    </tr>
-
-    <tr>
-        <td class="tag_index_group">
-            未登録 
-        </td>
-
-        <td class="tag_index_tag">
-            <% @tags_not_included_in_model.each do |tag| %>
-                <%= link_to "#{tag}", "./tag/#{tag}/", class:"tag_button" %>
+                <%= link_to "#{tag.tag}", "./tag/#{tag.tag}/", class:"button button_tag" %>
             <% end %>
         </td>
     </tr>
@@ -48,7 +41,7 @@
 </table>
 
 <div>
-    <%= link_to "タグなし", yourphoto_nothing_tag_path , class:"tag_button" %>
+    <%= link_to "タグなし", yourphoto_nothing_tag_path , class:"button button_tag" %>
 </div>
 
 <h1>写真(最新3件)</h1>

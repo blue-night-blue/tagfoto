@@ -1,36 +1,56 @@
 const jsonString = document.getElementById('json_string').getAttribute("data-array");
 
-const andsearch = document.getElementById('container_andsearch');
-const andTags = andsearch.querySelectorAll('.tag');
-const andclear = andsearch.querySelector('.button_clear');
+// 関数を共通化するためのヘルパー関数
+function setupTagToggle(containerId) {
+    const container = document.getElementById(containerId);
+    const tags = container.querySelectorAll('.tag');
+    const clearButton = container.querySelector('.button_clear');
+    const selectedTagInputted = container.querySelector('.selected_tag_inputted');
+    const searchButton = container.querySelector('.button_search');
 
-window.onload = function(){
-
-    // andsearch
-    andTags.forEach( (andTag)=>{
-        andTag.addEventListener('click',selectTagToggle);
-    }); 
-    andclear.addEventListener('click',()=>{
-        const selectedTags = andsearch.querySelectorAll('.select_tag');
-        selectedTags.forEach( (selectedTag)=>{
-            selectedTag.classList.remove('select_tag');
-        });
+    tags.forEach((tag) => {
+        tag.addEventListener('click', () => selectTagToggle(tag, selectedTagInputted, searchButton, containerId) );
     });
 
+    clearButton.addEventListener('click', () => clearSelectedTags(tags, selectedTagInputted, searchButton) );
 };
 
-function selectTagToggle(){
-    const SelectedTagInputted = andsearch.querySelector('.selected_tag_inputted');
-    if(SelectedTagInputted.value.split('&').includes(this.value) === false){
-        SelectedTagInputted.value += this.value + "&";
-    }else{
-        SelectedTagInputted.value = SelectedTagInputted.value.replace(`${this.value}&` , ``);
-    };
-    
-    this.classList.toggle('select_tag');
+// タグの選択状態を切り替える関数
+function selectTagToggle(tag, inputField, searchButton, containerId) {
+    const tagValue = encodeURIComponent(tag.value);
+    const selectedTags = inputField.value.split('+');
 
-    const getLink = andsearch.querySelector('.button_search');
-    const setLink = SelectedTagInputted.value.replace(/&$/ , "/");
-    getLink.setAttribute('href',setLink);
+    if (!selectedTags.includes(tagValue)) {
+        inputField.value += tagValue + "+";
+    } else {
+        inputField.value = inputField.value.replace(`${tagValue}+`, "");
+    }
+
+    tag.classList.toggle('select_tag');
+
+    const setLink = inputField.value.replace(/\+$/, "");
+
+    if (containerId === 'container_andsearch') {
+        searchButton.setAttribute('href', `results?and=${setLink}`);
+    } else if (containerId === 'container_orsearch') {
+        searchButton.setAttribute('href', `results?or=${setLink}`);
+    } else if (containerId === 'container_andorsearch') {
+
+    }; 
 };
 
+// 選択されたタグをクリアする関数
+function clearSelectedTags(tags, inputField, searchButton) {
+    tags.forEach((tag) => {
+        tag.classList.remove('select_tag');
+    });
+
+    inputField.value = "";
+    searchButton.removeAttribute('href');
+};
+
+// 各コンテナに関数をセットアップ
+window.onload = function() {
+    setupTagToggle('container_andsearch');
+    setupTagToggle('container_orsearch');
+};

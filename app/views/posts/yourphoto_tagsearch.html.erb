@@ -1,8 +1,8 @@
 <% provide(:title, "詳細検索") %>
 
 <% content_for :head do %>
-  <meta name="turbo-visit-control" content="reload">
-  <%= javascript_import_module_tag "tagSearch" %>
+<meta name="turbo-visit-control" content="reload">
+<%= javascript_import_module_tag "tagSearch" %>
 <% end %>
 
 <input type="hidden" id="json_string" data-array="<%= @json_string %>">

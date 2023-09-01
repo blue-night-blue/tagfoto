@@ -25,9 +25,9 @@ Rails.application.routes.draw do
   get "/contact" , to: "top#contact"
 
   # 自分の写真
-  get "/yourphoto/tagsearch/" , to: "posts#yourphoto_tagsearch" , trailing_slash: true 
-  get "/yourphoto/tagsearch/:tags/" , to: "posts#yourphoto_tagsearch_result" , trailing_slash: true 
-  get "/yourphoto/tagsearch/:tags/:id" , to: "posts#edit"
+  get "/yourphoto/tagsearch/results/:id" , to: "posts#edit"
+  get "/yourphoto/tagsearch/" , to: "posts#yourphoto_tagsearch"  , trailing_slash: true
+  get "/yourphoto/tagsearch/results" , to: "posts#yourphoto_tagsearch_results"  , trailing_slash: true
 
   get "yourphoto/tag/:tag/" , to: "posts#yourphoto_tag"  , trailing_slash: true
   get "yourphoto/tag/:tag/:id" , to: "posts#edit"  

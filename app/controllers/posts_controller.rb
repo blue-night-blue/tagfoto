@@ -105,10 +105,7 @@ class PostsController < ApplicationController
   end
 
   def edit
-    if params[:tags]
-      tags = params[:tags].split("&")
-      @posts = Post.where(user_id:@current_user.id).where(tags.map { |tag| "FIND_IN_SET('#{tag}', tag)" }.join(" AND ") )
-    elsif params[:tag]
+    if params[:tag]
       @posts = Post.where(user_id:@current_user.id).where("tag LIKE ?","%#{params[:tag]}%")
     elsif params[:view]=="all"
       @posts = Post.where(user_id:@current_user.id)
@@ -171,13 +168,33 @@ class PostsController < ApplicationController
     @taggroups=Taggroup.where(user_id:@current_user.id).where(id:groups_in_tags_in_posts_array).order(:sort_order)
 
     posts = Post.where(user_id:@current_user.id)
-    @json_string = posts.map { |post| { id: post.id, tag: post.tag } }.to_json
-
+    @json_string = posts.pluck(:tag).reject(&:empty?).to_json
   end
 
-  def yourphoto_tagsearch_result
-    tags = params[:tags].split("&")
-    @posts = Post.where(user_id:@current_user.id).where(tags.map { |tag| "FIND_IN_SET('#{tag}', tag)" }.join(" AND ") ).order(created_at: :desc)
+  def yourphoto_tagsearch_results
+    if params[:and] 
+      @query = params[:and].sub("\/","")
+      and_query = URI.decode_www_form_component(@query)
+      and_array = and_query.split(" ")
+      @posts = Post.where(user_id:@current_user.id).where(and_array.map { |tag| "FIND_IN_SET('#{tag}', tag)" }.join(" AND ") ).order(created_at: :desc)
+      @and_url = "?and=" + @query.sub(" ","+")
+        if params[:id] 
+          @post=Post.find(params[:id])
+          @and_url = "?and=" + @query.sub(" ","+")
+          @taggroups=Taggroup.where(user_id:@current_user.id).order(:sort_order)
+          @tags =Tag.where(user_id:@current_user.id).order(:sort_order)
+          current_index = @posts.index(@post)
+          @recent_photo_post = @posts[current_index + 1] if current_index < @posts.length - 1
+          @old_photo_post = @posts[current_index - 1] if current_index > 0
+          render :edit
+        end
+
+    end
+
+    
+    
+    
+    
   end
    
   

@@ -1,14 +1,14 @@
-<% provide(:title, "タグ:AND[#{@query}]") %>
+<% provide(:title, @results_title) %>
 
 <%= link_to "タグ詳細検索に戻る", yourphoto_tagsearch_path , class:"button button_link" %>
 
-<h1>タグ:AND[<%= @query %>]</h1>
+<h1><%= @results_title %></h1>
 
 <div id="photo_index_container">
-<% @posts.each do |post| %>
+<% @posts.order(created_at: :desc).each do |post| %>
     <div id="<%= dom_id post %>" class="container_images">
     <% if post.images.attached? %>
-        <%= link_to "#{@and_url}&id=#{post.id}" do %>
+        <%= link_to "#{@back_url}&id=#{post.id}" do %>
             <%= image_tag post.images[0].variant(:thumb).processed.url %>
         <% end %>
     <% end %>

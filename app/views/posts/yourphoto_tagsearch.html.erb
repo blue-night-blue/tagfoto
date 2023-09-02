@@ -1,4 +1,4 @@
-<% provide(:title, "詳細検索") %>
+<% provide(:title, "タグ詳細検索") %>
 
 <% content_for :head do %>
 <meta name="turbo-visit-control" content="reload">
@@ -10,14 +10,12 @@
 <%= link_to "戻る", "../" , class:"button button_link" %>
 
 <h1>AND検索</h1>
-
 <div id="container_andsearch">
     <table id="tag_index_container">
         <tr>
             <th class="tag_index_group">グループ</th>
             <th class="tag_index_tag">タグ</th>
         </tr>
-
         <% @taggroups.each do |taggroup| %>
             <tr>
                 <td class="tag_index_group">
@@ -31,29 +29,56 @@
                 </td>
             </tr>
         <% end %>
-
         <tr>
             <td class="tag_index_group">
                 なし
             </td>
-
             <td class="tag_index_tag">
                 <% @tags_included_in_model.where(group:"").each do |tag| %>
                     <input type="button" value="<%= tag.tag %>" class="tag">
                 <% end %>
             </td>
         </tr>
-        
     </table>
-
     <input type="hidden" value="" class="selected_tag_inputted">
+    <%= link_to "AND検索" , "./" , class:"button button_search" %>
+    <button class="button button_clear">リセット</button>
+</div>
 
-    <div>
-        <%= link_to "AND検索" , "./" , class:"button button_search" %>
-    </div>
 
-    <div class="container_reset">
-        <button class="button button_clear">リセット</button>
-    </div>
 
+<h1>OR検索</h1>
+<div id="container_orsearch">
+    <table id="tag_index_container">
+        <tr>
+            <th class="tag_index_group">グループ</th>
+            <th class="tag_index_tag">タグ</th>
+        </tr>
+        <% @taggroups.each do |taggroup| %>
+            <tr>
+                <td class="tag_index_group">
+                    <%= taggroup.group %>
+                </td>
+
+                <td class="tag_index_tag">
+                    <% @tags_included_in_model.where(group:taggroup.id.to_s).each do |tag| %>
+                        <input type="button" value="<%= tag.tag %>" class="tag">
+                    <% end %>
+                </td>
+            </tr>
+        <% end %>
+        <tr>
+            <td class="tag_index_group">
+                なし
+            </td>
+            <td class="tag_index_tag">
+                <% @tags_included_in_model.where(group:"").each do |tag| %>
+                    <input type="button" value="<%= tag.tag %>" class="tag">
+                <% end %>
+            </td>
+        </tr>
+    </table>
+    <input type="hidden" value="" class="selected_tag_inputted">
+    <%= link_to "OR検索" , "./" , class:"button button_search" %>
+    <button class="button button_clear">リセット</button>
 </div>

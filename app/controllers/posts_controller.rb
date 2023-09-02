@@ -172,28 +172,38 @@ class PostsController < ApplicationController
   end
 
   def yourphoto_tagsearch_results
-    if params[:and] 
-      @query = params[:and].sub("\/","")
-      and_query = URI.decode_www_form_component(@query)
-      and_array = and_query.split(" ")
-      @posts = Post.where(user_id:@current_user.id).where(and_array.map { |tag| "FIND_IN_SET('#{tag}', tag)" }.join(" AND ") ).order(created_at: :desc)
-      @and_url = "?and=" + @query.sub(" ","+")
-        if params[:id] 
-          @post=Post.find(params[:id])
-          @and_url = "?and=" + @query.sub(" ","+")
-          @taggroups=Taggroup.where(user_id:@current_user.id).order(:sort_order)
-          @tags =Tag.where(user_id:@current_user.id).order(:sort_order)
-          current_index = @posts.index(@post)
-          @recent_photo_post = @posts[current_index + 1] if current_index < @posts.length - 1
-          @old_photo_post = @posts[current_index - 1] if current_index > 0
-          render :edit
-        end
-
+    if params[:and] || params[:or]
+      @query = params[:and] || params[:or] 
+    else
+      flash[:notice] = "無効なURLです。"
+      redirect_to yourphoto_tagsearch_path
+      return
     end
 
+    query_array = URI.decode_www_form_component(@query).split(" ")
     
-    
-    
+    if params[:and]
+      @posts = Post.where(user_id:@current_user.id).where(query_array.map { |tag| "FIND_IN_SET('#{tag}', tag)" }.join(" AND ") )
+      @back_url = "?and=" + @query.sub(" ","+")
+      @results_title = "タグ:AND[#{@query}]"
+    elsif params[:or]
+      @posts = Post.where(user_id:@current_user.id).where(
+                          query_array.map { |tag| "tag LIKE ?" }.join(" OR "),
+                          *query_array.map { |tag| "%#{tag}%" }
+                          )
+      @back_url = "?or=" + @query.sub(" ","+")
+      @results_title = "タグ:OR[#{@query}]"
+    end
+
+    if params[:id] 
+      @post=Post.find(params[:id])
+      @taggroups=Taggroup.where(user_id:@current_user.id).order(:sort_order)
+      @tags =Tag.where(user_id:@current_user.id).order(:sort_order)
+      current_index = @posts.index(@post)
+      @recent_photo_post = @posts[current_index + 1] if current_index < @posts.length - 1
+      @old_photo_post = @posts[current_index - 1] if current_index > 0
+      render :edit
+    end
     
   end
    

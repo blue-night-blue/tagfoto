@@ -172,27 +172,41 @@ class PostsController < ApplicationController
   end
 
   def yourphoto_tagsearch_results
-    if params[:and] || params[:or]
-      @query = params[:and] || params[:or] 
+
+    if params[:and] && params[:or]
+      and_query = params[:and]
+      or_query = params[:or]
+
+      and_query_array = URI.decode_www_form_component(and_query).split(" ")
+      or_query_array = URI.decode_www_form_component(or_query).split(" ")
+    
+      @posts = Post.where(user_id:@current_user.id).where(
+                and_query_array.map { |tag| "FIND_IN_SET('#{tag}', tag)" }.join(" AND ") 
+                ).where(
+                or_query_array.map { |tag| "tag LIKE ?" }.join(" OR "),
+                *or_query_array.map { |tag| "%#{tag}%" }
+                )
+      @back_url = "?and=" + and_query.sub(" ","+") + "&or=" + or_query.sub(" ","+")
+      @results_title = "タグ:AND[#{and_query}],OR[#{or_query}]"
+    elsif params[:and]
+      query = params[:and]
+      query_array = URI.decode_www_form_component(query).split(" ")
+      @posts = Post.where(user_id:@current_user.id).where(query_array.map { |tag| "FIND_IN_SET('#{tag}', tag)" }.join(" AND ") )
+      @back_url = "?and=" + query.sub(" ","+")
+      @results_title = "タグ:AND[#{query}]"
+    elsif params[:or]
+      query = params[:or]
+      query_array = URI.decode_www_form_component(query).split(" ")
+      @posts = Post.where(user_id:@current_user.id).where(
+                query_array.map { |tag| "tag LIKE ?" }.join(" OR "),
+                *query_array.map { |tag| "%#{tag}%" }
+                )
+      @back_url = "?or=" + query.sub(" ","+")
+      @results_title = "タグ:OR[#{query}]"
     else
       flash[:notice] = "無効なURLです。"
       redirect_to yourphoto_tagsearch_path
       return
-    end
-
-    query_array = URI.decode_www_form_component(@query).split(" ")
-    
-    if params[:and]
-      @posts = Post.where(user_id:@current_user.id).where(query_array.map { |tag| "FIND_IN_SET('#{tag}', tag)" }.join(" AND ") )
-      @back_url = "?and=" + @query.sub(" ","+")
-      @results_title = "タグ:AND[#{@query}]"
-    elsif params[:or]
-      @posts = Post.where(user_id:@current_user.id).where(
-                          query_array.map { |tag| "tag LIKE ?" }.join(" OR "),
-                          *query_array.map { |tag| "%#{tag}%" }
-                          )
-      @back_url = "?or=" + @query.sub(" ","+")
-      @results_title = "タグ:OR[#{@query}]"
     end
 
     if params[:id] 
@@ -204,7 +218,7 @@ class PostsController < ApplicationController
       @old_photo_post = @posts[current_index - 1] if current_index > 0
       render :edit
     end
-    
+   
   end
    
   

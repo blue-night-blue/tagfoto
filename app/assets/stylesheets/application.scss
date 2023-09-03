@@ -469,7 +469,7 @@ footer{
 
 // アップロード 兼 画像一覧 兼 画像編集
 
-#tag_index_container{
+.tag_index_container{
     width: 100%;
 
     th,td{
@@ -517,9 +517,14 @@ footer{
     }
 }
 
-.container_reset{
-    margin-top: 50px;
+.complex_button{
+    margin-top: 30px;
 }
+
+
+
+
+
 
 
 

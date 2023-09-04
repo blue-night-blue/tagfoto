@@ -2,7 +2,9 @@
 
 <%= link_to "タグ詳細検索に戻る", yourphoto_tagsearch_path , class:"button button_link" %>
 
-<h1><%= @results_title %></h1>
+<h1>検索結果</h1>
+
+<p><%= @results_title %></p>
 
 <div id="photo_index_container">
 <% @posts.order(created_at: :desc).each do |post| %>

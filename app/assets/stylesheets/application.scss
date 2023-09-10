@@ -526,6 +526,25 @@ footer{
 
 
 
+// 画像一覧 兼 一括タグ付け
+
+.tag{
+    background-color: $color4;
+}
+
+.select_tag,
+.tag.select_tag{
+    background-color: $color1;
+}
+
+.not_exist,
+.tag.not_exist{
+    background-color: $bg;
+    color: $text_lignter;
+    border: 1px solid $text_lignter;
+}
+
+
 
 
 
@@ -695,9 +714,10 @@ footer{
     }
 }
 
-.select_tag{
-    background-color: $color3;
-}
+
+
+
+
 
     
     

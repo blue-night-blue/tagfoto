@@ -1,6 +1,5 @@
 const array = JSON.parse(document.getElementById('json_string').getAttribute("data-array"));
 let currentArray = [...array];
-console.log(currentArray);
 
 window.onload = ()=> {
     const containerAnd = document.getElementById('container_and');
@@ -21,44 +20,64 @@ window.onload = ()=> {
     });
 
     clearButton.addEventListener('click', () => { 
-        clearSelectedTags(andTags, andSelectedTagInputted, searchButton);
-        clearSelectedTags(orTags, orSelectedTagInputted, searchButton);
-        console.log(currentArray);
+        clearinputTags(andTags, andSelectedTagInputted, searchButton);
+        clearinputTags(orTags, orSelectedTagInputted, searchButton);
     });
 
-    // ブラウザバックした際に隠れinputをクリアする
+    // ブラウザバックした際に隠れinputをクリア
     window.addEventListener('pageshow', ()=> {
         andSelectedTagInputted.value = "";
         orSelectedTagInputted.value = "";
     });    
 };
 
-// タグの選択状態を切り替え、リンクをセットする関数
+// AND検索の、タグの選択状態切り替え/リンクをセット
 function selectTagToggleAnd(tag, inputField, searchButton) {
-    if(tag.classList.contains('select_tag') || tag.classList.contains('not_exist') ){
+    // 選択したタグを解除する際にcurrentArrayを再設定
+    if(tag.classList.contains('select_tag') ){
+        tag.classList.remove('select_tag');
+        tag.classList.add('select_tag_off');
+        const selectTags = document.getElementById('container_and').querySelectorAll('.select_tag');
+        if(selectTags.length !== 0){
+            currentArray = array.filter(item => {
+                const selectValues = Array.from(selectTags, selectTag => selectTag.value);
+                return selectValues.every(tag => item.includes(tag));
+            });
+        }else{
+            currentArray = array;
+        };
+    // 押せないタグを押した場合は、処理を終了
+    }else if(tag.classList.contains('not_exist') ){
         return;
-    }
-
-    currentArray = currentArray.filter(item => item.includes(tag.value));
+    // 押せるタグを押した場合は、currentArrayを、押したタグでフィルター
+    }else{
+        currentArray = currentArray.filter(item => item.includes(tag.value));
+    };
 
     if(currentArray.length!==0){
-        tag.classList.add('select_tag'); 
+        // currentArrayに含まれないタグの色を薄くする
         const otherAndTags = document.getElementById('container_and').querySelectorAll('.tag');
-        console.log(currentArray);
- 
         otherAndTags.forEach((otherAndTag) => {
             if(!currentArray.some( (item)=>item.includes(otherAndTag.value) ) ){
                 otherAndTag.classList.add('not_exist');
+            }else{
+                otherAndTag.classList.remove('not_exist');
             };
         });
 
         const tagValue = encodeURIComponent(tag.value);
-        const selectedTags = inputField.value.split('+');
+        const inputTags = inputField.value.split('+');
 
-        if (!selectedTags.includes(tagValue)) {
+        if (!inputTags.includes(tagValue)) {
             inputField.value += tagValue + "+";
         } else {
             inputField.value = inputField.value.replace(`${tagValue}+`, "");
+        };
+
+        if(tag.classList.contains('select_tag_off') ){
+            tag.classList.remove('select_tag_off'); 
+        }else{
+            tag.classList.add('select_tag'); 
         };
 
         const setLinkAnd = document.getElementById('container_and').querySelector('.selected_tag_inputted').value.replace(/\+$/, "");
@@ -76,11 +95,12 @@ function selectTagToggleAnd(tag, inputField, searchButton) {
     };
 };
 
+// OR検索の、タグの選択状態切り替え/リンクをセット
 function selectTagToggleOr(tag, inputField, searchButton) {
     const tagValue = encodeURIComponent(tag.value);
-    const selectedTags = inputField.value.split('+');
+    const inputTags = inputField.value.split('+');
 
-    if (!selectedTags.includes(tagValue)) {
+    if (!inputTags.includes(tagValue)) {
         inputField.value += tagValue + "+";
     } else {
         inputField.value = inputField.value.replace(`${tagValue}+`, "");
@@ -102,8 +122,8 @@ function selectTagToggleOr(tag, inputField, searchButton) {
     };
 };
 
-// 選択されたタグ、リンクをクリアする関数
-function clearSelectedTags(tags, inputField, searchButton) {
+// 選択されたタグ、リンクをクリア
+function clearinputTags(tags, inputField, searchButton) {
     tags.forEach((tag) => {
         tag.classList.remove('select_tag');
         tag.classList.remove('not_exist');

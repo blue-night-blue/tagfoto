@@ -5,6 +5,11 @@ orbs:
   aws-ecs: circleci/aws-ecs@3.2.0
   aws-cli: circleci/aws-cli@3.1.1
 
+executors:
+  ubuntu-executor:
+    machine:
+      image: ubuntu-2004:current  
+
 workflows:
 
   rails:
@@ -12,6 +17,7 @@ workflows:
       - aws-ecr/build-and-push-image:
           repo: '${MY_APP_PREFIX}-rails'
           tag: '${CIRCLE_SHA1}'
+          executor: ubuntu-executor
       - aws-ecs/deploy-service-update:
           requires:
             - aws-ecr/build-and-push-image
@@ -24,6 +30,7 @@ workflows:
       - aws-ecr/build-and-push-image:
           repo: '${MY_APP_PREFIX}-nginx'
           tag: '${CIRCLE_SHA1}'
+          executor: ubuntu-executor
       - aws-ecs/deploy-service-update:
           requires:
             - aws-ecr/build-and-push-image

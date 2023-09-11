@@ -8,6 +8,10 @@
 
   <h1><%= @user.name %>のタグ</h1>
 
+    <div class="container_search_link">
+        <%= link_to "詳細検索(AND,OR検索)",approved_photo_tagsearch_path,class:"button button_search" %>
+    </div>
+
   <table class="tag_index_container">
       <tr>
           <th class="tag_index_group">グループ</th>

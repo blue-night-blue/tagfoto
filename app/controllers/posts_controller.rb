@@ -221,7 +221,7 @@ class PostsController < ApplicationController
    
   end
    
-  
+ 
 
  
   
@@ -324,7 +324,93 @@ class PostsController < ApplicationController
     end
   end
 
- 
+  def approved_photo_tagsearch
+    @user=User.find_by(name:params[:user_name])
+    @approved_user = ApprovedUser.find_by(user_id:@user.id, approved_user_id:@current_user.id)
+    if  @user.present? && @approved_user.present?
+
+      tags_in_posts_array = Post.tags_in_posts(@user)
+      @tags_included_in_model=Tag.where(user_id:@user.id).where(tag: tags_in_posts_array).order(:sort_order)
+
+      groups_in_tags_in_posts_array = @tags_included_in_model.pluck(:group).reject(&:empty?)
+      @taggroups=Taggroup.where(user_id:@user.id).where(id:groups_in_tags_in_posts_array).order(:sort_order)
+
+      @posts = Post.where(user_id:@user.id).limit(3).order(created_at: :desc) 
+      
+      @secret_phrase = SecretPhrase.find_by(user_id:@user.id) 
+
+      posts = Post.where(user_id:@user.id)
+      @json_string = posts.pluck(:tag).reject(&:empty?).to_json
+    else
+      flash[:notice]="当該のユーザーが存在しない、もしくは権限がありません"
+      redirect_to yourphoto_path
+    end
+
+  end
+
+  def approved_photo_tagsearch_results
+    @user=User.find_by(name:params[:user_name])
+    @approved_user = ApprovedUser.find_by(user_id:@user.id, approved_user_id:@current_user.id)
+
+    if  @user.present? && @approved_user.present?
+      if params[:and] && params[:or]
+        and_query = params[:and]
+        or_query = params[:or]
+
+        and_query_array = URI.decode_www_form_component(and_query).split(" ")
+        or_query_array = URI.decode_www_form_component(or_query).split(" ")
+      
+        @posts = Post.where(user_id:@user.id).where(
+                  and_query_array.map { |tag| "FIND_IN_SET('#{tag}', tag)" }.join(" AND ") 
+                  ).where(
+                  or_query_array.map { |tag| "tag LIKE ?" }.join(" OR "),
+                  *or_query_array.map { |tag| "%#{tag}%" }
+                  )
+        @back_url = "?and=" + and_query.sub(" ","+") + "&or=" + or_query.sub(" ","+")
+        @results_title = "タグ:AND[#{and_query}],OR[#{or_query}]"
+      elsif params[:and]
+        query = params[:and]
+        query_array = URI.decode_www_form_component(query).split(" ")
+        @posts = Post.where(user_id:@user.id).where(query_array.map { |tag| "FIND_IN_SET('#{tag}', tag)" }.join(" AND ") )
+        @back_url = "?and=" + query.sub(" ","+")
+        @results_title = "タグ:AND[#{query}]"
+      elsif params[:or]
+        query = params[:or]
+        query_array = URI.decode_www_form_component(query).split(" ")
+        @posts = Post.where(user_id:@user.id).where(
+                  query_array.map { |tag| "tag LIKE ?" }.join(" OR "),
+                  *query_array.map { |tag| "%#{tag}%" }
+                  )
+        @back_url = "?or=" + query.sub(" ","+")
+        @results_title = "タグ:OR[#{query}]"
+      else
+        flash[:notice] = "無効なURLです。"
+        redirect_to approved_photo_tagsearch_path
+        return
+      end
+
+      if params[:id] 
+        @post=Post.find(params[:id])
+        current_index = @posts.index(@post)
+        @recent_photo_post = @posts[current_index + 1] if current_index < @posts.length - 1
+        @old_photo_post = @posts[current_index - 1] if current_index > 0
+        tags_in_posts_array = Post.tags_in_posts(@user)
+        @tags_included_in_model=Tag.where(user_id:@user.id).where(tag: tags_in_posts_array).order(:sort_order)
+        groups_in_tags_in_posts_array = @tags_included_in_model.pluck(:group).reject(&:empty?)
+        @taggroups=Taggroup.where(user_id:@user.id).where(id:groups_in_tags_in_posts_array).order(:sort_order)
+        render :approved_show
+      end
+  
+    else
+      flash[:notice]="当該のユーザーが存在しない、もしくは権限がありません"
+      redirect_to yourphoto_path
+    end
+  
+  end
+   
+  
+
+
   
 
   

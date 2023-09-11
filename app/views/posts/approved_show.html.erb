@@ -6,20 +6,28 @@
 <% end %>
 
 <div class="container_post_navi">
-  <%= link_to "一覧に戻る", "./" , class:"button button_link" %>
+  <% if @back_url %>
+    <%= link_to "検索結果に戻る", "#{@back_url}" , class:"button button_link" %>
+  <% else %>
+    <%= link_to "一覧に戻る", "./" , class:"button button_link" %>
+  <% end %>
+  
   <div>
     <% if @recent_photo_post %>
-      <%= link_to "./#{@recent_photo_post.id}", class:"recent_photo" do %>
-        <i class="fa-solid fa-right-long fa-flip-horizontal"></i>
-        <span>new</span>
+      <% link_text = content_tag(:i, "", class: "fa-solid fa-right-long fa-flip-horizontal") + content_tag(:span, "new") %>
+      <% url = @back_url ? "#{@back_url}&id=#{@recent_photo_post.id}" : "./#{@recent_photo_post.id}" %>
+      <%= link_to url, class: "recent_photo" do %>
+        <%= link_text %>
       <% end %>
     <% end %>
   </div>
+
   <div>
     <% if @old_photo_post %>
-      <%= link_to "./#{@old_photo_post.id}", class:"old_photo" do %>
-        <span>old</span>
-        <i class="fa-solid fa-right-long"></i>
+      <% link_text = content_tag(:i, "", class: "fa-solid fa-right-long") + content_tag(:span, "old") %>
+      <% url = @back_url ? "#{@back_url}&id=#{@old_photo_post.id}" : "./#{@old_photo_post.id}" %>
+      <%= link_to url, class: "old_photo" do %>
+        <%= link_text %>
       <% end %>
     <% end %>
   </div>

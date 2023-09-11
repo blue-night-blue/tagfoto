@@ -37,6 +37,10 @@ Rails.application.routes.draw do
   get "yourphoto/:view/:id" , to: "posts#edit"  
 
   # 閲覧を許可された写真
+  get "/photo/:user_name/tagsearch/results/:id" , to: "posts#approved_show"
+  get "/photo/:user_name/tagsearch/" , to: "posts#approved_photo_tagsearch", as: :approved_photo_tagsearch   , trailing_slash: true
+  get "/photo/:user_name/tagsearch/results" , to: "posts#approved_photo_tagsearch_results", as: :approved_photo_tagsearch_results   , trailing_slash: true
+
   get "/photo/:user_name/tag/:tag/" , to: "posts#approved_photo_tag" , trailing_slash: true  
   get "/photo/:user_name/tag/:tag/:id" , to: "posts#approved_show"
 

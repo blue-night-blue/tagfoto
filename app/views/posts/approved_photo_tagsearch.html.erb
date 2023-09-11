@@ -1,0 +1,93 @@
+<% provide(:title, "タグ詳細検索(#{@user.name})") %>
+
+<% content_for :head do %>
+    <meta name="turbo-visit-control" content="reload">
+    <%= javascript_import_module_tag "tagSearch" %>
+<% end %>
+
+<input type="hidden" id="json_string" data-array="<%= @json_string %>">
+
+<%= link_to "戻る", "../" , class:"button button_link" %>
+
+<h1>使い方</h1>
+<ul>
+    <li>それぞれの箇所でボタンを押して、一番下の検索ボタンを押してください。</li>
+    <li>ANDは、ボタンを押したタグの全てを含む投稿を検索します。</li>
+    <li>ORは、ボタンを押したタグのいずれかを含む投稿を検索します。(たくさん引っかかります)</li>
+    <li>ANDとORを掛け合わせて検索することもできます。</li>
+</ul>
+
+
+<h1>AND</h1>
+<div id="container_and">
+    <table class="tag_index_container">
+        <tr>
+            <th class="tag_index_group">グループ</th>
+            <th class="tag_index_tag">タグ</th>
+        </tr>
+        <% @taggroups.each do |taggroup| %>
+            <tr>
+                <td class="tag_index_group">
+                    <%= taggroup.group %>
+                </td>
+
+                <td class="tag_index_tag">
+                    <% @tags_included_in_model.where(group:taggroup.id.to_s).each do |tag| %>
+                        <input type="button" value="<%= tag.tag %>" class="tag">
+                    <% end %>
+                </td>
+            </tr>
+        <% end %>
+        <tr>
+            <td class="tag_index_group">
+                なし
+            </td>
+            <td class="tag_index_tag">
+                <% @tags_included_in_model.where(group:"").each do |tag| %>
+                    <input type="button" value="<%= tag.tag %>" class="tag">
+                <% end %>
+            </td>
+        </tr>
+    </table>
+    <input type="hidden" value="" class="selected_tag_inputted">
+</div>
+
+
+<h1>OR</h1>
+<div id="container_or">
+    <table class="tag_index_container">
+        <tr>
+            <th class="tag_index_group">グループ</th>
+            <th class="tag_index_tag">タグ</th>
+        </tr>
+        <% @taggroups.each do |taggroup| %>
+            <tr>
+                <td class="tag_index_group">
+                    <%= taggroup.group %>
+                </td>
+
+                <td class="tag_index_tag">
+                    <% @tags_included_in_model.where(group:taggroup.id.to_s).each do |tag| %>
+                        <input type="button" value="<%= tag.tag %>" class="tag">
+                    <% end %>
+                </td>
+            </tr>
+        <% end %>
+        <tr>
+            <td class="tag_index_group">
+                なし
+            </td>
+            <td class="tag_index_tag">
+                <% @tags_included_in_model.where(group:"").each do |tag| %>
+                    <input type="button" value="<%= tag.tag %>" class="tag">
+                <% end %>
+            </td>
+        </tr>
+    </table>
+    <input type="hidden" value="" class="selected_tag_inputted">
+</div>
+
+<div class="complex_button">
+    <a href="" class="button button_search">検索</a>
+    <button class="button button_clear">リセット</button>
+</div>

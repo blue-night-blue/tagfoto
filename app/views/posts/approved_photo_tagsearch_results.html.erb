@@ -1,0 +1,20 @@
+<% provide(:title, "#{@user.name}の検索結果(#{@results_title})") %>
+
+<%= link_to "タグ詳細検索に戻る", approved_photo_tagsearch_path , class:"button button_link" %>
+
+<h1><%= @user.name %>の検索結果</h1>
+
+<p><%= @results_title %></p>
+
+<div id="photo_index_container">
+<% @posts.order(created_at: :desc).each do |post| %>
+    <div id="<%= dom_id post %>" class="container_images">
+    <% if post.images.attached? %>
+        <%= link_to "#{@back_url}&id=#{post.id}" do %>
+            <%= image_tag post.images[0].variant(:thumb).processed.url %>
+        <% end %>
+    <% end %>
+    </div>
+<% end %>
+</div>
+ 

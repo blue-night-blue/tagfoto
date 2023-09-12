@@ -1,0 +1,33 @@
+<% provide(:title, "一括削除") %>
+
+<% content_for :head do %>
+  <meta name="turbo-visit-control" content="reload">
+  <%= javascript_import_module_tag "selectAndDelete" %>
+<% end %>
+
+<h1>一括削除</h1>
+
+<button id="clear_input_tag" class="button button_clear">画像選択の解除</button>
+
+<div id="posts">
+  <%= form_with url:multiple_delete_path do |form| %>
+    <div>
+      <%= form.submit "選択した画像を削除する" ,data: { turbo_confirm: "本当に削除しますか？" } %>
+    </div>
+
+    <div id="photo_index_container">
+      <% @posts.each do |post| %>
+        <div id="<%= dom_id post %>" class="container_images container_select_and_delete">
+          <% if post.images.attached? %>
+              <%= image_tag post.images[0].variant(:thumb).processed.url %>
+              <%= check_box_tag "deletes[#{ post.id }]", post.id %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    
+  <% end %>
+</div>
+
+
+

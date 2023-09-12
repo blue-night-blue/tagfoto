@@ -249,7 +249,9 @@ iframe{
     height: 1200px;
 }
 
-
+.hidden{
+    display: none;
+}
 
 
 
@@ -708,15 +710,38 @@ footer{
                 border: none;
             }
         }
-        .select_image{
-            border: 5px $color2 solid;
-        } 
     }
 }
 
 
 
 
+
+
+
+// 一括タグ付け 兼 一括削除
+
+.select_image{
+    border: 5px $color2 solid;
+} 
+
+
+
+
+
+
+
+// 一括削除
+
+.container_select_and_delete{
+    height: 150px;
+    margin: 3px;
+    box-sizing: border-box;
+
+    input{
+        display: none;
+    }
+}
 
 
     

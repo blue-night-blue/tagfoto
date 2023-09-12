@@ -433,6 +433,28 @@ class PostsController < ApplicationController
     end
     redirect_to tagto_path 
   end
+
+  
+  
+  
+   
+  
+
+  # 一括削除 
+  
+  def select_and_delete
+    @posts = Post.where(user_id:@current_user.id).order(created_at: :desc)
+  end
+
+  def multiple_delete
+    if params[:deletes].present?
+      delete_list = params[:deletes].keys
+      ActiveRecord::Base.transaction do
+        Post.destroy(delete_list)
+      end
+    end
+    redirect_to select_and_delete_path
+  end
    
   
 

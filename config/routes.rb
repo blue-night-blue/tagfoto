@@ -36,6 +36,9 @@ Rails.application.routes.draw do
   get "yourphoto/nothing_tag/" , to: "posts#yourphoto_nothing_tag"  , trailing_slash: true
   get "yourphoto/:view/:id" , to: "posts#edit"  
 
+  get "/yourphoto/select_and_delete" , to: "posts#select_and_delete" ,as: :select_and_delete
+  post "/multiple_delete" , to: "posts#multiple_delete"  
+
   # 閲覧を許可された写真
   get "/photo/:user_name/tagsearch/results/:id" , to: "posts#approved_show"
   get "/photo/:user_name/tagsearch/" , to: "posts#approved_photo_tagsearch", as: :approved_photo_tagsearch   , trailing_slash: true

@@ -1,4 +1,4 @@
-const images=document.querySelectorAll('.container_images');
+const images=document.querySelectorAll('.container_image_and_tag');
 const clear=document.getElementById('clear_input_tag');
 
 window.onload=function(){

@@ -15,12 +15,16 @@
       <%= form.submit "選択した画像を削除する" ,data: { turbo_confirm: "本当に削除しますか？" } %>
     </div>
 
-    <div id="photo_index_container">
+    <div id="container_image_and_tag_all">
       <% @posts.each do |post| %>
-        <div id="<%= dom_id post %>" class="container_images container_select_and_delete">
+        <div id="<%= dom_id post %>" class="container_image_and_tag">
           <% if post.images.attached? %>
+            <div class="container_image">
               <%= image_tag post.images[0].variant(:thumb).processed.url %>
+            </div>
+            <div class="container_checkbox">
               <%= check_box_tag "deletes[#{ post.id }]", post.id %>
+            </div>
           <% end %>
         </div>
       <% end %>

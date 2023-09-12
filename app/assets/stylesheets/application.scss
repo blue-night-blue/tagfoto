@@ -671,7 +671,7 @@ footer{
 
 
 
-// 一括タグ付け
+// 一括タグ付け 兼 一括削除
 
 #container_input_tag{
     margin: 1em 0;
@@ -697,7 +697,11 @@ footer{
             .container_image{
                 text-align: center;
             }
-            
+
+            .container_checkbox{
+                display: none;
+            } 
+
             img{
                 width: 100%;
             } 
@@ -710,6 +714,10 @@ footer{
                 border: none;
             }
         }
+        
+        .select_image{
+            border: 5px $color2 solid;
+        } 
     }
 }
 
@@ -719,11 +727,7 @@ footer{
 
 
 
-// 一括タグ付け 兼 一括削除
 
-.select_image{
-    border: 5px $color2 solid;
-} 
 
 
 

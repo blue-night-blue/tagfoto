@@ -58,6 +58,7 @@ gem 'nokogiri'
 gem "unicorn"
 gem "mysql2"
 gem "dartsass-rails", "~> 0.5.0"
+gem "ruby-vips"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

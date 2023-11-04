@@ -473,18 +473,25 @@ class PostsController < ApplicationController
       params.require(:post).permit(:comment, :tag)
     end
     
-    def image_resize(image,use_fill)
-      chain = ImageProcessing::MiniMagick.source(image.tempfile)
+    def image_resize(image, use_fill)
+      pipeline = ImageProcessing::Vips.source(image)
     
       if use_fill
-        chain = chain.resize_to_fill(1024, 1024)
+        pipeline = pipeline.resize_to_fill(1024, 1024)
       else
-        chain = chain.resize_to_limit(1024, 768)
+        pipeline = pipeline.resize_to_limit(1024, 768)
       end
     
-      image.tempfile = chain.strip.call
+      pipeline = pipeline.saver(strip: true)
+      image.tempfile = pipeline.call
       image
     end
+    
+    
+    
+    
+    
+    
     
     
    

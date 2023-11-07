@@ -70,7 +70,8 @@ Rails.application.configure do
 
   
   config.logger = Logger.new(STDOUT)
-  
+  config.hosts << "tagfoto.bluenight.blue"
+  config.web_console.allowed_ips = '0.0.0.0/0'  
   
   
 end

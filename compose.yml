@@ -1,3 +1,11 @@
+# アプリごとにやること一覧。
+
+# ここのwebのポート3箇所
+# ここのドメイン2箇所
+# Procfile.devのポート1箇所
+# puma.rbのポート2箇所
+# master.keyをローカルからコピペ
+
 services:
   web:
     build: .
@@ -14,9 +22,9 @@ services:
       DB_HOST: db
       DB_USERNAME: root
       DB_PASSWORD: password
-      VIRTUAL_HOST: tagfoto.bluenight.blue
+      VIRTUAL_HOST: tagfoto.bnbnb.link
       VIRTUAL_PORT: 3000 
-      LETSENCRYPT_HOST: tagfoto.bluenight.blue
+      LETSENCRYPT_HOST: tagfoto.bnbnb.link
       LETSENCRYPT_EMAIL: pulpfictiontaxidriver@yahoo.co.jp
 
   db:
@@ -27,7 +35,7 @@ services:
       MYSQL_ROOT_HOST: '%'
       TZ: "Asia/Tokyo"
     ports:
-      - 3306:3306
+      - 3307:3307
     command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
     volumes:
       - db-volume:/var/lib/mysql
@@ -38,6 +46,6 @@ volumes:
 networks:
   default:
     external:
-      name: kagoya_ssl_network
+      name: shared
     
 

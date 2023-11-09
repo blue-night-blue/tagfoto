@@ -149,7 +149,7 @@ class PostsController < ApplicationController
   end
 
   def yourphoto_all
-    @posts = Post.where(user_id:@current_user.id).order(created_at: :desc)
+    @posts = Post.where(user_id:@current_user.id).order(created_at: :desc).page params[:page]
   end
 
   def yourphoto_tag
@@ -259,7 +259,7 @@ class PostsController < ApplicationController
   def approved_photo_all
     @user=User.find_by(name:params[:user_name])
     if  @user && ApprovedUser.find_by(user_id:@user.id, approved_user_id:@current_user.id).present?
-      @posts = Post.where(user_id:@user.id).order(created_at: :desc)
+      @posts = Post.where(user_id:@user.id).order(created_at: :desc).page params[:page]
     else
       flash[:notice]="当該のユーザーが存在しない、もしくは権限がありません"
       redirect_to yourphoto_path
@@ -419,7 +419,7 @@ class PostsController < ApplicationController
   # 一括タグ付け 
   
   def tagto
-    @posts = Post.where(user_id:@current_user.id).order(created_at: :desc)
+    @posts = Post.where(user_id:@current_user.id).order(created_at: :desc).page params[:page]
     @taggroups=Taggroup.where(user_id:@current_user.id).order(:sort_order)
     @tags =Tag.where(user_id:@current_user.id).order(:sort_order)
   end

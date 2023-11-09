@@ -38,5 +38,3 @@
 !/app/assets/builds/.keep
 
 # ここから俺
-/app/views/top/about.html.erb
-/app/views/top/updates.html.erb

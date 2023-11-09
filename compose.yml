@@ -4,6 +4,7 @@
 # ここのドメイン2箇所
 # Procfile.devのポート1箇所
 # puma.rbのポート2箇所
+# development.rbのドメイン1箇所
 # master.keyをローカルからコピペ
 
 services:

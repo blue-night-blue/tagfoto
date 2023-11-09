@@ -93,7 +93,7 @@ class PostsController < ApplicationController
     end
 
     flash[:success]="更新しました。"
-    redirect_to yourphoto_path
+    redirect_to request.referer
   end
 
   def destroy

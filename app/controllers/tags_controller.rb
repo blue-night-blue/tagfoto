@@ -26,7 +26,7 @@ class TagsController < ApplicationController
     @tag = Tag.new
     @search = Tag.where(user_id:@current_user.id).ransack(params[:q])
     @search.sorts = 'id desc' if @search.sorts.empty?
-    @tags = @search.result.page(params[:page])
+    @tags = @search.result
   end 
 
   def new

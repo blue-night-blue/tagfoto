@@ -75,7 +75,29 @@ class TagsController < ApplicationController
 
 
   
+ 
   
+  require 'csv'
+
+  def export_to_csv
+    tags = Tag.where(user_id: @current_user)
+    attributes = %w[tag sort_order group] 
+    bom ="\xEF\xBB\xBF"
+  
+    csv_data = CSV.generate do |csv|
+      csv << attributes
+      tags.each do |tag|
+        csv << tag.attributes.values_at(*attributes).map { |attr| attr.to_s }
+      end
+    end
+  
+    send_data bom + csv_data, filename: "tags.csv", type: "text/csv", disposition: "attachment"
+  end
+  
+
+
+
+
   
   
 

@@ -58,6 +58,7 @@ Rails.application.routes.draw do
   post "/create_multiple_posts" , to: "posts#create_multiple_posts"  
   get "/edittaggroup" , to: "taggroups#index"  
   post "/secret_message_access_toggle/:user_id" , to: "approved_users#secret_message_access_toggle"  
+  get "/export_to_csv" , to: "tags#export_to_csv"  
 
 
   

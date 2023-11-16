@@ -55,6 +55,10 @@
   <%= turbo_frame_tag "tags" do %>
     <%= render @tags %>
   <% end %>
-  
+
+  <h1>エクスポート</h1>
+
+  <%= link_to "csvで保存" , export_to_csv_path , class:"button" %>
+
 </div>
 

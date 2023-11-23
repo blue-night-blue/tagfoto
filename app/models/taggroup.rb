@@ -2,7 +2,7 @@ class Taggroup < ApplicationRecord
     belongs_to :user
     
     def self.ransackable_attributes(auth_object = nil)
-        ["created_at", "group", "id", "sort_order", "updated_at", "user_id"]
+        ["created_at", "group", "id", "sort_order", "updated_at", "user_id", "number"]
     end    
 
     VALID_TAG_REGEX = /\A[^\[\]\/\\"$%&'=~|`{*}<>?!^;:.,]*\z/i

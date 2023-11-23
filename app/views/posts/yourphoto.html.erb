@@ -19,7 +19,7 @@
             </td>
 
             <td class="tag_index_tag">
-                <% @tags_included_in_model.where(group:taggroup.id.to_s).each do |tag| %>
+                <% @tags_included_in_model.where(group_number:taggroup.number).each do |tag| %>
                     <%= link_to "#{tag.tag}", "./tag/#{tag.tag}/", class:"button button_tag" %>
                 <% end %>
             </td>
@@ -32,7 +32,7 @@
         </td>
 
         <td class="tag_index_tag">
-            <% @tags_included_in_model.where(group:"").each do |tag| %>
+            <% @tags_included_in_model.where(group_number:"").each do |tag| %>
                 <%= link_to "#{tag.tag}", "./tag/#{tag.tag}/", class:"button button_tag" %>
             <% end %>
         </td>

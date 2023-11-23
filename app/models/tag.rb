@@ -2,7 +2,7 @@ class Tag < ApplicationRecord
     belongs_to :user
     
     def self.ransackable_attributes(auth_object = nil)
-        ["created_at", "group", "id", "sort_order", "tag", "updated_at", "user_id"]
+        ["created_at", "group_number", "id", "sort_order", "tag", "updated_at", "user_id"]
     end    
     
     

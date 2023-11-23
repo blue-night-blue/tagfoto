@@ -39,8 +39,8 @@
     <%= search_form_for @search do |f| %>
       <%= f.label :tag_cont, "タグ" %>
       <%= f.search_field :tag_cont, class:"table_tag" %>
-      <%= f.label :group_cont, "グループ" %> 
-      <%= f.select :group_cont, options_from_collection_for_select(Taggroup.where(user_id:@current_user.id).order(:sort_order), :number, :group), include_blank: true %>
+      <%= f.label :group_number_cont, "グループ" %> 
+      <%= f.select :group_number_cont, options_from_collection_for_select(Taggroup.where(user_id:@current_user.id).order(:sort_order), :number, :group), include_blank: true %>
       <%= f.submit "検索" ,class:"button_mini" %>
       <%= link_to "クリア", edittag_path, class:"button button_clear" %>
     <% end %>

@@ -32,7 +32,7 @@ user_count.times do |i|
   end
 
   3.times do |j|
-    Taggroup.find_or_create_by(user_id: users[i].id, group:"グループ#{j+1}")
+    Taggroup.find_or_create_by(user_id: users[i].id, group:"グループ#{j+1}", group_number:"#{j+1}")
   end
 
 end

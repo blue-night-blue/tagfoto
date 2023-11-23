@@ -52,7 +52,7 @@ class PostsController < ApplicationController
         tags_in_tags_hash = Tag.tags_in_tags(@current_user)
         tags_not_included_in_model = @post.tag.to_s.split(",").reject { |tag| tags_in_tags_hash[tag] }
         tags_not_included_in_model.each do |tag|
-          Tag.create(user_id: @current_user.id , tag: "#{tag}" , group: "")
+          Tag.create(user_id: @current_user.id , tag: "#{tag}" , group_number:"")
         end
       end
       flash[:success]="アップロードしました。"
@@ -88,7 +88,7 @@ class PostsController < ApplicationController
       tags_in_tags_hash = Tag.tags_in_tags(@current_user)
       tags_not_included_in_model = @post.tag.to_s.split(",").reject { |tag| tags_in_tags_hash[tag] }
       tags_not_included_in_model.each do |tag|
-        Tag.create(user_id: @current_user.id , tag: "#{tag}" , group: "")
+        Tag.create(user_id: @current_user.id , tag: "#{tag}" , group_number:"")
       end
     end
 
@@ -142,8 +142,8 @@ class PostsController < ApplicationController
     tags_in_posts_array = Post.tags_in_posts(@current_user)
     @tags_included_in_model=Tag.where(user_id:@current_user.id).where(tag: tags_in_posts_array).order(:sort_order)
 
-    groups_in_tags_in_posts_array = @tags_included_in_model.pluck(:group).reject(&:empty?)
-    @taggroups=Taggroup.where(user_id:@current_user.id).where(id:groups_in_tags_in_posts_array).order(:sort_order)
+    groups_in_tags_in_posts_array = @tags_included_in_model.pluck(:group_number).reject(&:empty?)
+    @taggroups=Taggroup.where(user_id:@current_user.id).where(number:groups_in_tags_in_posts_array).order(:sort_order)
 
     @posts = Post.where(user_id:@current_user.id).limit(3).order(created_at: :desc)
   end
@@ -164,8 +164,8 @@ class PostsController < ApplicationController
     tags_in_posts_array = Post.tags_in_posts(@current_user)
     @tags_included_in_model=Tag.where(user_id:@current_user.id).where(tag: tags_in_posts_array).order(:sort_order)
 
-    groups_in_tags_in_posts_array = @tags_included_in_model.pluck(:group).reject(&:empty?)
-    @taggroups=Taggroup.where(user_id:@current_user.id).where(id:groups_in_tags_in_posts_array).order(:sort_order)
+    groups_in_tags_in_posts_array = @tags_included_in_model.pluck(:group_number).reject(&:empty?)
+    @taggroups=Taggroup.where(user_id:@current_user.id).where(number:groups_in_tags_in_posts_array).order(:sort_order)
 
     posts = Post.where(user_id:@current_user.id)
     @json_string = posts.pluck(:tag).reject(&:empty?).to_json
@@ -244,8 +244,8 @@ class PostsController < ApplicationController
       tags_in_posts_array = Post.tags_in_posts(@user)
       @tags_included_in_model=Tag.where(user_id:@user.id).where(tag: tags_in_posts_array).order(:sort_order)
 
-      groups_in_tags_in_posts_array = @tags_included_in_model.pluck(:group).reject(&:empty?)
-      @taggroups=Taggroup.where(user_id:@user.id).where(id:groups_in_tags_in_posts_array).order(:sort_order)
+      groups_in_tags_in_posts_array = @tags_included_in_model.pluck(:group_number).reject(&:empty?)
+      @taggroups=Taggroup.where(user_id:@user.id).where(number:groups_in_tags_in_posts_array).order(:sort_order)
 
       @posts = Post.where(user_id:@user.id).limit(3).order(created_at: :desc) 
       
@@ -315,8 +315,8 @@ class PostsController < ApplicationController
       tags_in_posts_array = @post.tag.split(",").map(&:strip).reject(&:empty?) 
       @tags_included_in_model=Tag.where(user_id:@user.id).where(tag: tags_in_posts_array).order(:sort_order)
 
-      groups_in_tags_in_posts_array = @tags_included_in_model.pluck(:group).reject(&:empty?)
-      @taggroups=Taggroup.where(user_id:@user.id).where(id:groups_in_tags_in_posts_array).order(:sort_order)
+      groups_in_tags_in_posts_array = @tags_included_in_model.pluck(:group_number).reject(&:empty?)
+      @taggroups=Taggroup.where(user_id:@user.id).where(number:groups_in_tags_in_posts_array).order(:sort_order)
       
     else
       flash[:notice]="当該のユーザーが存在しない、もしくは権限がありません"
@@ -332,8 +332,8 @@ class PostsController < ApplicationController
       tags_in_posts_array = Post.tags_in_posts(@user)
       @tags_included_in_model=Tag.where(user_id:@user.id).where(tag: tags_in_posts_array).order(:sort_order)
 
-      groups_in_tags_in_posts_array = @tags_included_in_model.pluck(:group).reject(&:empty?)
-      @taggroups=Taggroup.where(user_id:@user.id).where(id:groups_in_tags_in_posts_array).order(:sort_order)
+      groups_in_tags_in_posts_array = @tags_included_in_model.pluck(:group_number).reject(&:empty?)
+      @taggroups=Taggroup.where(user_id:@user.id).where(number:groups_in_tags_in_posts_array).order(:sort_order)
 
       @posts = Post.where(user_id:@user.id).limit(3).order(created_at: :desc) 
       
@@ -396,8 +396,8 @@ class PostsController < ApplicationController
         @old_photo_post = @posts[current_index - 1] if current_index > 0
         tags_in_posts_array = Post.tags_in_posts(@user)
         @tags_included_in_model=Tag.where(user_id:@user.id).where(tag: tags_in_posts_array).order(:sort_order)
-        groups_in_tags_in_posts_array = @tags_included_in_model.pluck(:group).reject(&:empty?)
-        @taggroups=Taggroup.where(user_id:@user.id).where(id:groups_in_tags_in_posts_array).order(:sort_order)
+        groups_in_tags_in_posts_array = @tags_included_in_model.pluck(:group_number).reject(&:empty?)
+        @taggroups=Taggroup.where(user_id:@user.id).where(number:groups_in_tags_in_posts_array).order(:sort_order)
         render :approved_show
       end
   

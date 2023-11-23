@@ -23,7 +23,7 @@ class TaggroupsController < ApplicationController
     @taggroup = Taggroup.new
     @search = Taggroup.where(user_id:@current_user.id).ransack(params[:q])
     @search.sorts = 'id desc' if @search.sorts.empty?
-    @taggroups = @search.result.page(params[:page])
+    @taggroups = @search.result
   end
 
   def new

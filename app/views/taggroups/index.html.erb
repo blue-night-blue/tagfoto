@@ -42,6 +42,25 @@
   <%= turbo_frame_tag "taggroups" do %>
     <%= render @taggroups %>
   <% end %>
-  
+
 </div>
+  
+  
+  
+  <h1>エクスポート</h1>
+  <%= link_to "csvで保存" , export_taggroup_to_csv_path , class:"button" %>
+
+
+  <h1>インポート</h1>
+  <%= form_with(url: import_taggroup_path, method: :post, local: true, multipart: true) do |form| %>
+    <div>
+      <%= form.file_field :csv_file %>
+    </div>
+  
+    <div>
+      <%= form.submit '取込' %>
+    </div>
+  <% end %>
+
+
 

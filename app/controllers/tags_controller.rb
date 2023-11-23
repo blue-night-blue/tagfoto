@@ -12,7 +12,7 @@ class TagsController < ApplicationController
   end 
   
   def set_my_taggroup
-    @taggroups = Taggroup.where(user_id:@current_user.id).order(:sort_order).map { |group| [group.group, group.id] } 
+    @taggroups = Taggroup.where(user_id:@current_user.id).order(:sort_order).map { |group| [group.group, group.number] } 
   end 
 
 
@@ -51,7 +51,7 @@ class TagsController < ApplicationController
 
   def update
     tag_name = @tag.tag
-    if @tag.update(tag_params) && @tag.saved_change_to_attribute?(:tag) || @tag.saved_change_to_attribute?(:group) || @tag.saved_change_to_attribute?(:sort_order)
+    if @tag.update(tag_params) && @tag.saved_change_to_attribute?(:tag) || @tag.saved_change_to_attribute?(:group_number) || @tag.saved_change_to_attribute?(:sort_order)
       respond_to do |format|
         if @tag.update(tag_params)
           format.html { redirect_to tags_path, notice: "#{tag_name}を修正しました" }
@@ -77,11 +77,9 @@ class TagsController < ApplicationController
   
  
   
-  require 'csv'
-
-  def export_to_csv
+  def export_tag_to_csv
     tags = Tag.where(user_id: @current_user)
-    attributes = %w[tag sort_order group] 
+    attributes = %w[tag sort_order group_number] 
     bom ="\xEF\xBB\xBF"
   
     csv_data = CSV.generate do |csv|
@@ -94,6 +92,32 @@ class TagsController < ApplicationController
     send_data bom + csv_data, filename: "tags.csv", type: "text/csv", disposition: "attachment"
   end
   
+  def import_tag
+    csv_file = params[:csv_file]
+    csv_text = File.read(csv_file.path).encode('UTF-8', 'UTF-8', :invalid => :replace).sub(/^\xEF\xBB\xBF/, '')
+    csv = CSV.parse(csv_text, headers: true)
+
+    csv.each do |row|
+      tag_data = {
+        user_id: @current_user.id,
+        tag: row['tag'],
+        sort_order: row['sort_order'],
+        group_number: row['group_number'].to_s
+      }
+
+      if tag_data[:group_number].present? 
+        taggroup = Taggroup.find_by(user_id: @current_user.id, number: tag_data[:group_number])
+        if taggroup.number == tag_data[:group_number]
+          Tag.create(tag_data)
+        end
+      else
+        Tag.create(tag_data)
+      end
+
+    end
+    redirect_to edittag_path
+
+  end
 
 
 
@@ -107,6 +131,6 @@ class TagsController < ApplicationController
     end
 
     def tag_params
-      params.require(:tag).permit(:user_id, :tag, :sort_order, :group)
+      params.require(:tag).permit(:user_id, :tag, :sort_order, :group_number)
     end
   end

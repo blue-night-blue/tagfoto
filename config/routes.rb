@@ -58,7 +58,10 @@ Rails.application.routes.draw do
   post "/create_multiple_posts" , to: "posts#create_multiple_posts"  
   get "/edittaggroup" , to: "taggroups#index"  
   post "/secret_message_access_toggle/:user_id" , to: "approved_users#secret_message_access_toggle"  
-  get "/export_to_csv" , to: "tags#export_to_csv"  
+  get "/export_tag_to_csv" , to: "tags#export_tag_to_csv"  
+  get "/export_taggroup_to_csv" , to: "taggroups#export_taggroup_to_csv"  
+  post "/import_taggroup" , to: "taggroups#import_taggroup"  
+  post "/import_tag" , to: "tags#import_tag"  
 
 
   

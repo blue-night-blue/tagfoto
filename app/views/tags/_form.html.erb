@@ -1,10 +1,10 @@
 <%= form_with(model: tag, class: form_type) do |form| %>
   <%= form.text_field :tag, class:"table_tag" %>
   
-  <% if tag.group=="" %>
-    <%= form.select :group, options_for_select(@taggroups), include_blank: true  %>
+  <% if tag.group_number=="" %>
+    <%= form.select :group_number, options_for_select(@taggroups), include_blank: true  %>
   <% else %>
-    <%= form.select :group, @taggroups, include_blank: true  %>
+    <%= form.select :group_number, @taggroups, include_blank: true  %>
   <% end %>
   
   <%= form.text_field :sort_order, class:"table_sort_order" %>

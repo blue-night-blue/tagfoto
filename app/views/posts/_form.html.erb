@@ -20,7 +20,7 @@
                   </td>
 
                   <td class="tag_index_tag">
-                      <% @tags.where(group:taggroup.id.to_s).each do |tag| %>
+                      <% @tags.where(group_number:taggroup.number).each do |tag| %>
                         <input type="button" value="<%= tag.tag %>" class="tag">
                       <% end %>
                   </td>

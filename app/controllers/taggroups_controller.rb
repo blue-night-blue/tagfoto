@@ -3,6 +3,7 @@ class TaggroupsController < ApplicationController
   before_action :ensure_correct_user, only: %i[ update destroy ]
   before_action :set_taggroup, only: %i[ update destroy ]
   before_action :set_next_number, only: [:create]
+  require 'csv'
 
   def ensure_correct_user
     @taggroup = Taggroup.find_by(id: params[:id])

@@ -3,6 +3,7 @@ class TagsController < ApplicationController
   before_action :set_my_taggroup
   before_action :set_tag, only: %i[ edit update destroy ]
   before_action :ensure_correct_user, only: %i[ edit update destroy ]
+  require 'csv'
   
   def ensure_correct_user
     if @tag.user_id != @current_user.id

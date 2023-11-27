@@ -5,6 +5,6 @@ rm -f /tagfoto/tmp/pids/server.pid
 bundle exec rails db:create
 bundle exec rails db:migrate
 bundle exec rails db:migrate:status
-bundle exec rails assets:precompile RAILS_ENV=production
+bundle exec rails assets:precompile
 
 exec "$@"

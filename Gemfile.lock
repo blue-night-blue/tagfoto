@@ -116,8 +116,8 @@ GEM
     ffi (1.15.5)
     globalid (1.1.0)
       activesupport (>= 5.0)
-    google-protobuf (3.24.2-x86_64-darwin)
-    google-protobuf (3.24.2-x86_64-linux)
+    google-protobuf (3.25.1-x86_64-darwin)
+    google-protobuf (3.25.1-x86_64-linux)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     image_processing (1.12.2)
@@ -145,7 +145,6 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
-    kgio (2.11.4)
     loofah (2.21.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -214,7 +213,6 @@ GEM
       rake (>= 12.2)
       thor (~> 1.0)
       zeitwerk (~> 2.5)
-    raindrops (0.20.1)
     rake (13.0.6)
     ransack (4.0.0)
       activerecord (>= 6.1.5)
@@ -227,9 +225,9 @@ GEM
     ruby-vips (2.1.4)
       ffi (~> 1.12)
     rubyzip (2.3.2)
-    sass-embedded (1.66.1-x86_64-darwin)
+    sass-embedded (1.69.5-x86_64-darwin)
       google-protobuf (~> 3.23)
-    sass-embedded (1.66.1-x86_64-linux-gnu)
+    sass-embedded (1.69.5-x86_64-linux-gnu)
       google-protobuf (~> 3.23)
     selenium-webdriver (4.10.0)
       rexml (~> 3.2, >= 3.2.5)
@@ -252,9 +250,6 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
-    unicorn (6.1.0)
-      kgio (~> 2.6)
-      raindrops (~> 0.7)
     web-console (4.2.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -289,18 +284,15 @@ DEPENDENCIES
   jbuilder
   kaminari
   mysql2
-  nokogiri
   puma (~> 5.0)
   rails (~> 7.0.5)
   rails-i18n
   ransack
-  ruby-vips
   selenium-webdriver
   sprockets-rails
   stimulus-rails
   turbo-rails
   tzinfo-data
-  unicorn
   web-console
   webdrivers
 

@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user
   before_action :ensure_correct_user, only: %i[ edit update destroy ]
   before_action :set_post, only: %i[ edit update destroy ]
+  before_action :url_options
 
   def ensure_correct_user
     @post = Post.find_by(id: params[:id])
@@ -11,7 +12,10 @@ class PostsController < ApplicationController
     end
   end 
   
-
+  def url_options
+    ActiveStorage::Current.url_options = { host: request.host, port: request.port }.merge(super)
+  end
+   
   
   
   

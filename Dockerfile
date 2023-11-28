@@ -11,5 +11,3 @@ RUN bundle
 COPY . .
 
 ENTRYPOINT ["bash", "/tagfoto/entrypoint.sh"]
-
-CMD ["rails", "s", "-b", "0.0.0.0"]

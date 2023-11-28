@@ -1,6 +1,5 @@
 #!/bin/bash
 set -e
-rm -f /tagfoto/tmp/pids/server.pid
 
 bundle exec rails db:create
 bundle exec rails db:migrate

@@ -20,6 +20,9 @@ module Tagfoto
     # 複数画像を別レコードとして保存する際に、multiple:trueで勝手に空白列を入れるのを阻止
     config.active_storage.multiple_file_field_include_hidden = false
 
+    # 画像アップの上限撤廃
+    Rack::Utils.multipart_part_limit = 0
+    
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

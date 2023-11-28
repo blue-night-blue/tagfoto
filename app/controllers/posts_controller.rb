@@ -447,7 +447,7 @@ class PostsController < ApplicationController
   # 一括削除 
   
   def select_and_delete
-    @posts = Post.where(user_id:@current_user.id).order(created_at: :desc)
+    @posts = Post.where(user_id:@current_user.id).order(created_at: :desc).page params[:page]
   end
 
   def multiple_delete

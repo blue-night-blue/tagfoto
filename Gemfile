@@ -56,6 +56,9 @@ gem 'ransack'
 gem 'kaminari'
 gem "mysql2"
 gem "dartsass-rails", "~> 0.5.0"
+gem 'activerecord-session_store'
+gem "whenever"
+
 
 
 

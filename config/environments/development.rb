@@ -69,7 +69,6 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   
-  config.logger = Logger.new(STDOUT)
   config.hosts << "tagfoto.bnbnb.link"
   config.web_console.allowed_ips = '0.0.0.0/0'  
   

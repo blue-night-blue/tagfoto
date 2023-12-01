@@ -1,6 +1,7 @@
 
 services:
   web:
+    container_name: tagfoto
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && rails s -p 3001 -b '0.0.0.0'"
     ports: 
@@ -18,6 +19,7 @@ services:
       DB_PASSWORD: password
 
   db:
+    container_name: tagfoto-db
     image: mysql:8.0
     platform: linux/amd64
     environment:

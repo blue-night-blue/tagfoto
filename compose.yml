@@ -6,6 +6,7 @@
 
 services:
   web:
+    container_name: tagfoto
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3001 -b '0.0.0.0'"
     volumes:
@@ -25,6 +26,7 @@ services:
       LETSENCRYPT_EMAIL: pulpfictiontaxidriver@yahoo.co.jp
 
   db:
+    container_name: tagfoto-db
     image: mysql:8.0
     platform: linux/amd64
     environment:

@@ -8,6 +8,7 @@
 <h1>一括削除</h1>
 
 <button id="clear_input_tag" class="button button_clear">画像選択の解除</button>
+<%= paginate @posts %>
 
 <div id="posts">
   <%= form_with url:multiple_delete_path do |form| %>

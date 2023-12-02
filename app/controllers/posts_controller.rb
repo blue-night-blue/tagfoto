@@ -435,7 +435,7 @@ class PostsController < ApplicationController
         post.update(tag: tag)
       end
     end
-    redirect_to tagto_path 
+    redirect_to request.referer
   end
 
   

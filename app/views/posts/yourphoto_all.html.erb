@@ -3,6 +3,7 @@
 <%= link_to "戻る", yourphoto_path, class:"button button_link" %>
 
 <h1>すべての写真</h1>
+<%= paginate @posts %>
 
 <div id="photo_index_container">
   <% @posts.each do |post| %>

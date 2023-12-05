@@ -110,7 +110,7 @@ class PostsController < ApplicationController
 
   def edit
     if params[:tag]
-      @posts = Post.where(user_id:@current_user.id).where("tag LIKE ?","%#{params[:tag]}%")
+      @posts = Post.where(user_id:@current_user.id).where("tag REGEXP '(^|,|\s+)#{Regexp.escape(params[:tag])}($|,|\s+)' ")
     elsif params[:view]=="all"
       @posts = Post.where(user_id:@current_user.id)
     elsif params[:view]=="nothing_tag"
@@ -157,7 +157,7 @@ class PostsController < ApplicationController
   end
 
   def yourphoto_tag
-    @posts = Post.where(user_id:@current_user.id).where("tag LIKE ?","%#{params[:tag]}%").order(created_at: :desc)
+    @posts = Post.where(user_id:@current_user.id).where("tag REGEXP '(^|,|\s+)#{Regexp.escape(params[:tag])}($|,|\s+)' ").order(created_at: :desc)
   end
 
   def yourphoto_nothing_tag
@@ -185,9 +185,9 @@ class PostsController < ApplicationController
       or_query_array = URI.decode_www_form_component(or_query).split(" ")
     
       @posts = Post.where(user_id:@current_user.id).where(
-                and_query_array.map { |tag| "FIND_IN_SET('#{tag}', tag)" }.join(" AND ") 
+                and_query_array.map { |tag| "tag REGEXP '(^|,|\s+)#{Regexp.escape(tag)}($|,|\s+)' " }.join(" AND ") 
                 ).where(
-                or_query_array.map { |tag| "tag LIKE ?" }.join(" OR "),
+                or_query_array.map { |tag| "tag REGEXP '(^|,|\s+)#{Regexp.escape(tag)}($|,|\s+)' " }.join(" OR "),
                 *or_query_array.map { |tag| "%#{tag}%" }
                 )
       @back_url = "?and=" + and_query.sub(" ","+") + "&or=" + or_query.sub(" ","+")
@@ -195,14 +195,14 @@ class PostsController < ApplicationController
     elsif params[:and]
       query = params[:and]
       query_array = URI.decode_www_form_component(query).split(" ")
-      @posts = Post.where(user_id:@current_user.id).where(query_array.map { |tag| "FIND_IN_SET('#{tag}', tag)" }.join(" AND ") )
+      @posts = Post.where(user_id:@current_user.id).where(query_array.map { |tag| "tag REGEXP '(^|,|\s+)#{Regexp.escape(tag)}($|,|\s+)' " }.join(" AND ") )
       @back_url = "?and=" + query.sub(" ","+")
       @results_title = "タグ:AND[#{query}]"
     elsif params[:or]
       query = params[:or]
       query_array = URI.decode_www_form_component(query).split(" ")
       @posts = Post.where(user_id:@current_user.id).where(
-                query_array.map { |tag| "tag LIKE ?" }.join(" OR "),
+                query_array.map { |tag| "tag REGEXP '(^|,|\s+)#{Regexp.escape(tag)}($|,|\s+)' " }.join(" OR "),
                 *query_array.map { |tag| "%#{tag}%" }
                 )
       @back_url = "?or=" + query.sub(" ","+")
@@ -273,7 +273,7 @@ class PostsController < ApplicationController
   def approved_photo_tag
     @user=User.find_by(name:params[:user_name])
     if  @user && ApprovedUser.find_by(user_id:@user.id, approved_user_id:@current_user.id).present?
-      @posts = Post.where(user_id:@user.id).where("tag LIKE ?","%#{params[:tag]}%").order(created_at: :desc)
+      @posts = Post.where(user_id:@user.id).where("tag REGEXP '(^|,|\s+)#{Regexp.escape(params[:tag])}($|,|\s+)' ").order(created_at: :desc)
     else
       flash[:notice]="当該のユーザーが存在しない、もしくは権限がありません"
       redirect_to yourphoto_path
@@ -299,7 +299,7 @@ class PostsController < ApplicationController
       
       # 前後ポストへのナビゲーション用
       if params[:tag]
-        @posts = Post.where(user_id:@user.id).where("tag LIKE ?","%#{params[:tag]}%")
+        @posts = Post.where(user_id:@user.id).where("tag REGEXP '(^|,|\s+)#{Regexp.escape(params[:tag])}($|,|\s+)' ")
       elsif params[:view]=="all"
         @posts = Post.where(user_id:@user.id)
       elsif params[:view]=="nothing_tag"
@@ -365,9 +365,9 @@ class PostsController < ApplicationController
         or_query_array = URI.decode_www_form_component(or_query).split(" ")
       
         @posts = Post.where(user_id:@user.id).where(
-                  and_query_array.map { |tag| "FIND_IN_SET('#{tag}', tag)" }.join(" AND ") 
+                  and_query_array.map { |tag| "tag REGEXP '(^|,|\s+)#{Regexp.escape(tag)}($|,|\s+)' " }.join(" AND ") 
                   ).where(
-                  or_query_array.map { |tag| "tag LIKE ?" }.join(" OR "),
+                  or_query_array.map { |tag| "tag REGEXP '(^|,|\s+)#{Regexp.escape(tag)}($|,|\s+)' " }.join(" OR "),
                   *or_query_array.map { |tag| "%#{tag}%" }
                   )
         @back_url = "?and=" + and_query.sub(" ","+") + "&or=" + or_query.sub(" ","+")
@@ -375,14 +375,14 @@ class PostsController < ApplicationController
       elsif params[:and]
         query = params[:and]
         query_array = URI.decode_www_form_component(query).split(" ")
-        @posts = Post.where(user_id:@user.id).where(query_array.map { |tag| "FIND_IN_SET('#{tag}', tag)" }.join(" AND ") )
+        @posts = Post.where(user_id:@user.id).where(query_array.map { |tag| "tag REGEXP '(^|,|\s+)#{Regexp.escape(tag)}($|,|\s+)' " }.join(" AND ") )
         @back_url = "?and=" + query.sub(" ","+")
         @results_title = "タグ:AND[#{query}]"
       elsif params[:or]
         query = params[:or]
         query_array = URI.decode_www_form_component(query).split(" ")
         @posts = Post.where(user_id:@user.id).where(
-                  query_array.map { |tag| "tag LIKE ?" }.join(" OR "),
+                  query_array.map { |tag| "tag REGEXP '(^|,|\s+)#{Regexp.escape(tag)}($|,|\s+)' " }.join(" OR "),
                   *query_array.map { |tag| "%#{tag}%" }
                   )
         @back_url = "?or=" + query.sub(" ","+")
@@ -433,6 +433,28 @@ class PostsController < ApplicationController
       post = Post.find_by(id: post_id)
       if post.tag != tag 
         post.update(tag: tag)
+        
+        # 読点をカンマに変換し、末尾がカンマでない場合にカンマを追加
+        converted_tag_string = post.tag.gsub("、", ",")
+        if converted_tag_string[-1] != "," && post.tag != ""
+          converted_tag_string += ","
+        end
+        post.tag = converted_tag_string
+        
+        unless post.save 
+          redirect_to tagto_path
+          return
+        end
+
+        # 未登録のタグを登録
+        if post.tag != ""
+          tags_in_tags_hash = Tag.tags_in_tags(@current_user)
+          tags_not_included_in_model = post.tag.to_s.split(",").reject { |tag| tags_in_tags_hash[tag] }
+          tags_not_included_in_model.each do |tag|
+            Tag.create(user_id: @current_user.id , tag: "#{tag}" , group_number:"")
+          end
+        end
+
       end
     end
     redirect_to tagto_path 

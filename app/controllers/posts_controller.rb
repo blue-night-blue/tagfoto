@@ -457,7 +457,7 @@ class PostsController < ApplicationController
 
       end
     end
-    redirect_to tagto_path 
+    redirect_to request.referer
   end
 
   

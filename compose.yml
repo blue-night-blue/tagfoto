@@ -23,7 +23,7 @@ services:
       VIRTUAL_HOST: tagfoto.bnbnb.link
       VIRTUAL_PORT: 3001
       LETSENCRYPT_HOST: tagfoto.bnbnb.link
-      LETSENCRYPT_EMAIL: pulpfictiontaxidriver@yahoo.co.jp
+      LETSENCRYPT_EMAIL: bnb7043-encrypt@yahoo.co.jp
 
   db:
     container_name: tagfoto-db
